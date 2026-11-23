@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>imShuka — Brandbook & Design System</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96' fill='none'%3E%3Crect width='96' height='96' rx='22' fill='%23841838'/%3E%3Cpath d='M26 74V46a22 22 0 0 1 44 0v28' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='48' cy='45' r='4.5' fill='white'/%3E%3Crect x='44.5' y='55' width='7' height='19' rx='3.5' fill='white'/%3E%3C/svg%3E">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --sf: #FFFFFF;
+    --ln: #E5E7EB;
+    --ink: #111827;
+    --mu: #6B7280;
+    --ph: #F3F4F6;
+    --br: #841838;
+    --br-h: #6E1B35;
+    --br-soft: #FDF2F5;
+    --bt: #841838;
+    --em: #059669;
+    --em-soft: #ECFDF5;
+    --er: #B91C1C;
+    --er-soft: #FEF2F2;
+  }
+  [data-theme="dark"] {
+    --bg: #0B0F17;
+    --sf: #121826;
+    --ln: #243049;
+    --ink: #F3F4F6;
+    --mu: #9CA3AF;
+    --ph: #1A2233;
+    --br: #C94A70;
+    --br-h: #A82C51;
+    --br-soft: #26121A;
+    --bt: #F08DA9;
+    --em: #34D399;
+    --em-soft: #0F2922;
+    --er: #F87171;
+    --er-soft: #2A1215;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', 'Noto Sans Armenian', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+  .dsp {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Armenian', 'Inter', sans-serif;
+    font-weight: 700;
+  }
+  .mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+  .surface {
+    background-color: var(--sf);
+    border: 1px solid var(--ln);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .subtle-bg {
+    background-color: var(--ph);
+  }
+  .text-muted { color: var(--mu); }
+  .text-brand { color: var(--bt); }
+  .bg-brand { background-color: var(--br); }
+  .bg-brand-soft { background-color: var(--br-soft); }
+  .border-line { border-color: var(--ln); }
+  .text-emerald-sem { color: var(--em); }
+  .bg-emerald-soft { background-color: var(--em-soft); }
+
+  /* Interactive UI Preview Controls */
+  .ui-pill {
+    border: 1px solid var(--ln);
+    background: var(--sf);
+    color: var(--ink);
+    border-radius: 999px;
+    height: 40px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+  .ui-pill:hover { border-color: var(--mu); }
+  .ui-pill.active {
+    background: var(--br);
+    border-color: var(--br);
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+  .ui-pill.active:hover, .ui-pill.hover-sim {
+    background: var(--br-h);
+    border-color: var(--br-h);
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  /* Sidebar active indicator */
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--mu);
+    transition: all 0.15s ease;
+  }
+  .nav-link:hover {
+    color: var(--ink);
+    background: var(--ph);
+  }
+  .nav-link.active {
+    color: var(--bt);
+    background: var(--br-soft);
+    font-weight: 600;
+  }
+
+  /* Construction Grid Pattern */
+  .grid-canvas {
+    background-image:
+      linear-gradient(to right, rgba(132, 24, 56, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(132, 24, 56, 0.12) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  [data-theme="dark"] .grid-canvas {
+    background-image:
+      linear-gradient(to right, rgba(240, 141, 169, 0.14) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(240, 141, 169, 0.14) 1px, transparent 1px);
+  }
+
+  /* Clamp utility */
+  .clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Toast Notification */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    background: #111827;
+    color: #FFFFFF;
+    border: 1px solid #374151;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Print Styles */
+  @media print {
+    .no-print { display: none !important; }
+    body { background: #FFFFFF !important; color: #111827 !important; }
+    .surface { border: 1px solid #E5E7EB !important; break-inside: avoid; }
+    main { max-width: 100% !important; padding: 0 !important; }
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Top Utility Bar -->
+  <header class="sticky top-0 z-30 surface border-x-0 border-t-0 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <!-- Brand Mark -->
+        <svg width="34" height="34" viewBox="0 0 96 96" fill="none" aria-hidden="true" class="shrink-0">
+          <rect width="96" height="96" rx="22" fill="#841838"/>
+          <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+          <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+        </svg>
+        <div class="flex items-baseline gap-2.5">
+          <span class="dsp text-lg tracking-tight">imShuka</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-brand-soft text-brand font-medium">Brandbook v1.0</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 no-print">
+        <button id="themeToggle" onclick="toggleTheme()" class="ui-pill !h-9 !px-3.5 text-xs" aria-label="Toggle Light or Dark Theme">
+          <span id="themeIcon">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </span>
+          <span id="themeLabel">Dark Mode</span>
+        </button>
+        <button onclick="window.print()" class="ui-pill !h-9 !px-3.5 text-xs hidden sm:inline-flex" aria-label="Print Brandbook">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Print / PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Horizontal Section Nav -->
+    <nav class="lg:hidden border-t border-line overflow-x-auto no-print">
+      <div class="flex items-center gap-1 px-4 py-2 whitespace-nowrap text-xs">
+        <a href="#essence" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">01 Essence</a>
+        <a href="#logo" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">02 Logo & Mark</a>
+        <a href="#colors" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">03 Colors</a>
+        <a href="#typography" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">04 Typography</a>
+        <a href="#components" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">05 UI System</a>
+        <a href="#voice" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">06 Voice & Tone</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Shell -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 flex flex-col lg:flex-row gap-10">
+
+    <!-- Sticky Desktop Sidebar Navigation -->
+    <aside class="hidden lg:block w-60 shrink-0 no-print">
+      <div class="sticky top-24 space-y-6">
+        <div>
+          <p class="text-[11px] uppercase tracking-wider text-muted font-semibold px-3 mb-2">Contents</p>
+          <nav id="sideNav" class="space-y-1">
+            <a href="#essence" class="nav-link active" data-sec="essence">
+              <span class="mono text-[11px] opacity-70">01</span> Brand Essence
+            </a>
+            <a href="#logo" class="nav-link" data-sec="logo">
+              <span class="mono text-[11px] opacity-70">02</span> Logo & App Icon
+            </a>
+            <a href="#colors" class="nav-link" data-sec="colors">
+              <span class="mono text-[11px] opacity-70">03</span> Color System
+            </a>
+            <a href="#typography" class="nav-link" data-sec="typography">
+              <span class="mono text-[11px] opacity-70">04</span> Typography
+            </a>
+            <a href="#components" class="nav-link" data-sec="components">
+              <span class="mono text-[11px] opacity-70">05</span> UI & Iconography
+            </a>
+            <a href="#voice" class="nav-link" data-sec="voice">
+              <span class="mono text-[11px] opacity-70">06</span> Voice & Microcopy
+            </a>
+          </nav>
+        </div>
+
+        <div class="surface rounded-2xl p-4 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#841838]"></span>
+            <span class="text-xs font-semibold">Primary Token</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed">
+            Rich Pomegranate <code class="mono text-brand font-medium">#841838</code> anchors brand recognition across light and dark mobile interfaces.
+          </p>
+          <button onclick="copyText('#841838', 'Copied #841838')" class="w-full ui-pill !h-8 justify-center text-xs">
+            Copy #841838
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Editorial Content Column -->
+    <main class="flex-1 min-w-0 space-y-20">
+
+      <!-- =========================================================
+           SECTION 01: HERO & BRAND ESSENCE
+      ========================================================== -->
+      <section id="essence" class="scroll-mt-24 space-y-8">
+        <div class="surface rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+            <div class="space-y-4 max-w-2xl">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-soft text-brand text-xs font-semibold">
+                <span>Brand Identity & Design System</span>
+                <span>·</span>
+                <span>Armenia</span>
+              </div>
+              <h1 class="dsp text-3xl sm:text-5xl tracking-tight leading-[1.12]">
+                imShuka <span class="text-muted font-normal text-2xl sm:text-3xl">/ իմ շուկա</span>
+              </h1>
+              <p class="text-lg sm:text-xl font-medium text-brand leading-snug">
+                «Հայաստանի առցանց շուկա՝ փոքր խանութների համար»
+              </p>
+              <p class="text-sm sm:text-base text-muted leading-relaxed">
+                Meaning <strong>“My Market”</strong> in Armenian, <strong>imShuka</strong> is a mobile-first marketplace connecting regional workshops, independent makers, and small local shops across Armenia’s marzes directly with everyday buyers—built around clarity, cultural warmth, and zero friction.
+              </p>
+            </div>
+
+            <!-- Hero Emblem Display -->
+            <div class="shrink-0 flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-soft border border-line">
+              <svg width="104" height="104" viewBox="0 0 96 96" fill="none" aria-label="imShuka Primary Emblem">
+                <rect width="96" height="96" rx="22" fill="#841838"/>
+                <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+                <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+              </svg>
+              <span class="mono text-[11px] text-brand mt-3 font-medium">imshuka.am</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Brand Personality Pillars -->
+        <div class="space-y-4">
+          <div class="flex items-baseline justify-between">
+            <h2 class="dsp text-xl">Brand Pillars & Personality</h2>
+            <span class="text-xs text-muted">How imShuka looks, speaks, and behaves</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="surface rounded-2xl p-6 space-y-2">
+              <div class="w-9 h-9 rounded-xl bg-brand-soft text-brand flex items-center justify-center font-bold text-sm">01</div>
+              <h3 class="dsp text-base">Warm & Crafted</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                Rooted in rich pomegranate crimson rather than cold corporate navy. Feels tactile, human, and respectful of Armenian craftsmanship.
+              </p>
+            </div>
+            <div class="surface rounded-2xl p-6 space-y-2">
+              <div class="w-9 h-9 rounded-xl bg-brand-soft text-brand flex items-center justify-center font-bold text-sm">02</div>
+              <h3 class="dsp text-base">Local & Authentic</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                Celebrates real makers from Dilijan to Gyumri. Every storefront carries its own clean link (<span class="mono text-xs">imshuka.am/shop</span>) and regional identity.
+              </p>
+            </div>
+            <div class="surface rounded-2xl p-6 space-y-2">
+              <div class="w-9 h-9 rounded-xl bg-brand-soft text-brand flex items-center justify-center font-bold text-sm">03</div>
+              <h3 class="dsp text-base">Trustworthy & Clutter-Free</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                No noisy flash-sale banners, dark patterns, or mandatory buyer sign-ups. Transparent pricing in AMD (<span class="num">֏</span>) and verified store badges.
+              </p>
+            </div>
+            <div class="surface rounded-2xl p-6 space-y-2">
+              <div class="w-9 h-9 rounded-xl bg-brand-soft text-brand flex items-center justify-center font-bold text-sm">04</div>
+              <h3 class="dsp text-base">Mobile-First Simplicity</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                Designed thumb-first with 44px touch targets, bottom sheet drawers, and instant Instagram-to-storefront publishing in minutes.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regional Audience Showcase -->
+        <div class="surface rounded-2xl p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="dsp text-base">Regional Ecosystem Showcase</h3>
+              <p class="text-xs text-muted">Representative seller profiles across Armenia’s marzes</p>
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-soft text-emerald-sem font-medium">4 Marzes Represented</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="p-4 rounded-xl border border-line space-y-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="dsp text-sm text-brand">Տավուշի արհեստ</span>
+                <svg class="w-4 h-4 text-emerald-sem shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+              </div>
+              <p class="text-xs text-muted">Ijevan / Dilijan · Tavush</p>
+              <p class="text-xs leading-relaxed pt-1">Hand-thrown ceramics, walnut boards, and woven wool textiles.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-line space-y-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="dsp text-sm text-brand">Երևան Ստուդիո</span>
+                <svg class="w-4 h-4 text-emerald-sem shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+              </div>
+              <p class="text-xs text-muted">Yerevan · Capital</p>
+              <p class="text-xs leading-relaxed pt-1">Washed linen apparel, heavy canvas totes, and minimalist homeware.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-line space-y-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="dsp text-sm text-brand">Արարատ Ռոուսթերս</span>
+                <svg class="w-4 h-4 text-emerald-sem shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+              </div>
+              <p class="text-xs text-muted">Gyumri · Shirak</p>
+              <p class="text-xs leading-relaxed pt-1">Small-batch roasted coffee, alpine raw honey, and sun-dried apricots.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-line space-y-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="dsp text-sm text-brand">Լոռի Թեք</span>
+                <svg class="w-4 h-4 text-emerald-sem shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+              </div>
+              <p class="text-xs text-muted">Vanadzor · Lori</p>
+              <p class="text-xs leading-relaxed pt-1">Compact audio gear, Qi wireless chargers, and custom keyboards.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SECTION 02: LOGO & APP ICON SYSTEM
+      ========================================================== -->
+      <section id="logo" class="scroll-mt-24 space-y-8">
+        <div class="border-b border-line pb-4 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <span class="mono text-xs text-brand font-semibold">02 / IDENTITY MARK</span>
+            <h2 class="dsp text-2xl sm:text-3xl mt-1">Logo & App Icon System</h2>
+          </div>
+          <button onclick="copyPrimarySvg()" class="ui-pill active no-print">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy Primary SVG</span>
+          </button>
+        </div>
+
+        <!-- Symbolism & Lockups Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Primary App Icon Tile -->
+          <div class="surface rounded-2xl p-6 flex flex-col justify-between gap-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold">Primary App Icon</span>
+              <span class="mono text-[11px] text-muted">96×96 · rx=22</span>
+            </div>
+            <div class="py-6 flex items-center justify-center rounded-xl subtle-bg">
+              <svg width="88" height="88" viewBox="0 0 96 96" fill="none">
+                <rect width="96" height="96" rx="22" fill="#841838"/>
+                <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+                <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+              </svg>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">
+              Combines an architectural <strong>market stall arch</strong> with a central <strong>“i” / pin</strong>—distinct from generic shopping bag icons.
+            </p>
+          </div>
+
+          <!-- Horizontal Wordmark Lockup -->
+          <div class="surface rounded-2xl p-6 flex flex-col justify-between gap-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold">Horizontal Lockup</span>
+              <span class="mono text-[11px] text-muted">Header / Web</span>
+            </div>
+            <div class="py-6 flex items-center justify-center rounded-xl subtle-bg">
+              <div class="inline-flex items-center gap-3">
+                <svg width="44" height="44" viewBox="0 0 96 96" fill="none">
+                  <rect width="96" height="96" rx="22" fill="#841838"/>
+                  <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+                  <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+                </svg>
+                <span class="dsp text-2xl tracking-tight">imShuka</span>
+              </div>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">
+              Icon paired at <span class="mono">8px–12px</span> gap with <strong>Plus Jakarta Sans Bold</strong>. Used in sticky navigation and press headers.
+            </p>
+          </div>
+
+          <!-- Monochrome Versions -->
+          <div class="surface rounded-2xl p-6 flex flex-col justify-between gap-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold">Monochrome Variants</span>
+              <span class="mono text-[11px] text-muted">1-Color Print / Stamp</span>
+            </div>
+            <div class="py-6 px-4 flex items-center justify-around rounded-xl subtle-bg">
+              <!-- Dark Mono -->
+              <div class="flex flex-col items-center gap-2">
+                <svg width="56" height="56" viewBox="0 0 96 96" fill="none">
+                  <rect width="96" height="96" rx="22" fill="#111827"/>
+                  <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+                  <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+                </svg>
+                <span class="mono text-[10px] text-muted">Ink Mono</span>
+              </div>
+              <!-- Light Outline Mono -->
+              <div class="flex flex-col items-center gap-2">
+                <svg width="56" height="56" viewBox="0 0 96 96" fill="none">
+                  <rect x="2" y="2" width="92" height="92" rx="20" fill="#FFFFFF" stroke="#111827" stroke-width="4"/>
+                  <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#111827" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="48" cy="45" r="4.5" fill="#111827"/>
+                  <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#111827"/>
+                </svg>
+                <span class="mono text-[10px] text-muted">Stamp / Outline</span>
+              </div>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">
+              Use monochrome marks for shipping labels, kraft packaging stamps, and single-ink receipts.
+            </p>
+          </div>
+        </div>
+
+        <!-- Construction Grid & Optical Sizing -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Clearspace & Construction Grid -->
+          <div class="surface rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="dsp text-base">Clearspace & Construction Grid</h3>
+              <span class="mono text-xs text-muted">Safe Zone = 0.25× Tile</span>
+            </div>
+            <div class="grid-canvas rounded-xl border border-line p-8 flex items-center justify-center relative">
+              <div class="relative p-6 border border-dashed border-[#841838]/60 rounded-3xl">
+                <span class="mono text-[10px] text-brand absolute -top-2.5 left-4 px-1.5 surface rounded">x = 24px clearspace</span>
+                <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+                  <rect width="96" height="96" rx="22" fill="#841838"/>
+                  <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+                  <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">
+              Maintain a minimum clearspace equal to <strong>25% of the tile width</strong> around the mark. Corner radius is fixed at <strong>22.9%</strong> (<span class="mono">rx="22"</span> on a <span class="mono">96×96</span> grid).
+            </p>
+          </div>
+
+          <!-- Optical Sizing Comparison -->
+          <div class="surface rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="dsp text-base">Optical Sizing & Dark Browser Legibility</h3>
+              <span class="mono text-xs text-muted">16px · 32px · 96px</span>
+            </div>
+            <div class="rounded-xl bg-[#181A1F] text-white p-6 space-y-5">
+              <div class="flex items-end justify-around gap-4">
+                <div class="flex flex-col items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 96 96" fill="none">
+                    <rect width="96" height="96" rx="22" fill="#841838"/>
+                    <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="48" cy="45" r="5.5" fill="#FFFFFF"/>
+                    <rect x="43.5" y="55" width="9" height="19" rx="4.5" fill="#FFFFFF"/>
+                  </svg>
+                  <span class="mono text-[11px] text-gray-400">16×16 Favicon</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                  <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+                    <rect width="96" height="96" rx="22" fill="#841838"/>
+                    <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="48" cy="45" r="4.8" fill="#FFFFFF"/>
+                    <rect x="44" y="55" width="8" height="19" rx="4" fill="#FFFFFF"/>
+                  </svg>
+                  <span class="mono text-[11px] text-gray-400">32×32 Header</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                  <svg width="64" height="64" viewBox="0 0 96 96" fill="none">
+                    <rect width="96" height="96" rx="22" fill="#841838"/>
+                    <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+                    <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+                  </svg>
+                  <span class="mono text-[11px] text-gray-400">64×64+ App</span>
+                </div>
+              </div>
+              <!-- Simulated Browser Tab Row -->
+              <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2.5 bg-white/10 px-3 py-1.5 rounded-lg">
+                  <svg width="16" height="16" viewBox="0 0 96 96" fill="none">
+                    <rect width="96" height="96" rx="22" fill="#841838"/>
+                    <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="48" cy="45" r="5.5" fill="#FFFFFF"/>
+                    <rect x="43.5" y="55" width="9" height="19" rx="4.5" fill="#FFFFFF"/>
+                  </svg>
+                  <span class="font-medium text-white">imShuka</span>
+                </div>
+                <span class="text-[11px] text-gray-400">Distinct silhouette vs. blue/green tabs</span>
+              </div>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">
+              Rich Pomegranate (<span class="mono">#841838</span>) preserves crisp outer edge separation on dark browser tabs without neon glare.
+            </p>
+          </div>
+        </div>
+
+        <!-- SVG Code Inspector -->
+        <div class="surface rounded-2xl p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold">Canonical SVG Markup</span>
+            <button onclick="copyPrimarySvg()" class="text-xs text-brand underline underline-offset-2 font-medium no-print">Copy SVG</button>
+          </div>
+          <pre id="svgCodeBlock" class="mono text-xs p-4 rounded-xl subtle-bg overflow-x-auto leading-relaxed select-all">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none"&gt;
+  &lt;rect width="96" height="96" rx="22" fill="#841838"/&gt;
+  &lt;path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/&gt;
+  &lt;rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/&gt;
+&lt;/svg&gt;</pre>
+        </div>
+
+        <!-- Do's and Don'ts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="surface rounded-2xl p-5 border-l-4" style="border-left-color: var(--em);">
+            <div class="flex items-center gap-2 text-emerald-sem font-semibold text-sm mb-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Do</span>
+            </div>
+            <ul class="text-xs text-muted space-y-2 list-disc pl-4">
+              <li>Use pure white (<span class="mono">#FFFFFF</span>) strokes inside the <span class="mono">#841838</span> rounded tile.</li>
+              <li>Preserve the <span class="mono">rx="22"</span> squircle proportion at all display sizes.</li>
+              <li>Pair with <strong>Plus Jakarta Sans Bold</strong> for the <span class="mono">imShuka</span> wordmark.</li>
+            </ul>
+          </div>
+          <div class="surface rounded-2xl p-5 border-l-4" style="border-left-color: var(--er);">
+            <div class="flex items-center gap-2 font-semibold text-sm mb-3" style="color: var(--er);">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              <span>Don’t</span>
+            </div>
+            <ul class="text-xs text-muted space-y-2 list-disc pl-4">
+              <li>Do not place gradients, drop shadows, or bevel effects on the arch mark.</li>
+              <li>Do not switch the primary brand tile to green (reserved strictly for verified badges).</li>
+              <li>Do not stretch, rotate, or alter the spacing between the arch and inner “i”.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SECTION 03: COLOR PALETTE & UI TOKENS
+      ========================================================== -->
+      <section id="colors" class="scroll-mt-24 space-y-8">
+        <div class="border-b border-line pb-4">
+          <span class="mono text-xs text-brand font-semibold">03 / COLOR SYSTEM</span>
+          <h2 class="dsp text-2xl sm:text-3xl mt-1">Color Palette & UI Tokens</h2>
+          <p class="text-sm text-muted mt-1">Click any swatch to copy its HEX code. Contrast ratios verified against WCAG 2.1 standards.</p>
+        </div>
+
+        <!-- Primary & Semantic Brand Tokens -->
+        <div class="space-y-3">
+          <h3 class="dsp text-base">Brand Pomegranate & Semantic Tokens</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="brandSwatches"></div>
+        </div>
+
+        <!-- Light & Dark Neutral Surfaces -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <h3 class="dsp text-base">Light Mode Surface & Ink Tokens</h3>
+            <div class="surface rounded-2xl overflow-hidden divide-y divide-[var(--ln)]" id="lightNeutrals"></div>
+          </div>
+          <div class="space-y-3">
+            <h3 class="dsp text-base">Dark Mode Surface & Ink Tokens</h3>
+            <div class="surface rounded-2xl overflow-hidden divide-y divide-[var(--ln)]" id="darkNeutrals"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SECTION 04: TYPOGRAPHY SYSTEM
+      ========================================================== -->
+      <section id="typography" class="scroll-mt-24 space-y-8">
+        <div class="border-b border-line pb-4">
+          <span class="mono text-xs text-brand font-semibold">04 / TYPOGRAPHY</span>
+          <h2 class="dsp text-2xl sm:text-3xl mt-1">Bilingual Type System</h2>
+          <p class="text-sm text-muted mt-1">Harmonized Latin and Armenian typefaces engineered for crisp mobile legibility and tabular financial alignment.</p>
+        </div>
+
+        <!-- Font Family Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="surface rounded-2xl p-6 space-y-3">
+            <span class="text-xs px-2.5 py-1 rounded-full bg-brand-soft text-brand font-medium">Display & Headings</span>
+            <div class="dsp text-3xl pt-2">Plus Jakarta Sans</div>
+            <p class="text-xs text-muted leading-relaxed">
+              Geometric warmth with tight tracking. Used at <strong>700 Bold</strong> for the <span class="mono">imShuka</span> logotype, section titles, and price totals.
+            </p>
+          </div>
+          <div class="surface rounded-2xl p-6 space-y-3">
+            <span class="text-xs px-2.5 py-1 rounded-full bg-brand-soft text-brand font-medium">Body & UI Controls</span>
+            <div class="text-3xl font-semibold pt-2">Inter</div>
+            <p class="text-xs text-muted leading-relaxed">
+              High x-height clarity at small sizes. Used at <strong>400 / 500 / 600</strong> for product titles, pills, drawers, and tabular numerals.
+            </p>
+          </div>
+          <div class="surface rounded-2xl p-6 space-y-3">
+            <span class="text-xs px-2.5 py-1 rounded-full bg-brand-soft text-brand font-medium">Armenian Script</span>
+            <div class="dsp text-3xl pt-2">Noto Sans Armenian</div>
+            <p class="text-xs text-muted leading-relaxed">
+              Optical weight-matched companion (<strong>400–700</strong>) ensuring seamless baseline alignment when Armenian and Latin mix inline.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive Live Type Tester -->
+        <div class="surface rounded-2xl p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="dsp text-base">Interactive Bilingual Type Specimen</h3>
+              <p class="text-xs text-muted">Type below to preview live Armenian & English rendering across scales</p>
+            </div>
+            <button onclick="resetTypeTester()" class="text-xs text-brand underline underline-offset-2 no-print">Reset Sample</button>
+          </div>
+          <input id="typeInput" type="text" value="Տավուշի արհեստ · Handcrafted in Dilijan — 15 500 ֏" oninput="updateSpecimen(this.value)" class="w-full h-11 px-4 rounded-xl border border-line bg-transparent text-sm outline-none focus:border-[#841838]" aria-label="Custom type preview text">
+
+          <div class="divide-y divide-[var(--ln)] pt-2">
+            <div class="py-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <span class="mono text-[11px] text-muted w-40 shrink-0">H1 / 28px Bold</span>
+              <div class="dsp text-2xl sm:text-[28px] leading-tight specimen-out flex-1">Տավուշի արհեստ · Handcrafted in Dilijan — 15 500 ֏</div>
+            </div>
+            <div class="py-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <span class="mono text-[11px] text-muted w-40 shrink-0">H2 Store / 20px Bold</span>
+              <div class="dsp text-xl text-brand specimen-out flex-1">Տավուշի արհեստ · Handcrafted in Dilijan — 15 500 ֏</div>
+            </div>
+            <div class="py-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <span class="mono text-[11px] text-muted w-40 shrink-0">Body / 14px Regular</span>
+              <div class="text-sm leading-relaxed specimen-out flex-1">Տավուշի արհեստ · Handcrafted in Dilijan — 15 500 ֏</div>
+            </div>
+            <div class="py-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <span class="mono text-[11px] text-muted w-40 shrink-0">Tabular Price / num</span>
+              <div class="dsp text-lg num flex-1">4 200 ֏ &nbsp;·&nbsp; 15 500 ֏ &nbsp;·&nbsp; +374 77 123 456 &nbsp;·&nbsp; imshuka.am/tavush-craft</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SECTION 05: INTERACTIVE UI COMPONENTS & ICONOGRAPHY
+      ========================================================== -->
+      <section id="components" class="scroll-mt-24 space-y-8">
+        <div class="border-b border-line pb-4">
+          <span class="mono text-xs text-brand font-semibold">05 / UI COMPONENT LIBRARY</span>
+          <h2 class="dsp text-2xl sm:text-3xl mt-1">Interactive Components & Iconography</h2>
+          <p class="text-sm text-muted mt-1">Production-accurate primitives styled with imShuka’s Rich Pomegranate design tokens.</p>
+        </div>
+
+        <!-- Interactive Pill Buttons & States -->
+        <div class="surface rounded-2xl p-6 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="dsp text-base">Category Pills & Action Buttons</h3>
+              <p class="text-xs text-muted">Click pills to test active state transitions (<span class="mono">height: 40px</span>, <span class="mono">radius: 999px</span>)</p>
+            </div>
+            <span class="mono text-xs text-muted">Default · Hover #6E1B35 · Active #841838</span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5" id="demoPills">
+            <button class="ui-pill active" onclick="selectDemoPill(this)">Բոլորը (All)</button>
+            <button class="ui-pill" onclick="selectDemoPill(this)">Հագուստ (Apparel)</button>
+            <button class="ui-pill" onclick="selectDemoPill(this)">Տուն (Home)</button>
+            <button class="ui-pill" onclick="selectDemoPill(this)">Ձեռագործ (Craft)</button>
+            <button class="ui-pill" onclick="selectDemoPill(this)">Մթերք (Pantry)</button>
+          </div>
+
+          <div class="pt-4 border-t border-line flex flex-wrap items-center gap-3">
+            <button onclick="copyText('Ավելացնել զամբյուղին', 'Clicked Primary CTA')" class="ui-pill active !h-11 !px-6">
+              Ավելացնել զամբյուղին
+            </button>
+            <button class="ui-pill hover-sim !h-11 !px-6">
+              Hover / Pressed (#6E1B35)
+            </button>
+            <button class="ui-pill !h-11 !px-5">
+              <span>Բացել խանութ</span>
+            </button>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-soft text-brand text-xs font-medium">
+              <span class="w-2 h-2 rounded-full bg-brand"></span>
+              <span>0% տեղադրման վճար</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verified Store Banner Preview -->
+        <div class="space-y-3">
+          <h3 class="dsp text-base">Verified Store Header Banner</h3>
+          <div class="surface rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="dsp text-xl text-brand">Տավուշի արհեստ</span>
+                <svg class="w-5 h-5 text-emerald-sem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-label="Հաստատված խանութ"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+              </div>
+              <div class="mono text-xs text-muted mt-1">imshuka.am/tavush-craft</div>
+              <div class="text-xs text-muted mt-1 flex flex-wrap gap-x-4 gap-y-1">
+                <span>Իջևան, Տավուշ</span>
+                <span class="num">4 ապրանք</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="copyText('https://imshuka.am/tavush-craft', 'Copied store link!')" class="ui-pill">Պատճենել հղումը</button>
+              <button class="ui-pill active">Ավելացնել ապրանք</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Authentic Product Cards Grid -->
+        <div class="space-y-3">
+          <h3 class="dsp text-base">Marketplace Product Cards (1:1 Aspect Ratio)</h3>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Card 1 -->
+            <div class="surface rounded-xl overflow-hidden flex flex-col">
+              <div class="aspect-square subtle-bg flex items-center justify-center p-6">
+                <svg class="w-3/5 h-3/5" viewBox="0 0 100 100" fill="var(--sf)" stroke="var(--mu)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M42 16h16M44 16c0 12-14 18-14 38 0 14 8 26 20 26s20-12 20-26c0-20-14-26-14-38z"/><path d="M36 58h28"/>
+                </svg>
+              </div>
+              <div class="p-3 flex-1 flex flex-col justify-between gap-2">
+                <div>
+                  <div class="font-medium text-sm clamp-2 leading-snug">Կերամիկական ծաղկաման՝ անփայլ ջնարակով</div>
+                  <div class="num text-sm font-semibold mt-1">12 000 ֏</div>
+                </div>
+                <span class="text-xs text-muted underline underline-offset-2">Տավուշի արհեստ</span>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="surface rounded-xl overflow-hidden flex flex-col">
+              <div class="aspect-square subtle-bg flex items-center justify-center p-6">
+                <svg class="w-3/5 h-3/5" viewBox="0 0 100 100" fill="var(--sf)" stroke="var(--mu)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M35 22 17 32l6 14 8-4v38h38V42l8 4 6-14-18-10c-2 6-8 9-15 9s-13-3-15-9z"/>
+                </svg>
+              </div>
+              <div class="p-3 flex-1 flex flex-col justify-between gap-2">
+                <div>
+                  <div class="font-medium text-sm clamp-2 leading-snug">Վուշե վերնաշապիկ՝ ազատ կտրվածք</div>
+                  <div class="num text-sm font-semibold mt-1">24 500 ֏</div>
+                </div>
+                <span class="text-xs text-muted underline underline-offset-2">Երևան Ստուդիո</span>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="surface rounded-xl overflow-hidden flex flex-col">
+              <div class="aspect-square subtle-bg flex items-center justify-center p-6">
+                <svg class="w-3/5 h-3/5" viewBox="0 0 100 100" fill="var(--sf)" stroke="var(--mu)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 42h68c0 22-14 38-34 38S16 64 16 42z"/><path d="M38 80h24M16 42h68"/>
+                </svg>
+              </div>
+              <div class="p-3 flex-1 flex flex-col justify-between gap-2">
+                <div>
+                  <div class="font-medium text-sm clamp-2 leading-snug">Ձեռագործ թաս՝ տանձենու փայտից</div>
+                  <div class="num text-sm font-semibold mt-1">6 800 ֏</div>
+                </div>
+                <span class="text-xs text-muted underline underline-offset-2">Տավուշի արհեստ</span>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="surface rounded-xl overflow-hidden flex flex-col">
+              <div class="aspect-square subtle-bg flex items-center justify-center p-6">
+                <svg class="w-3/5 h-3/5" viewBox="0 0 100 100" fill="var(--sf)" stroke="var(--mu)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="34" y="12" width="32" height="10" rx="2"/><path d="M36 22v6c-8 4-8 10-8 14v36a6 6 0 0 0 6 6h32a6 6 0 0 0 6-6V42c0-4 0-10-8-14v-6"/><rect x="38" y="46" width="24" height="20" rx="2"/>
+                </svg>
+              </div>
+              <div class="p-3 flex-1 flex flex-col justify-between gap-2">
+                <div>
+                  <div class="font-medium text-sm clamp-2 leading-snug">Լեռնային հում մեղր Շիրակից, 400 գ</div>
+                  <div class="num text-sm font-semibold mt-1">3 600 ֏</div>
+                </div>
+                <span class="text-xs text-muted underline underline-offset-2">Արարատ Ռոուսթերս</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Minimalist 1.5px Stroke Iconography -->
+        <div class="surface rounded-2xl p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="dsp text-base">System Iconography</h3>
+              <p class="text-xs text-muted">Consistent <span class="mono">24×24</span> viewBox, <span class="mono">1.5px</span> stroke width, round caps and joins</p>
+            </div>
+            <span class="mono text-xs text-muted">stroke-width="1.5"</span>
+          </div>
+          <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+            <div class="p-4 rounded-xl border border-line flex flex-col items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span class="mono text-[11px] text-muted">Search</span>
+            </div>
+            <div class="p-4 rounded-xl border border-line flex flex-col items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+              <span class="mono text-[11px] text-muted">Cart</span>
+            </div>
+            <div class="p-4 rounded-xl border border-line flex flex-col items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="mono text-[11px] text-muted">Location</span>
+            </div>
+            <div class="p-4 rounded-xl border border-line flex flex-col items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4zM3 7v10l9 4 9-4V7"/></svg>
+              <span class="mono text-[11px] text-muted">Pickup</span>
+            </div>
+            <div class="p-4 rounded-xl border border-line flex flex-col items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-sem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+              <span class="mono text-[11px] text-muted">Verified</span>
+            </div>
+            <div class="p-4 rounded-xl border border-line flex flex-col items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 9 1-5h14l1 5M4 9a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 6 0 2.5 2.5 0 0 0 5 0M5 12v8h14v-8"/></svg>
+              <span class="mono text-[11px] text-muted">Storefront</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SECTION 06: VOICE, TONE & MICROCOPY GUIDELINES
+      ========================================================== -->
+      <section id="voice" class="scroll-mt-24 space-y-8">
+        <div class="border-b border-line pb-4">
+          <span class="mono text-xs text-brand font-semibold">06 / VOICE & MICROCOPY</span>
+          <h2 class="dsp text-2xl sm:text-3xl mt-1">Voice, Tone & Microcopy Guidelines</h2>
+          <p class="text-sm text-muted mt-1">Armenian-first communication that feels neighborly, transparent, and action-oriented.</p>
+        </div>
+
+        <!-- Core Trust Signals -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="surface rounded-2xl p-5 space-y-1.5">
+            <span class="mono text-[11px] text-brand font-semibold">SELLER PROMISE</span>
+            <div class="dsp text-base">«0% տեղադրման վճար»</div>
+            <p class="text-xs text-muted">Zero listing fees — sellers keep 100% of their revenue.</p>
+          </div>
+          <div class="surface rounded-2xl p-5 space-y-1.5">
+            <span class="mono text-[11px] text-brand font-semibold">BUYER FRICTIONLESS CTA</span>
+            <div class="dsp text-base">«Պատվիրել առանց գրանցման»</div>
+            <p class="text-xs text-muted">Order without registration — just name, +374 phone, and delivery choice.</p>
+          </div>
+          <div class="surface rounded-2xl p-5 space-y-1.5">
+            <span class="mono text-[11px] text-brand font-semibold">PRIVACY ASSURANCE</span>
+            <div class="dsp text-base">«Գնորդներին չի ցուցադրվում»</div>
+            <p class="text-xs text-muted">Explicit reassurance that a seller's login phone stays private.</p>
+          </div>
+        </div>
+
+        <!-- Copywriting Do vs Don't Table -->
+        <div class="surface rounded-2xl overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--ln)]">
+            <div class="p-6 space-y-4">
+              <div class="text-xs font-semibold text-emerald-sem uppercase tracking-wider">imShuka Voice (Clear & Respectful)</div>
+              <div class="space-y-3 text-sm">
+                <div class="p-3 rounded-xl bg-emerald-soft">
+                  <div class="font-medium">«Վերցնել այսօր Իջևանում»</div>
+                  <div class="text-xs text-muted mt-0.5">Specific, local, and immediately useful to the shopper.</div>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-soft">
+                  <div class="font-medium">«Վաճառողը կզանգահարի պատվերը հաստատելու համար»</div>
+                  <div class="text-xs text-muted mt-0.5">Sets clear human expectations after checkout.</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="text-xs font-semibold uppercase tracking-wider" style="color: var(--er);">Avoid (Aggressive / Jargon)</div>
+              <div class="space-y-3 text-sm">
+                <div class="p-3 rounded-xl" style="background: var(--er-soft);">
+                  <div class="font-medium">«ՇՏԱՊԵՔ! Մնացել է ընդամենը 1 հատ!!!»</div>
+                  <div class="text-xs text-muted mt-0.5">Artificial urgency clashes with our calm, trusted market tone.</div>
+                </div>
+                <div class="p-3 rounded-xl" style="background: var(--er-soft);">
+                  <div class="font-medium">«Ստեղծեք աքաունթ և վերիֆիկացրեք Ձեր պրոֆիլը»</div>
+                  <div class="text-xs text-muted mt-0.5">Avoid heavy transliterated tech jargon when natural Armenian works.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="border-t border-line pt-8 pb-12 flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
+        <div class="flex items-center gap-2.5">
+          <svg width="24" height="24" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#841838"/>
+            <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+            <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+          </svg>
+          <span class="dsp text-sm text-[var(--ink)]">imShuka</span>
+          <span>· Brandbook & Design System</span>
+        </div>
+        <div>© 2026 imShuka (իմ շուկա). Built for Armenia’s local shops.</div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite">
+    <svg class="w-4 h-4 text-[#34D399]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastMsg">Copied to clipboard</span>
+  </div>
+
+<script>
+  const PRIMARY_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <rect width="96" height="96" rx="22" fill="#841838"/>
+  <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+  <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+</svg>`;
+
+  const BRAND_COLORS = [
+    {
+      name: 'Rich Pomegranate',
+      token: '--br',
+      hex: '#841838',
+      rgb: 'rgb(132, 24, 56)',
+      wcag: '7.8:1 vs White (AAA)',
+      darkText: false,
+      usage: 'Primary brand fill, app icon tile, CTA buttons, active category pills, and focus rings.'
+    },
+    {
+      name: 'Hover Pomegranate',
+      token: '--br-h',
+      hex: '#6E1B35',
+      rgb: 'rgb(110, 27, 53)',
+      wcag: '9.4:1 vs White (AAA)',
+      darkText: false,
+      usage: 'Interactive hover and pressed state for primary buttons and active pills.'
+    },
+    {
+      name: 'Pomegranate Soft Tint',
+      token: '--br-soft',
+      hex: '#FDF2F5',
+      rgb: 'rgb(253, 242, 245)',
+      wcag: '7.1:1 with #841838',
+      darkText: true,
+      usage: 'Subtle highlight surfaces, value-prop banners, and demo code callouts in light mode.'
+    },
+    {
+      name: 'Dark Mode Accent',
+      token: '--br (dark)',
+      hex: '#C94A70',
+      rgb: 'rgb(201, 74, 112)',
+      wcag: '4.6:1 vs #121826 (AA)',
+      darkText: false,
+      usage: 'Lifted crimson primary fill on dark UI surfaces so buttons maintain crisp prominence.'
+    },
+    {
+      name: 'Dark Mode Text Tint',
+      token: '--bt (dark)',
+      hex: '#F08DA9',
+      rgb: 'rgb(240, 141, 169)',
+      wcag: '7.9:1 vs #121826 (AAA)',
+      darkText: true,
+      usage: 'Store headings, active links, and brand highlights on dark-mode cards.'
+    },
+    {
+      name: 'Verified Pine / Emerald',
+      token: '--em',
+      hex: '#059669',
+      rgb: 'rgb(5, 150, 105)',
+      wcag: '4.5:1 vs White (AA)',
+      darkText: false,
+      usage: 'Reserved strictly for verified shop checkmarks («Հաստատված խանութ») and success states.'
+    }
+  ];
+
+  const LIGHT_NEUTRALS = [
+    { name: 'Canvas Background', token: '--bg', hex: '#FAFAFA', desc: 'Page canvas' },
+    { name: 'Card Surface', token: '--sf', hex: '#FFFFFF', desc: 'Cards, header, drawers' },
+    { name: 'Hairline Border', token: '--ln', hex: '#E5E7EB', desc: '1px structural dividers' },
+    { name: 'Primary Ink', token: '--ink', hex: '#111827', desc: 'Headings & primary text' },
+    { name: 'Muted Secondary', token: '--mu', hex: '#6B7280', desc: 'Metadata & captions' },
+    { name: 'Image Placeholder', token: '--ph', hex: '#F3F4F6', desc: '1:1 product frame' }
+  ];
+
+  const DARK_NEUTRALS = [
+    { name: 'Dark Canvas', token: '--bg', hex: '#0B0F17', desc: 'Dark page canvas' },
+    { name: 'Dark Surface', token: '--sf', hex: '#121826', desc: 'Dark cards & sheets' },
+    { name: 'Dark Border', token: '--ln', hex: '#243049', desc: '1px slate dividers' },
+    { name: 'Dark Primary Ink', token: '--ink', hex: '#F3F4F6', desc: 'High-legibility text' },
+    { name: 'Dark Muted Text', token: '--mu', hex: '#9CA3AF', desc: 'Secondary metadata' }
+  ];
+
+  function renderSwatches() {
+    document.getElementById('brandSwatches').innerHTML = BRAND_COLORS.map(c => `
+      <button onclick="copyText('${c.hex}', 'Copied ${c.name} (${c.hex})')" class="surface rounded-2xl overflow-hidden text-left flex flex-col group transition-transform active:scale-[0.99]">
+        <div class="h-28 p-4 flex flex-col justify-between" style="background-color: ${c.hex}; color: ${c.darkText ? '#111827' : '#FFFFFF'};">
+          <div class="flex items-center justify-between">
+            <span class="mono text-xs font-semibold">${c.hex}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full" style="background: ${c.darkText ? 'rgba(17,24,39,0.08)' : 'rgba(255,255,255,0.18)'};">${c.wcag}</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="dsp text-sm">${c.name}</span>
+            <span class="mono text-[11px] opacity-80 group-hover:underline">Copy</span>
+          </div>
+        </div>
+        <div class="p-4 space-y-1.5 flex-1">
+          <div class="flex items-center justify-between text-[11px] mono text-muted">
+            <span>${c.token}</span>
+            <span>${c.rgb}</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed pt-1">${c.usage}</p>
+        </div>
+      </button>
+    `).join('');
+
+    const renderNeutralList = list => list.map(n => `
+      <button onclick="copyText('${n.hex}', 'Copied ${n.name} (${n.hex})')" class="w-full p-3.5 flex items-center justify-between gap-3 text-left hover:bg-[var(--ph)] transition-colors">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="w-9 h-9 rounded-lg border border-line shrink-0" style="background-color: ${n.hex};"></span>
+          <div class="min-w-0">
+            <div class="text-xs font-semibold truncate">${n.name}</div>
+            <div class="text-[11px] text-muted truncate">${n.desc}</div>
+          </div>
+        </div>
+        <div class="text-right shrink-0">
+          <div class="mono text-xs font-medium">${n.hex}</div>
+          <div class="mono text-[10px] text-muted">${n.token}</div>
+        </div>
+      </button>
+    `).join('');
+
+    document.getElementById('lightNeutrals').innerHTML = renderNeutralList(LIGHT_NEUTRALS);
+    document.getElementById('darkNeutrals').innerHTML = renderNeutralList(DARK_NEUTRALS);
+  }
+
+  let toastTimer;
+  function copyText(text, label) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = label || `Copied ${text}`;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function copyPrimarySvg() {
+    copyText(PRIMARY_SVG, 'Copied imShuka SVG markup');
+  }
+
+  function toggleTheme() {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    document.getElementById('themeLabel').textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+    document.getElementById('themeIcon').innerHTML = next === 'dark'
+      ? '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-15.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2m-15.07 7.07 1.41-1.41M17.66 6.34l1.41-1.41"/></svg>'
+      : '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+  }
+
+  function updateSpecimen(val) {
+    const txt = val.trim() || 'Տավուշի արհեստ · Handcrafted in Dilijan — 15 500 ֏';
+    document.querySelectorAll('.specimen-out').forEach(el => el.textContent = txt);
+  }
+
+  function resetTypeTester() {
+    const def = 'Տավուշի արհեստ · Handcrafted in Dilijan — 15 500 ֏';
+    document.getElementById('typeInput').value = def;
+    updateSpecimen(def);
+  }
+
+  function selectDemoPill(btn) {
+    document.querySelectorAll('#demoPills .ui-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('#sideNav .nav-link');
+  window.addEventListener('scroll', () => {
+    let current = 'essence';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 140) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.sec === current);
+    });
+  }, { passive: true });
+
+  renderSwatches();
+</script>
+</body>
+</html>
