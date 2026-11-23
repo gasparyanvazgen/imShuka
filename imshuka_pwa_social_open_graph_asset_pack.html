@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>imShuka — PWA & Social Open Graph Asset Pack</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96' fill='none'%3E%3Crect width='96' height='96' rx='22' fill='%23841838'/%3E%3Cpath d='M26 74V46a22 22 0 0 1 44 0v28' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='48' cy='45' r='4.5' fill='white'/%3E%3Crect x='44.5' y='55' width='7' height='19' rx='3.5' fill='white'/%3E%3C/svg%3E">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --sf: #FFFFFF;
+    --ln: #E5E7EB;
+    --ink: #111827;
+    --mu: #6B7280;
+    --ph: #F3F4F6;
+    --br: #841838;
+    --br-h: #6E1B35;
+    --br-soft: #FDF2F5;
+    --bt: #841838;
+    --em: #059669;
+    --em-soft: #ECFDF5;
+  }
+  [data-theme="dark"] {
+    --bg: #0B0F17;
+    --sf: #121826;
+    --ln: #243049;
+    --ink: #F3F4F6;
+    --mu: #9CA3AF;
+    --ph: #1A2233;
+    --br: #C94A70;
+    --br-h: #A82C51;
+    --br-soft: #26121A;
+    --bt: #F08DA9;
+    --em: #34D399;
+    --em-soft: #0F2922;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', 'Noto Sans Armenian', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+  .dsp {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Armenian', 'Inter', sans-serif;
+    font-weight: 700;
+  }
+  .mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .surface {
+    background-color: var(--sf);
+    border: 1px solid var(--ln);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .subtle-bg { background-color: var(--ph); }
+  .text-muted { color: var(--mu); }
+  .text-brand { color: var(--bt); }
+  .bg-brand-soft { background-color: var(--br-soft); }
+  .border-line { border-color: var(--ln); }
+  .text-emerald-sem { color: var(--em); }
+  .bg-emerald-soft { background-color: var(--em-soft); }
+
+  /* Pill Buttons */
+  .ui-pill {
+    border: 1px solid var(--ln);
+    background: var(--sf);
+    color: var(--ink);
+    border-radius: 999px;
+    height: 38px;
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .ui-pill:hover { border-color: var(--mu); }
+  .ui-pill.active {
+    background: #841838;
+    border-color: #841838;
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+  .ui-pill.active:hover {
+    background: #6E1B35;
+    border-color: #6E1B35;
+  }
+
+  /* Checkerboard transparency grid for icon previews */
+  .checker-bg {
+    background-color: var(--ph);
+    background-image:
+      linear-gradient(45deg, rgba(128,128,128,0.08) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(128,128,128,0.08) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(128,128,128,0.08) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(128,128,128,0.08) 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  }
+
+  .field-input {
+    width: 100%;
+    height: 42px;
+    border: 1px solid var(--ln);
+    background: var(--sf);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 0 12px;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .field-input:focus { border-color: #841838; }
+
+  /* Toast */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    background: #111827;
+    color: #FFFFFF;
+    border: 1px solid #374151;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.3);
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+</style>
+</head>
+<body class="min-h-screen pb-16">
+
+  <!-- Sticky Top Header -->
+  <header class="sticky top-0 z-30 surface border-x-0 border-t-0 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <svg width="34" height="34" viewBox="0 0 96 96" fill="none" aria-hidden="true" class="shrink-0">
+          <rect width="96" height="96" rx="22" fill="#841838"/>
+          <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+          <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+        </svg>
+        <div class="flex items-baseline gap-2.5 truncate">
+          <span class="dsp text-lg tracking-tight">imShuka</span>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-brand-soft text-brand font-medium truncate">PWA & Social Asset Pack</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <nav class="hidden md:flex items-center gap-1 mr-2 text-xs">
+          <a href="#icons" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">01 Icons</a>
+          <a href="#og-studio" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">02 Open Graph</a>
+          <a href="#manifest" class="px-3 py-1.5 rounded-full text-muted hover:text-brand">03 Manifest & Meta</a>
+        </nav>
+        <button onclick="toggleTheme()" class="ui-pill !h-9 !px-3.5 text-xs" aria-label="Toggle theme">
+          <span id="themeIcon">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </span>
+          <span id="themeLabel" class="hidden sm:inline">Dark Mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 space-y-16">
+
+    <!-- Intro Banner -->
+    <section class="surface rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div class="space-y-2.5 max-w-2xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-soft text-brand text-xs font-semibold">
+          <span>Production Asset Exporter</span>
+          <span>·</span>
+          <span class="mono">#841838 Rich Pomegranate</span>
+        </div>
+        <h1 class="dsp text-2xl sm:text-4xl tracking-tight">
+          PWA Icons, Social Open Graph & Manifest Pack
+        </h1>
+        <p class="text-sm text-muted leading-relaxed">
+          Generate and download optically tuned favicons, iOS Apple Touch icons, Android maskable PWA icons, and <span class="mono text-xs">1200×630</span> Open Graph link-preview cards for <strong>imShuka («իմ շուկա»)</strong>—rendered directly on HTML5 Canvas at native pixel resolution.
+        </p>
+      </div>
+      <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0">
+        <button onclick="downloadAllIcons()" class="ui-pill active !h-11 !px-5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download All 6 Icons</span>
+        </button>
+        <button onclick="downloadOgPng()" class="ui-pill !h-11 !px-5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Export og-image.png</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 01: PWA & APP ICON PRODUCTION SUITE
+    ========================================================== -->
+    <section id="icons" class="scroll-mt-24 space-y-6">
+      <div class="border-b border-line pb-4 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span class="mono text-xs text-brand font-semibold">01 / ICON PRODUCTION SUITE</span>
+          <h2 class="dsp text-2xl mt-1">Favicons, iOS Touch & PWA Manifest Icons</h2>
+          <p class="text-sm text-muted mt-1">Every raster asset is rendered at exact pixel dimensions with optical stroke compensation for small sizes.</p>
+        </div>
+
+        <!-- Maskable Safe-Zone Guide Toggle -->
+        <label class="inline-flex items-center gap-2.5 surface px-4 py-2 rounded-full cursor-pointer select-none text-xs font-medium">
+          <input id="safeZoneToggle" type="checkbox" checked onchange="renderAllIcons()" class="w-4 h-4 accent-[#841838] rounded cursor-pointer">
+          <span>Show 80% Maskable Safe-Zone Guide</span>
+        </label>
+      </div>
+
+      <!-- 7-Asset Grid (SVG + 6 PNGs) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="iconGrid"></div>
+
+      <!-- Live 1:1 Dark Browser Tab & History Row Preview -->
+      <div class="surface rounded-2xl p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 class="dsp text-base">Live 1:1 Dark Browser Chrome & Sidebar Preview</h3>
+            <p class="text-xs text-muted">Actual <span class="mono">16×16</span> pixel-snapped PNG rendered at native <span class="mono">1:1</span> scale on dark UI backgrounds</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-soft text-emerald-sem font-medium">Zero Sub-Pixel Blur</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Dark Browser Tab Strip -->
+          <div class="rounded-xl bg-[#181A1F] p-4 space-y-3 border border-white/10">
+            <div class="mono text-[10px] uppercase tracking-wider text-gray-400">Browser Tab Bar (16×16 px)</div>
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-between gap-3 bg-[#282B33] text-white px-3.5 py-2 rounded-t-xl border-t border-x border-white/10 min-w-[180px]">
+                <div class="flex items-center gap-2.5">
+                  <img id="liveTab16" width="16" height="16" alt="16px tab icon" class="block shrink-0">
+                  <span class="text-xs font-medium">imShuka</span>
+                </div>
+                <span class="text-gray-400 text-xs leading-none">×</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-400 px-3 py-2 text-xs">
+                <span class="w-3.5 h-3.5 rounded-full bg-white/15 inline-block"></span>
+                <span>New Tab</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dark Sidebar / History Row -->
+          <div class="rounded-xl bg-[#181A1F] p-4 space-y-2.5 border border-white/10">
+            <div class="mono text-[10px] uppercase tracking-wider text-gray-400">Sidebar & History List (16×16 px)</div>
+            <div class="space-y-1.5 text-xs text-gray-200">
+              <div class="flex items-center gap-3 px-2.5 py-1.5 rounded-lg bg-white/[0.06]">
+                <img id="liveRow16" width="16" height="16" alt="16px history icon" class="block shrink-0">
+                <span class="font-medium text-white">imShuka</span>
+                <span class="mono text-[10px] text-gray-400 ml-auto">imshuka.am</span>
+              </div>
+              <div class="flex items-center gap-3 px-2.5 py-1.5 rounded-lg text-gray-400">
+                <span class="w-4 h-4 rounded-full bg-[#0284C7] inline-block shrink-0"></span>
+                <span class="truncate">List.am - Հայաստանի անվճար հայտարարություններ</span>
+              </div>
+              <div class="flex items-center gap-3 px-2.5 py-1.5 rounded-lg text-gray-400">
+                <span class="w-4 h-4 rounded bg-[#16A34A] inline-block shrink-0"></span>
+                <span class="truncate">Shopify: The All-in-One Commerce Platform</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 02: SOCIAL OPEN GRAPH (1200x630) STUDIO
+    ========================================================== -->
+    <section id="og-studio" class="scroll-mt-24 space-y-6">
+      <div class="border-b border-line pb-4 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span class="mono text-xs text-brand font-semibold">02 / SOCIAL OPEN GRAPH GENERATOR</span>
+          <h2 class="dsp text-2xl mt-1">Open Graph Share Card (<span class="num">1200×630</span>)</h2>
+          <p class="text-sm text-muted mt-1">Switch between the main marketplace card and custom regional storefront share cards.</p>
+        </div>
+        <button onclick="downloadOgPng()" class="ui-pill active !h-10 !px-5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download og-image.png (1200×630)</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Left Controls Panel -->
+        <div class="lg:col-span-5 surface rounded-2xl p-6 space-y-5">
+          <div class="space-y-2">
+            <span class="text-xs font-semibold text-muted uppercase tracking-wider">Card Mode</span>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="modeMarketBtn" onclick="setOgMode('market')" class="ui-pill active w-full">Marketplace Default</button>
+              <button id="modeStoreBtn" onclick="setOgMode('store')" class="ui-pill w-full">Custom Store Card</button>
+            </div>
+          </div>
+
+          <!-- Marketplace Mode Info -->
+          <div id="marketControls" class="space-y-4">
+            <div class="p-4 rounded-xl bg-brand-soft space-y-1.5">
+              <div class="dsp text-sm text-brand">Default Marketplace OG Card</div>
+              <p class="text-xs text-muted leading-relaxed">
+                Used for the root domain (<span class="mono">imshuka.am</span>). Features the Rich Pomegranate emblem, Armenian tagline, and regional craft badge.
+              </p>
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1.5" for="marketTaglineInput">Tagline (Armenian)</label>
+              <input id="marketTaglineInput" type="text" class="field-input" value="Հայաստանի առցանց շուկա՝ փոքր խանութների համար" oninput="renderOgCanvas()">
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1.5" for="marketBadgeInput">Top Pill Badge</label>
+              <input id="marketBadgeInput" type="text" class="field-input" value="0% տեղադրման վճար · Տեղական արտադրողներ" oninput="renderOgCanvas()">
+            </div>
+          </div>
+
+          <!-- Custom Store Mode Controls -->
+          <div id="storeControls" class="space-y-4 hidden">
+            <div>
+              <label class="block text-xs text-muted mb-1.5" for="storeNameInput">Store Name (Խանութի անվանում)</label>
+              <input id="storeNameInput" type="text" class="field-input" value="Տավուշի արհեստ" oninput="renderOgCanvas()">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs text-muted mb-1.5" for="storeLocInput">City & Marz</label>
+                <input id="storeLocInput" type="text" class="field-input" value="Իջևան, Տավուշ" oninput="renderOgCanvas()">
+              </div>
+              <div>
+                <label class="block text-xs text-muted mb-1.5" for="storeCountInput">Catalog Count</label>
+                <input id="storeCountInput" type="text" class="field-input" value="14 ապրանք" oninput="renderOgCanvas()">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1.5" for="storeSlugInput">Store URL Slug</label>
+              <input id="storeSlugInput" type="text" class="field-input mono" value="imshuka.am/tavush-craft" oninput="renderOgCanvas()">
+            </div>
+            <label class="inline-flex items-center gap-2.5 cursor-pointer select-none text-xs font-medium pt-1">
+              <input id="storeVerifiedInput" type="checkbox" checked onchange="renderOgCanvas()" class="w-4 h-4 accent-[#059669] rounded">
+              <span>Show Verified Emerald Checkmark («Հաստատված խանութ»)</span>
+            </label>
+          </div>
+
+          <!-- Theme Variant for OG Card -->
+          <div class="pt-3 border-t border-line flex items-center justify-between">
+            <span class="text-xs font-medium text-muted">Card Surface Style</span>
+            <div class="flex items-center gap-1.5">
+              <button id="ogStyleLight" onclick="setOgSurface('light')" class="ui-pill active !h-8 !px-3 text-xs">Warm Light</button>
+              <button id="ogStyleDark" onclick="setOgSurface('dark')" class="ui-pill !h-8 !px-3 text-xs">Deep Pomegranate</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Live Canvas + Social Mockups -->
+        <div class="lg:col-span-7 space-y-6">
+          <!-- True 1200x630 Canvas Container -->
+          <div class="surface rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs text-muted">
+              <span class="font-semibold text-[var(--ink)]">Live Master Canvas Preview</span>
+              <span class="mono">1200 × 630 px (1.91:1)</span>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-line bg-[#111827]">
+              <canvas id="ogCanvas" width="1200" height="630" class="w-full h-auto block"></canvas>
+            </div>
+          </div>
+
+          <!-- Messaging App Link Previews (Telegram & Instagram DM) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Telegram Preview -->
+            <div class="surface rounded-2xl p-4 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#2AABEE]"></span>
+                  Telegram Link Preview
+                </span>
+                <span class="mono text-[10px] text-muted">t.me share</span>
+              </div>
+              <div class="rounded-xl p-3 bg-[#17212B] text-white space-y-2 text-xs">
+                <div class="text-[#6AB2F2] underline truncate" id="tgUrl">https://imshuka.am</div>
+                <div class="border-l-2 border-[#6AB2F2] pl-2.5 space-y-1.5">
+                  <div class="font-semibold text-[#6AB2F2]">imShuka</div>
+                  <div class="font-semibold text-white leading-snug" id="tgTitle">imShuka — Հայաստանի առցանց շուկա</div>
+                  <div class="text-gray-300 text-[11px] line-clamp-2" id="tgDesc">Հայաստանի առցանց շուկա՝ փոքր խանութների համար։ Պատվիրեք առանց գրանցման։</div>
+                  <img id="tgPreviewImg" alt="Telegram OG Preview" class="w-full aspect-[1200/630] object-cover rounded-lg mt-1.5 border border-white/10">
+                </div>
+              </div>
+            </div>
+
+            <!-- Instagram / Facebook Share Preview -->
+            <div class="surface rounded-2xl p-4 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#E1306C]"></span>
+                  Instagram / Meta Share Card
+                </span>
+                <span class="mono text-[10px] text-muted">og:image</span>
+              </div>
+              <div class="rounded-xl overflow-hidden border border-line bg-[var(--ph)]">
+                <img id="igPreviewImg" alt="Instagram OG Preview" class="w-full aspect-[1200/630] object-cover block">
+                <div class="p-3 surface border-x-0 border-b-0 space-y-0.5">
+                  <div class="mono text-[10px] uppercase text-muted" id="igDomain">IMSHUKA.AM</div>
+                  <div class="font-semibold text-xs truncate" id="igTitle">imShuka — Հայաստանի առցանց շուկա</div>
+                  <div class="text-[11px] text-muted truncate" id="igDesc">Հայաստանի առցանց շուկա՝ փոքր խանութների համար</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 03: MANIFEST.WEBMANIFEST & HTML <HEAD> SNIPPETS
+    ========================================================== -->
+    <section id="manifest" class="scroll-mt-24 space-y-6">
+      <div class="border-b border-line pb-4">
+        <span class="mono text-xs text-brand font-semibold">03 / DEPLOYMENT CODE</span>
+        <h2 class="dsp text-2xl mt-1">Production <span class="mono text-xl">manifest.webmanifest</span> & <span class="mono text-xl">&lt;head&gt;</span> Tags</h2>
+        <p class="text-sm text-muted mt-1">Drop these two snippets into your web root alongside the exported icon files.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- manifest.webmanifest -->
+        <div class="surface rounded-2xl p-5 flex flex-col justify-between gap-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="dsp text-base mono">manifest.webmanifest</h3>
+              <p class="text-xs text-muted">Configured for Armenian (<span class="mono">hy</span>), standalone mode, and <span class="mono">#841838</span></p>
+            </div>
+            <button onclick="copyManifest()" class="ui-pill active !h-9 !px-4 text-xs">Copy JSON</button>
+          </div>
+          <pre id="manifestCode" class="mono text-xs p-4 rounded-xl subtle-bg overflow-x-auto leading-relaxed flex-1 select-all"></pre>
+        </div>
+
+        <!-- HTML <head> Meta Tags -->
+        <div class="surface rounded-2xl p-5 flex flex-col justify-between gap-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="dsp text-base">HTML <span class="mono">&lt;head&gt;</span> Icon & OG Tags</h3>
+              <p class="text-xs text-muted">Includes favicons, Apple Touch icon, Open Graph, and Twitter Card tags</p>
+            </div>
+            <button onclick="copyHeadTags()" class="ui-pill active !h-9 !px-4 text-xs">Copy HTML</button>
+          </div>
+          <pre id="headCode" class="mono text-xs p-4 rounded-xl subtle-bg overflow-x-auto leading-relaxed flex-1 select-all"></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite">
+    <svg class="w-4 h-4 text-[#34D399]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastMsg">Downloaded asset</span>
+  </div>
+
+<script>
+  const PRIMARY_SVG_CODE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <rect width="96" height="96" rx="22" fill="#841838"/>
+  <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+  <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+</svg>`;
+
+  const ICON_SPECS = [
+    {
+      id: 'favicon-svg',
+      filename: 'favicon.svg',
+      dims: 'Vector (96×96)',
+      displaySize: 64,
+      type: 'svg',
+      badge: 'Primary Vector',
+      desc: 'Crisp infinite-resolution SVG icon prioritized first in modern browsers.'
+    },
+    {
+      id: 'favicon-16',
+      filename: 'favicon-16.png',
+      dims: '16 × 16 px',
+      canvasSize: 16,
+      displaySize: 16,
+      type: 'png',
+      rounded: true,
+      badge: 'Pixel-Snapped 1:1',
+      desc: 'Drawn on integer 16×16 pixel boundaries (2px legs, 1px center dot) for zero blur.'
+    },
+    {
+      id: 'favicon-32',
+      filename: 'favicon-32.png',
+      dims: '32 × 32 px',
+      canvasSize: 32,
+      displaySize: 32,
+      type: 'png',
+      rounded: true,
+      badge: 'Pixel-Snapped 1:1',
+      desc: 'Integer-aligned 32×32 retina tab & bookmark icon rendered at native 1:1 scale.'
+    },
+    {
+      id: 'apple-touch',
+      filename: 'apple-touch-icon.png',
+      dims: '180 × 180 px',
+      canvasSize: 180,
+      displaySize: 72,
+      type: 'png',
+      rounded: false,
+      badge: 'Full-Bleed iOS',
+      desc: 'Full-bleed #841838 square; iOS automatically applies its native squircle mask.'
+    },
+    {
+      id: 'icon-192',
+      filename: 'icon-192.png',
+      dims: '192 × 192 px',
+      canvasSize: 192,
+      displaySize: 72,
+      type: 'png',
+      rounded: true,
+      badge: 'PWA Standard',
+      desc: 'Home screen launcher icon for Android Chrome and mobile PWAs.'
+    },
+    {
+      id: 'icon-512',
+      filename: 'icon-512.png',
+      dims: '512 × 512 px',
+      canvasSize: 512,
+      displaySize: 80,
+      type: 'png',
+      rounded: true,
+      badge: 'Splash / Store',
+      desc: 'High-resolution splash screen and app directory icon.'
+    },
+    {
+      id: 'icon-maskable',
+      filename: 'icon-maskable-512.png',
+      dims: '512 × 512 px',
+      canvasSize: 512,
+      displaySize: 80,
+      type: 'png',
+      rounded: false,
+      maskable: true,
+      badge: 'Android Adaptive',
+      desc: 'Full-bleed tile with mark scaled inside the inner 80% safe circle.'
+    }
+  ];
+
+  // Draw rounded rectangle helper
+  function roundRectPath(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  // Render an imShuka icon onto any HTML5 Canvas with dedicated integer pixel-snapping at 16px and 32px
+  function drawIconToCanvas(canvas, spec, showGuide = false) {
+    const size = spec.canvasSize;
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, size, size);
+
+    // 1. Dedicated integer pixel-snapped grid for 16x16 favicon (zero sub-pixel fringes)
+    if (size === 16) {
+      ctx.fillStyle = '#841838';
+      roundRectPath(ctx, 0, 0, 16, 16, 4);
+      ctx.fill();
+
+      // Arch: 2px wide vertical legs at x=3.5 and x=12.5 (covers integer columns 3-4 and 12-13)
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(3.5, 12.5);
+      ctx.lineTo(3.5, 7.5);
+      ctx.arc(8, 7.5, 4.5, Math.PI, 0, false);
+      ctx.lineTo(12.5, 12.5);
+      ctx.stroke();
+
+      // Center "i" dot & stem snapped cleanly to x=7..9 (2px wide)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(8, 7.2, 1.1, 0, Math.PI * 2);
+      ctx.fill();
+      roundRectPath(ctx, 7, 9.5, 2, 3.8, 1);
+      ctx.fill();
+      return;
+    }
+
+    // 2. Dedicated integer pixel-snapped grid for 32x32 favicon
+    if (size === 32) {
+      ctx.fillStyle = '#841838';
+      roundRectPath(ctx, 0, 0, 32, 32, 7);
+      ctx.fill();
+
+      // Arch: 3px wide vertical legs centered at x=8.5 and x=23.5 (covers integer pixels 7-9 and 22-24)
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(8.5, 25);
+      ctx.lineTo(8.5, 15.5);
+      ctx.arc(16, 15.5, 7.5, Math.PI, 0, false);
+      ctx.lineTo(23.5, 25);
+      ctx.stroke();
+
+      // Center "i" dot & stem snapped cleanly to x=14.5..17.5 (3px wide)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(16, 15, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+      roundRectPath(ctx, 14.5, 19, 3, 7, 1.5);
+      ctx.fill();
+      return;
+    }
+
+    // 3. Smooth high-DPI vector scaling for 180px, 192px, and 512px icons
+    const scale = size / 96;
+    ctx.save();
+
+    ctx.fillStyle = '#841838';
+    if (spec.rounded) {
+      roundRectPath(ctx, 0, 0, size, size, 22 * scale);
+      ctx.fill();
+    } else {
+      ctx.fillRect(0, 0, size, size);
+    }
+
+    const innerFactor = spec.maskable ? 0.74 : 1.0;
+    const offset = (size * (1 - innerFactor)) / 2;
+    ctx.translate(offset, offset);
+    ctx.scale(scale * innerFactor, scale * innerFactor);
+
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(26, 74);
+    ctx.lineTo(26, 46);
+    ctx.arc(48, 46, 22, Math.PI, 0, false);
+    ctx.lineTo(70, 74);
+    ctx.stroke();
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.beginPath();
+    ctx.arc(48, 45, 4.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    roundRectPath(ctx, 44.5, 55, 7, 19, 3.5);
+    ctx.fill();
+
+    ctx.restore();
+
+    if (spec.maskable && showGuide) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+      ctx.lineWidth = Math.max(2, size * 0.008);
+      ctx.setLineDash([size * 0.03, size * 0.02]);
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size * 0.4, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  function renderAllIcons() {
+    const grid = document.getElementById('iconGrid');
+    const showGuide = document.getElementById('safeZoneToggle').checked;
+
+    grid.innerHTML = ICON_SPECS.map(spec => `
+      <div class="surface rounded-2xl p-5 flex flex-col justify-between gap-4">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-brand-soft text-brand font-medium">${spec.badge}</span>
+          <span class="mono text-[11px] text-muted">${spec.dims}</span>
+        </div>
+
+        <div class="h-32 rounded-xl checker-bg border border-line flex flex-col items-center justify-center gap-2 p-4">
+          ${spec.type === 'svg'
+            ? `<svg width="${spec.displaySize}" height="${spec.displaySize}" viewBox="0 0 96 96" fill="none">
+                <rect width="96" height="96" rx="22" fill="#841838"/>
+                <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+                <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+              </svg>`
+            : `<canvas id="canvas-${spec.id}" style="width:${spec.displaySize}px;height:${spec.displaySize}px;" class="block"></canvas>
+               ${spec.canvasSize <= 32 ? `<span class="mono text-[10px] text-muted">1:1 actual size (${spec.canvasSize}px)</span>` : ''}`
+          }
+        </div>
+
+        <div class="space-y-1">
+          <div class="mono text-xs font-semibold">${spec.filename}</div>
+          <p class="text-xs text-muted leading-relaxed">${spec.desc}</p>
+        </div>
+
+        <button onclick="downloadSingleIcon('${spec.id}')" class="ui-pill w-full !h-9 text-xs">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download ${spec.type.toUpperCase()}</span>
+        </button>
+      </div>
+    `).join('');
+
+    ICON_SPECS.forEach(spec => {
+      if (spec.type === 'png') {
+        const c = document.getElementById(`canvas-${spec.id}`);
+        if (c) drawIconToCanvas(c, spec, showGuide);
+      }
+    });
+
+    // Sync 1:1 live dark browser tab & sidebar previews with the exact 16x16 PNG data URL
+    const c16 = document.getElementById('canvas-favicon-16');
+    if (c16) {
+      const url16 = c16.toDataURL('image/png');
+      const tabImg = document.getElementById('liveTab16');
+      const rowImg = document.getElementById('liveRow16');
+      if (tabImg) tabImg.src = url16;
+      if (rowImg) rowImg.src = url16;
+    }
+  }
+
+  function renderAllIcons() {
+    const grid = document.getElementById('iconGrid');
+    const showGuide = document.getElementById('safeZoneToggle').checked;
+
+    grid.innerHTML = ICON_SPECS.map(spec => `
+      <div class="surface rounded-2xl p-5 flex flex-col justify-between gap-4">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-brand-soft text-brand font-medium">${spec.badge}</span>
+          <span class="mono text-[11px] text-muted">${spec.dims}</span>
+        </div>
+
+        <div class="h-32 rounded-xl checker-bg border border-line flex items-center justify-center p-4">
+          ${spec.type === 'svg'
+            ? `<svg width="${spec.displaySize}" height="${spec.displaySize}" viewBox="0 0 96 96" fill="none">
+                <rect width="96" height="96" rx="22" fill="#841838"/>
+                <path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="48" cy="45" r="4.5" fill="#FFFFFF"/>
+                <rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#FFFFFF"/>
+              </svg>`
+            : `<canvas id="canvas-${spec.id}" style="width:${spec.displaySize}px;height:${spec.displaySize}px;image-rendering:${spec.canvasSize <= 32 ? 'pixelated' : 'auto'};" class="shadow-sm"></canvas>`
+          }
+        </div>
+
+        <div class="space-y-1">
+          <div class="mono text-xs font-semibold">${spec.filename}</div>
+          <p class="text-xs text-muted leading-relaxed">${spec.desc}</p>
+        </div>
+
+        <button onclick="downloadSingleIcon('${spec.id}')" class="ui-pill w-full !h-9 text-xs">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download ${spec.type.toUpperCase()}</span>
+        </button>
+      </div>
+    `).join('');
+
+    ICON_SPECS.forEach(spec => {
+      if (spec.type === 'png') {
+        const c = document.getElementById(`canvas-${spec.id}`);
+        if (c) drawIconToCanvas(c, spec, showGuide);
+      }
+    });
+  }
+
+  function triggerDownload(url, filename) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  function downloadSingleIcon(id) {
+    const spec = ICON_SPECS.find(s => s.id === id);
+    if (!spec) return;
+
+    if (spec.type === 'svg') {
+      const blob = new Blob([PRIMARY_SVG_CODE], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      triggerDownload(url, spec.filename);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast(`Downloaded ${spec.filename}`);
+      return;
+    }
+
+    // Export clean canvas without dashed guide lines
+    const offscreen = document.createElement('canvas');
+    drawIconToCanvas(offscreen, spec, false);
+    offscreen.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      triggerDownload(url, spec.filename);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast(`Downloaded ${spec.filename} (${spec.dims})`);
+    }, 'image/png');
+  }
+
+  function downloadAllIcons() {
+    const pngSpecs = ICON_SPECS.filter(s => s.type === 'png');
+    pngSpecs.forEach((spec, idx) => {
+      setTimeout(() => {
+        const offscreen = document.createElement('canvas');
+        drawIconToCanvas(offscreen, spec, false);
+        offscreen.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          triggerDownload(url, spec.filename);
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }, 'image/png');
+      }, idx * 220);
+    });
+    showToast('Exporting all 6 PNG icon assets...');
+  }
+
+  /* =========================================================
+     OPEN GRAPH 1200x630 GENERATOR
+  ========================================================== */
+  let ogMode = 'market';
+  let ogSurface = 'light';
+
+  function setOgMode(mode) {
+    ogMode = mode;
+    document.getElementById('modeMarketBtn').classList.toggle('active', mode === 'market');
+    document.getElementById('modeStoreBtn').classList.toggle('active', mode === 'store');
+    document.getElementById('marketControls').classList.toggle('hidden', mode !== 'market');
+    document.getElementById('storeControls').classList.toggle('hidden', mode !== 'store');
+    renderOgCanvas();
+  }
+
+  function setOgSurface(style) {
+    ogSurface = style;
+    document.getElementById('ogStyleLight').classList.toggle('active', style === 'light');
+    document.getElementById('ogStyleDark').classList.toggle('active', style === 'dark');
+    renderOgCanvas();
+  }
+
+  function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 3) {
+    const words = text.split(' ');
+    let line = '';
+    let lineCount = 0;
+
+    for (let n = 0; n < words.length; n++) {
+      const testLine = line + words[n] + ' ';
+      const metrics = ctx.measureText(testLine);
+      if (metrics.width > maxWidth && n > 0) {
+        ctx.fillText(line.trim(), x, y + lineCount * lineHeight);
+        line = words[n] + ' ';
+        lineCount++;
+        if (lineCount >= maxLines - 1) break;
+      } else {
+        line = testLine;
+      }
+    }
+    if (lineCount < maxLines) {
+      ctx.fillText(line.trim(), x, y + lineCount * lineHeight);
+    }
+    return lineCount + 1;
+  }
+
+  function renderOgCanvas() {
+    const canvas = document.getElementById('ogCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = 1200;
+    const H = 630;
+    const isDark = ogSurface === 'dark';
+
+    ctx.clearRect(0, 0, W, H);
+
+    // 1. Background
+    ctx.fillStyle = isDark ? '#5C1127' : '#FAFAFA';
+    ctx.fillRect(0, 0, W, H);
+
+    // Subtle decorative architectural arch watermark on right
+    ctx.save();
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(132, 24, 56, 0.05)';
+    ctx.lineWidth = 36;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(860, 630);
+    ctx.lineTo(860, 340);
+    ctx.arc(1030, 340, 170, Math.PI, 0, false);
+    ctx.lineTo(1200, 630);
+    ctx.stroke();
+    ctx.restore();
+
+    // Outer subtle inner card frame
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.14)' : '#E5E7EB';
+    ctx.lineWidth = 2;
+    roundRectPath(ctx, 36, 36, W - 72, H - 72, 32);
+    ctx.fillStyle = isDark ? '#841838' : '#FFFFFF';
+    ctx.fill();
+    ctx.stroke();
+
+    // 2. Top-Left Emblem Tile (104x104)
+    const tileX = 88;
+    const tileY = 88;
+    const tileSize = 104;
+    const s = tileSize / 96;
+
+    ctx.save();
+    roundRectPath(ctx, tileX, tileY, tileSize, tileSize, 24);
+    ctx.fillStyle = isDark ? '#FFFFFF' : '#841838';
+    ctx.fill();
+
+    ctx.translate(tileX, tileY);
+    ctx.scale(s, s);
+    ctx.strokeStyle = isDark ? '#841838' : '#FFFFFF';
+    ctx.lineWidth = 5.2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(26, 74);
+    ctx.lineTo(26, 46);
+    ctx.arc(48, 46, 22, Math.PI, 0, false);
+    ctx.lineTo(70, 74);
+    ctx.stroke();
+
+    ctx.fillStyle = isDark ? '#841838' : '#FFFFFF';
+    ctx.beginPath();
+    ctx.arc(48, 45, 4.5, 0, Math.PI * 2);
+    ctx.fill();
+    roundRectPath(ctx, 44.5, 55, 7, 19, 3.5);
+    ctx.fill();
+    ctx.restore();
+
+    // Brand Wordmark next to tile
+    ctx.fillStyle = isDark ? '#FFFFFF' : '#111827';
+    ctx.font = '700 40px "Plus Jakarta Sans", Inter, sans-serif';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('imShuka', tileX + tileSize + 24, tileY + tileSize / 2);
+
+    if (ogMode === 'market') {
+      const tagline = document.getElementById('marketTaglineInput').value.trim() || 'Հայաստանի առցանց շուկա՝ փոքր խանութների համար';
+      const badge = document.getElementById('marketBadgeInput').value.trim() || '0% տեղադրման վճար';
+
+      // Top-Right Pill Badge
+      ctx.font = '600 21px Inter, "Noto Sans Armenian", sans-serif';
+      const badgeW = ctx.measureText(badge).width + 48;
+      const badgeX = W - 88 - badgeW;
+      const badgeY = 114;
+      roundRectPath(ctx, badgeX, badgeY, badgeW, 52, 26);
+      ctx.fillStyle = isDark ? 'rgba(255,255,255,0.14)' : '#FDF2F5';
+      ctx.fill();
+      ctx.fillStyle = isDark ? '#FFFFFF' : '#841838';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(badge, badgeX + 24, badgeY + 26);
+
+      // Main Headline / Tagline
+      ctx.fillStyle = isDark ? '#FFFFFF' : '#111827';
+      ctx.font = '700 50px "Plus Jakarta Sans", "Noto Sans Armenian", sans-serif';
+      ctx.textBaseline = 'top';
+      wrapCanvasText(ctx, tagline, 88, 250, 980, 66, 2);
+
+      // Bottom Footer Strip
+      ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.16)' : '#E5E7EB';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(88, 474);
+      ctx.lineTo(W - 88, 474);
+      ctx.stroke();
+
+      ctx.fillStyle = isDark ? 'rgba(255,255,255,0.85)' : '#6B7280';
+      ctx.font = '500 24px Inter, "Noto Sans Armenian", sans-serif';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('Երևան · Տավուշ · Լոռի · Շիրակ', 88, 524);
+
+      ctx.fillStyle = isDark ? '#FFFFFF' : '#841838';
+      ctx.font = '700 26px "JetBrains Mono", monospace';
+      const domainTxt = 'imshuka.am';
+      const dw = ctx.measureText(domainTxt).width;
+      ctx.fillText(domainTxt, W - 88 - dw, 524);
+
+      // Sync Social Mockups
+      syncSocialPreviews(
+        'https://imshuka.am',
+        'imShuka — Հայաստանի առցանց շուկա',
+        tagline,
+        'IMSHUKA.AM'
+      );
+    } else {
+      const storeName = document.getElementById('storeNameInput').value.trim() || 'Տավուշի արհեստ';
+      const storeLoc = document.getElementById('storeLocInput').value.trim() || 'Իջևան, Տավուշ';
+      const storeCount = document.getElementById('storeCountInput').value.trim() || '14 ապրանք';
+      const storeSlug = document.getElementById('storeSlugInput').value.trim() || 'imshuka.am/tavush-craft';
+      const verified = document.getElementById('storeVerifiedInput').checked;
+
+      // Verified Badge Top-Right
+      if (verified) {
+        const vLabel = 'Հաստատված խանութ';
+        ctx.font = '600 21px Inter, "Noto Sans Armenian", sans-serif';
+        const vw = ctx.measureText(vLabel).width + 72;
+        const vx = W - 88 - vw;
+        const vy = 114;
+        roundRectPath(ctx, vx, vy, vw, 52, 26);
+        ctx.fillStyle = isDark ? 'rgba(52, 211, 153, 0.18)' : '#ECFDF5';
+        ctx.fill();
+
+        // Check circle
+        ctx.strokeStyle = isDark ? '#34D399' : '#059669';
+        ctx.lineWidth = 2.6;
+        ctx.beginPath();
+        ctx.arc(vx + 30, vy + 26, 11, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(vx + 25, vy + 26);
+        ctx.lineTo(vx + 29, vy + 30);
+        ctx.lineTo(vx + 36, vy + 22);
+        ctx.stroke();
+
+        ctx.fillStyle = isDark ? '#34D399' : '#059669';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(vLabel, vx + 50, vy + 26);
+      }
+
+      // Store Name Headline
+      ctx.fillStyle = isDark ? '#FFFFFF' : '#841838';
+      ctx.font = '700 62px "Plus Jakarta Sans", "Noto Sans Armenian", sans-serif';
+      ctx.textBaseline = 'top';
+      ctx.fillText(storeName, 88, 248);
+
+      // Location + Count Subtitle
+      ctx.fillStyle = isDark ? 'rgba(255,255,255,0.85)' : '#6B7280';
+      ctx.font = '500 28px Inter, "Noto Sans Armenian", sans-serif';
+      ctx.fillText(`${storeLoc}   ·   ${storeCount}`, 88, 336);
+
+      // Bottom Footer Strip with Store URL
+      ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.16)' : '#E5E7EB';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(88, 474);
+      ctx.lineTo(W - 88, 474);
+      ctx.stroke();
+
+      ctx.fillStyle = isDark ? '#FFFFFF' : '#111827';
+      ctx.font = '600 26px "JetBrains Mono", monospace';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(storeSlug, 88, 524);
+
+      ctx.fillStyle = isDark ? 'rgba(255,255,255,0.85)' : '#6B7280';
+      ctx.font = '500 22px Inter, "Noto Sans Armenian", sans-serif';
+      const ctaTxt = 'Պատվիրել առանց գրանցման →';
+      const cw = ctx.measureText(ctaTxt).width;
+      ctx.fillText(ctaTxt, W - 88 - cw, 524);
+
+      syncSocialPreviews(
+        `https://${storeSlug.replace(/^https?:\/\//, '')}`,
+        `${storeName} — imShuka`,
+        `${storeLoc} · ${storeCount}։ Պատվիրեք առանց գրանցման imShuka-ում։`,
+        storeSlug.toUpperCase()
+      );
+    }
+  }
+
+  function syncSocialPreviews(url, title, desc, domain) {
+    const dataUrl = document.getElementById('ogCanvas').toDataURL('image/png');
+    document.getElementById('tgUrl').textContent = url;
+    document.getElementById('tgTitle').textContent = title;
+    document.getElementById('tgDesc').textContent = desc;
+    document.getElementById('tgPreviewImg').src = dataUrl;
+
+    document.getElementById('igDomain').textContent = domain;
+    document.getElementById('igTitle').textContent = title;
+    document.getElementById('igDesc').textContent = desc;
+    document.getElementById('igPreviewImg').src = dataUrl;
+  }
+
+  function downloadOgPng() {
+    const canvas = document.getElementById('ogCanvas');
+    const filename = ogMode === 'market' ? 'og-image.png' : 'og-store-card.png';
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      triggerDownload(url, filename);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast(`Exported ${filename} (1200×630)`);
+    }, 'image/png');
+  }
+
+  /* =========================================================
+     MANIFEST & HTML HEAD SNIPPETS
+  ========================================================== */
+  const MANIFEST_JSON = `{
+  "name": "imShuka — Հայաստանի առցանց շուկա",
+  "short_name": "imShuka",
+  "description": "Հայաստանի առցանց շուկա՝ փոքր խանութների համար",
+  "lang": "hy",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#841838",
+  "background_color": "#FAFAFA",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}`;
+
+  const HEAD_HTML = `<!-- Primary Theme & PWA Manifest -->
+<meta name="theme-color" content="#841838">
+<link rel="manifest" href="/manifest.webmanifest">
+
+<!-- Favicons & Apple Touch Icon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="imShuka">
+
+<!-- Open Graph / Telegram / Instagram / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="imShuka">
+<meta property="og:locale" content="hy_AM">
+<meta property="og:url" content="https://imshuka.am/">
+<meta property="og:title" content="imShuka — Հայաստանի առցանց շուկա">
+<meta property="og:description" content="Հայաստանի առցանց շուկա՝ փոքր խանութների համար։ Պատվիրեք առանց գրանցման։">
+<meta property="og:image" content="https://imshuka.am/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter / X Summary Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="imShuka — Հայաստանի առցանց շուկա">
+<meta name="twitter:description" content="Հայաստանի առցանց շուկա՝ փոքր խանութների համար։">
+<meta name="twitter:image" content="https://imshuka.am/og-image.png">`;
+
+  function copyManifest() {
+    copyText(MANIFEST_JSON, 'Copied manifest.webmanifest');
+  }
+
+  function copyHeadTags() {
+    copyText(HEAD_HTML, 'Copied HTML <head> meta tags');
+  }
+
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  function copyText(text, label) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+    showToast(label);
+  }
+
+  function toggleTheme() {
+    const root = document.documentElement;
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    document.getElementById('themeLabel').textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+    document.getElementById('themeIcon').innerHTML = next === 'dark'
+      ? '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-15.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2m-15.07 7.07 1.41-1.41M17.66 6.34l1.41-1.41"/></svg>'
+      : '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+  }
+
+  // Initialize on load and once fonts settle
+  document.getElementById('manifestCode').textContent = MANIFEST_JSON;
+  document.getElementById('headCode').textContent = HEAD_HTML;
+  renderAllIcons();
+  renderOgCanvas();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => renderOgCanvas());
+  }
+</script>
+</body>
+</html>
