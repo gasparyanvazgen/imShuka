@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>imShuka</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0F294A">
+<meta name="theme-color" content="#7A1F3D">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96' fill='none'%3E%3Crect width='96' height='96' rx='22' fill='%237A1F3D'/%3E%3Cpath d='M26 74V46a22 22 0 0 1 44 0v28' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='48' cy='45' r='4.5' fill='white'/%3E%3Crect x='44.5' y='55' width='7' height='19' rx='3.5' fill='white'/%3E%3C/svg%3E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -13,8 +14,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FAFAFA;--sf:#fff;--ln:#E5E7EB;--ink:#111827;--mu:#6B7280;--br:#0F294A;--em:#059669;--ph:#F3F4F6;--pt:env(safe-area-inset-top,0px);--pb:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0B0F17;--sf:#121826;--ln:#243049;--ink:#F3F4F6;--mu:#9CA3AF;--br:#3B6BA8;--ph:#1A2233;--em:#34D399}}
+:root{--bg:#FAFAFA;--sf:#fff;--ln:#E5E7EB;--ink:#111827;--mu:#6B7280;--br:#7A1F3D;--bt:#7A1F3D;--em:#059669;--ph:#F3F4F6;--pt:env(safe-area-inset-top,0px);--pb:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0B0F17;--sf:#121826;--ln:#243049;--ink:#F3F4F6;--mu:#9CA3AF;--br:#B8456A;--bt:#E58AA6;--ph:#1A2233;--em:#34D399}}
 *{box-sizing:border-box;margin:0}
 html{padding-top:var(--pt)}
 body{background:var(--bg);color:var(--ink);font:400 14px/1.5 Inter,'Noto Sans Armenian',system-ui,sans-serif;padding-bottom:calc(72px + var(--pb))}
@@ -32,9 +33,9 @@ svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stro
 .btn,.pill,.sel{border:1px solid var(--ln);background:var(--sf);border-radius:999px;height:40px;padding:0 16px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:all .15s}
 .btn:hover,.pill:hover,.sel:hover{border-color:var(--mu)}
 .pri{background:var(--br);border-color:var(--br);color:#fff;font-weight:600;justify-content:center}.pri:hover{opacity:.92;border-color:var(--br)}
-.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.on{background:var(--br);border-color:var(--br);color:#fff}
 .gst{color:var(--mu);font-size:12px}
-.cnt{background:var(--ink);color:var(--bg);border-radius:999px;font-size:11px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px}
+.cnt{background:var(--br);color:#fff;border-radius:999px;font-size:11px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px}
 .hide-m{display:none}
 .row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:16px 0 8px}.row::-webkit-scrollbar{display:none}
 .tb{display:flex;gap:8px;align-items:center;overflow-x:auto;scrollbar-width:none;padding:8px 0 16px}.tb::-webkit-scrollbar{display:none}
@@ -43,7 +44,7 @@ svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stro
 .pop{position:relative}.pp{position:absolute;top:44px;left:0;z-index:15;background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:16px;display:none;gap:8px;width:260px}.pp.o{display:flex}
 .in{width:100%;height:44px;border:1px solid var(--ln);border-radius:8px;padding:0 12px;background:var(--sf);outline:0}.in:focus,.sr:focus-within{border-color:var(--br)}
 .ban{border:1px solid var(--ln);background:var(--sf);border-radius:12px;padding:16px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
-.ban h2{font-size:20px;display:flex;align-items:center;gap:8px}.mu{color:var(--mu)}
+.ban h2{font-size:20px;display:flex;align-items:center;gap:8px;color:var(--bt)}.mu{color:var(--mu)}
 .vf{color:var(--em)}
 .g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .cd{background:var(--sf);border:1px solid var(--ln);border-radius:12px;overflow:hidden;text-align:left;transition:border-color .15s;display:block;width:100%}.cd:hover{border-color:var(--mu)}
@@ -51,7 +52,7 @@ svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stro
 .cb{padding:12px}.cb .n{font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sk{background:linear-gradient(90deg,var(--ph),var(--ln),var(--ph));background-size:200% 100%;animation:s 1s infinite linear;border-radius:8px}
 @keyframes s{to{background-position:-200% 0}}
-.lk{color:var(--mu);font-size:12px;text-decoration:underline;text-underline-offset:2px;display:inline-block;min-height:24px}.lk:hover{color:var(--ink)}
+.lk{color:var(--mu);font-size:12px;text-decoration:underline;text-underline-offset:2px;display:inline-block;min-height:24px}.lk:hover,.lk:focus-visible{color:var(--bt)}
 .em{text-align:center;padding:64px 16px;border:1px dashed var(--ln);border-radius:12px;grid-column:1/-1}
 .rv{display:flex;gap:16px;overflow-x:auto;padding:8px 0 24px}.rv button{flex:none;width:96px;text-align:left}.rv .im{border-radius:8px;border:1px solid var(--ln)}
 .uf{display:flex;align-items:center;border:1px solid var(--ln);border-radius:8px;height:44px;background:var(--sf);padding-left:12px;color:var(--mu);transition:border-color .15s}.uf:focus-within{border-color:var(--br)}
@@ -74,14 +75,14 @@ svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stro
 .db{padding:16px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:16px}.df{padding:16px;border-top:1px solid var(--ln);padding-bottom:calc(16px + var(--pb));display:flex;flex-direction:column;gap:8px}
 .ic{width:44px;height:44px;display:grid;place-items:center;border-radius:999px}.ic:hover{background:var(--ph)}
 .st{display:inline-flex;align-items:center;border:1px solid var(--ln);border-radius:999px}.st button{width:44px;height:40px;display:grid;place-items:center}.st span{min-width:24px;text-align:center}
-.tabs{display:flex;border-bottom:1px solid var(--ln)}.tabs button{flex:1;height:44px;color:var(--mu);border-bottom:2px solid transparent}.tabs .a{color:var(--ink);border-color:var(--ink);font-weight:600}
+.tabs{display:flex;border-bottom:1px solid var(--ln)}.tabs button{flex:1;height:44px;color:var(--mu);border-bottom:2px solid transparent}.tabs .a{color:var(--ink);border-color:var(--br);font-weight:600}
 .mt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--ln);border-radius:12px}.mt div{padding:12px;font-size:12px;color:var(--mu)}.mt div+div{border-left:1px solid var(--ln)}.mt b{display:block;color:var(--ink);font-size:13px}
 .lb{display:block;font-size:12px;color:var(--mu);margin-bottom:4px}
 .seg{display:flex;gap:8px;flex-wrap:wrap}
 .ig{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ig .t{border:1px solid var(--ln);border-radius:8px;overflow:hidden}.ig .t.off{opacity:.45}.ig .im svg{width:50%;height:50%}
 .ig .f{display:flex;gap:8px;align-items:center;padding:8px}.ig input[type=checkbox]{width:20px;height:20px;accent-color:var(--br)}.ig .in{height:36px;padding:0 8px}
 .tab{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--sf);border-top:1px solid var(--ln);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-bottom:var(--pb)}
-.tab button{height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;color:var(--mu)}.tab .a{color:var(--ink)}
+.tab button{height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;color:var(--mu)}.tab .a{color:var(--bt)}
 .okc{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--em);color:var(--em);display:grid;place-items:center;margin:0 auto}
 :focus-visible{outline:2px solid var(--br);outline-offset:2px}
 @media(min-width:640px){.hide-m{display:inline-flex}}
@@ -152,10 +153,10 @@ body.lock{overflow:hidden}
 </style>
 </head>
 <body>
-<div class="ib" id="ib"><button class="ic" onclick="ibX()" aria-label="Փակել"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div class="lg"><svg viewBox="0 0 32 32" fill="none"><path d="M6 11h20l-1.6 15.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8z" fill="#fff"/><path d="M11.5 11V9a4.5 4.5 0 0 1 9 0v2" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="19" r="1.6" fill="#0F294A"/></svg></div><div class="tx"><b>imShuka</b><span>Տեղադրեք հավելվածը՝ ավելի արագ գնումների համար</span></div><button class="btn pri" style="height:36px" onclick="ibGo()">Տեղադրել</button></div>
+<div class="ib" id="ib"><button class="ic" onclick="ibX()" aria-label="Փակել"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div class="lg"><svg viewBox="16 16 64 64" fill="none" aria-hidden="true"><path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="48" cy="45" r="4.5" fill="#fff"/><rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#fff"/></svg></div><div class="tx"><b>imShuka</b><span>Տեղադրեք հավելվածը՝ ավելի արագ գնումների համար</span></div><button class="btn pri" style="height:36px" onclick="ibGo()">Տեղադրել</button></div>
 <header class="hd"><div class="w">
  <button class="logo" onclick="reset()" aria-label="imShuka գլխավոր էջ">
-  <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M6 11h20l-1.6 15.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8z" fill="#0F294A"/><path d="M11.5 11V9a4.5 4.5 0 0 1 9 0v2" stroke="#0F294A" stroke-width="2" stroke-linecap="round"/><path d="M16 15.5c-2 0-3.3 1.5-3.3 3.2 0 2.2 3.3 5 3.3 5s3.3-2.8 3.3-5c0-1.7-1.300-3.200-3.300-3.200z" fill="#fff"/><circle cx="16" cy="18.6" r="1.1" fill="#0F294A"/></svg>
+  <svg width="32" height="32" viewBox="0 0 96 96" fill="none" aria-hidden="true"><rect width="96" height="96" rx="22" style="fill:var(--br)"/><path d="M26 74V46a22 22 0 0 1 44 0v28" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="48" cy="45" r="4.5" fill="#fff"/><rect x="44.5" y="55" width="7" height="19" rx="3.5" fill="#fff"/></svg>
   <b class="hide-m">imShuka</b></button>
  <label class="sr"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" placeholder="Որոնեք ապրանք, բրենդ կամ մարզ" oninput="set('q',this.value)" aria-label="Որոնել"></label>
  <button class="btn hide-m" onclick="openStore()">Բացել խանութ</button>
