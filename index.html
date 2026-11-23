@@ -47,7 +47,7 @@ svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stro
 .vf{color:var(--em)}
 .g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .cd{background:var(--sf);border:1px solid var(--ln);border-radius:12px;overflow:hidden;text-align:left;transition:border-color .15s;display:block;width:100%}.cd:hover{border-color:var(--mu)}
-.im{aspect-ratio:1;background:var(--ph);display:grid;place-items:center;overflow:hidden}.im img{width:100%;height:100%;object-fit:cover;display:block}.ae{font-size:12px;color:var(--er,#B91C1C)}.ae:empty{display:none}.im svg{width:58%;height:58%;fill:var(--sf);stroke:var(--mu);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.im{aspect-ratio:1;background:var(--ph);display:grid;place-items:center;overflow:hidden}.im img{width:100%;height:100%;object-fit:contain;display:block}.ae{font-size:12px;color:var(--er,#B91C1C)}.ae:empty{display:none}.im svg{width:58%;height:58%;fill:var(--sf);stroke:var(--mu);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
 .cb{padding:12px}.cb .n{font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sk{background:linear-gradient(90deg,var(--ph),var(--ln),var(--ph));background-size:200% 100%;animation:s 1s infinite linear;border-radius:8px}
 @keyframes s{to{background-position:-200% 0}}
@@ -94,7 +94,7 @@ svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stro
 @media(min-width:640px) and (max-width:1023px){.g{grid-template-columns:repeat(3,minmax(0,1fr))}.w{padding:0 24px}}
 @media(max-width:639px){
  .md{left:0;top:auto;bottom:0;width:100%;max-height:92vh;max-height:92dvh;border-radius:16px 16px 0 0;border-width:1px 0 0;transform:translateY(24px)}.md.o{transform:none}
- .md .im{aspect-ratio:16/9}
+ .md .im{aspect-ratio:1}
  .mt div{padding:10px 8px;font-size:11px}.mt b{font-size:12px}
  .ban{padding:16px 12px}.ban>div:last-child{width:100%}.ban>div:last-child .btn{flex:1;justify-content:center}
 }
@@ -134,12 +134,25 @@ body.lock{overflow:hidden}
 .ib{display:flex;align-items:center;gap:8px;padding:8px 12px 8px 4px;background:var(--sf);border-bottom:1px solid var(--ln)}.ib[hidden]{display:none}
 .ib .lg{width:40px;height:40px;border-radius:10px;background:var(--br);display:grid;place-items:center;flex:none}.ib .lg svg{width:26px;height:26px}
 .ib .tx{flex:1;min-width:0}.ib .tx b{display:block;font-weight:600}.ib .tx span{display:block;font-size:12px;color:var(--mu);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media(min-width:640px){.ib{display:none!important}}
+/* PREVIEW: banner always visible. To restore: add hidden to #ib and re-add @media(min-width:640px){.ib{display:none!important}} */
+.ft{border-top:1px solid var(--ln);margin-top:48px;background:var(--sf)}
+.fg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px;padding:32px 0 16px}.fb{grid-column:1/-1}
+.ft h4{font-size:13px;margin-bottom:8px}
+.ft a{display:flex;align-items:center;min-height:32px;color:var(--mu);text-decoration:none;font-size:13px}.ft a:hover{color:var(--ink)}
+.fs{display:flex;gap:8px;margin-top:16px}.fs a{width:44px;height:44px;border:1px solid var(--ln);border-radius:999px;justify-content:center;color:var(--ink)}.fs a:hover{border-color:var(--mu)}
+.fz{border-top:1px solid var(--ln);padding:16px 0;font-size:12px;color:var(--mu)}
+@media(min-width:1024px){.fg{grid-template-columns:1.4fr repeat(4,minmax(0,1fr))}.fb{grid-column:auto}}
+@media(pointer:coarse){.ft a{min-height:44px}.fs a{min-height:0}}
+.info p{margin:0 0 8px}.info h3{font-size:14px;margin:16px 0 4px}.info h3:first-child{margin-top:0}.info ul,.info ol{padding-left:20px;margin:0 0 8px}.info li{margin-bottom:6px}
+.info details{border:1px solid var(--ln);border-radius:12px;padding:0 16px;margin-bottom:8px}
+.info summary{min-height:44px;padding:12px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;font-weight:500;line-height:1.4;list-style:none}.info summary::-webkit-details-marker{display:none}
+.info summary::after{content:"";width:18px;height:18px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .15s}.info details[open] summary::after{transform:rotate(180deg)}
+.info details p{margin:0;padding:0 0 12px;color:var(--mu)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<div class="ib" id="ib" hidden><button class="ic" onclick="ibX()" aria-label="Փակել"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div class="lg"><svg viewBox="0 0 32 32" fill="none"><path d="M6 11h20l-1.6 15.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8z" fill="#fff"/><path d="M11.5 11V9a4.5 4.5 0 0 1 9 0v2" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="19" r="1.6" fill="#0F294A"/></svg></div><div class="tx"><b>imShuka</b><span>Տեղադրեք հավելվածը՝ ավելի արագ գնումների համար</span></div><button class="btn pri" style="height:36px" onclick="ibGo()">Տեղադրել</button></div>
+<div class="ib" id="ib"><button class="ic" onclick="ibX()" aria-label="Փակել"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div class="lg"><svg viewBox="0 0 32 32" fill="none"><path d="M6 11h20l-1.6 15.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8z" fill="#fff"/><path d="M11.5 11V9a4.5 4.5 0 0 1 9 0v2" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="19" r="1.6" fill="#0F294A"/></svg></div><div class="tx"><b>imShuka</b><span>Տեղադրեք հավելվածը՝ ավելի արագ գնումների համար</span></div><button class="btn pri" style="height:36px" onclick="ibGo()">Տեղադրել</button></div>
 <header class="hd"><div class="w">
  <button class="logo" onclick="reset()" aria-label="imShuka գլխավոր էջ">
   <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M6 11h20l-1.6 15.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8z" fill="#0F294A"/><path d="M11.5 11V9a4.5 4.5 0 0 1 9 0v2" stroke="#0F294A" stroke-width="2" stroke-linecap="round"/><path d="M16 15.5c-2 0-3.3 1.5-3.3 3.2 0 2.2 3.3 5 3.3 5s3.3-2.8 3.3-5c0-1.7-1.300-3.200-3.300-3.200z" fill="#fff"/><circle cx="16" cy="18.6" r="1.1" fill="#0F294A"/></svg>
@@ -157,6 +170,17 @@ body.lock{overflow:hidden}
  <h3 style="margin:32px 0 8px;font-size:15px">Վերջերս դիտածներ</h3>
  <div class="rv" id="rv"></div>
 </main>
+<footer class="ft"><div class="w">
+ <div class="fg">
+  <div class="fb"><b class="dsp" style="font-size:18px">imShuka</b><p class="mu" style="margin-top:4px;max-width:280px">Հայաստանի առցանց շուկա՝ փոքր խանութների համար։</p>
+   <div class="fs"><a href="https://instagram.com/imshuka" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a><a href="https://facebook.com/imshuka" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
+  <div><h4 class="dsp">Ընկերություն</h4><a href="#" onclick="openInfo('about');return false">Մեր մասին</a><a href="#" onclick="openInfo('contact');return false">Կապ մեզ հետ</a></div>
+  <div><h4 class="dsp">Ռեսուրսներ</h4><a href="#" onclick="openStore();return false">Ինչպես բացել խանութ</a><a href="#" onclick="openInfo('sell');return false">Վաճառողի ուղեցույց</a><a href="#" onclick="openInfo('ship');return false">Առաքման ուղեցույց</a></div>
+  <div><h4 class="dsp">Օգնություն</h4><a href="#" onclick="openInfo('faq');return false">Հաճախ տրվող հարցեր</a><a href="#" onclick="openInfo('orders');return false">Պատվերի և առաքման մասին</a><a href="#" onclick="openInfo('returns');return false">Վերադարձ և փոխհատուցում</a></div>
+  <div><h4 class="dsp">Իրավական</h4><a href="#" onclick="openInfo('terms');return false">Օգտագործման պայմաններ</a><a href="#" onclick="openInfo('privacy');return false">Գաղտնիության քաղաքականություն</a></div>
+ </div>
+ <div class="fz">© <span id="fy" class="num">2026</span> imShuka։ Բոլոր իրավունքները պաշտպանված են։</div>
+</div></footer>
 <nav class="tab">
  <button class="a" onclick="reset()"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Շուկա</button>
  <button onclick="openStores()"><svg class="i" viewBox="0 0 24 24"><path d="m4 9 1-5h14l1 5M4 9a2.500 2.500 0 0 0 5 0 2.500 2.500 0 0 0 6 0 2.500 2.500 0 0 0 5 0M5 12v8h14v-8"/></svg>Խանութներ</button>
@@ -362,15 +386,16 @@ function saveProd(){const bad=id=>{$(id).style.borderColor='var(--er,#B91C1C)';$
 const CAP=[['Վուշե վերնաշապիկ՝ ձիթապտղագույն','Apparel',18500],['Մայրամուտ Դիլիջանում',0,0],['Կավե գավաթ՝ կապույտ փայլեցումով','Craft',4800],['Թիմային ճաշ արհեստանոցում',0,0],['Հյուսած պատի զարդ','Home',22000],['Մեղրի բանկաներ՝ նոր խմբաքանակ','Pantry',3600],['Ստուդիայի բացման օրը',0,0],['Կաշվե քարտապանակ','Craft',6500],['Բամբակյա պայուսակ՝ բնական','Apparel',4200],['Ընկուզենու կտրատելու տախտակ','Home',15500],['Կուլիսներում',0,0],['Չրերի տուփ','Pantry',2900]];
 function fetchIg(){const h=SF.ig.replace(/^@/,'');if(!h){$('ih').style.borderColor='var(--er,#B91C1C)';$('ih').focus();return}
  loaded={lim,h};fetching=true;posts=[];renderStore();
- setTimeout(()=>{posts=CAP.slice(0,lim).map((c,i)=>({i,cap:c[0],c:c[1]||'Craft',nc:!c[1],p:c[2]||5000,on:!!c[1]}));fetching=false;renderStore()},700)}
+ setTimeout(()=>{posts=CAP.slice(0,lim).map((c,i)=>({i,cap:c[0],c:c[1]||'',nc:!c[1],p:c[2]||5000,on:!!c[1]}));fetching=false;renderStore()},700)}
 function igHtml(){if(!posts.length)return '<p class="mu">Մուտքագրեք էջի անունը և ընտրեք, թե վերջին քանի գրառումը բեռնել։</p>';
  const n=posts.filter(p=>p.on).length;
- return `<div class="sum"><span class="mu">Ընտրված է ${n}-ը ${posts.length}-ից</span><button class="lk" onclick="allIg(${n<posts.length})">${n<posts.length?'Ընտրել բոլորը':'Հանել բոլորը'}</button></div><div class="pg">${posts.map(p=>`<div class="pc ${p.on?'pon':''}"><button class="im pb" onclick="tog(${p.i})" aria-pressed="${p.on}" aria-label="${esc(p.cap)}">${art(p.nc?'Photo':p.c)}<span class="bx">${p.on?ic('check'):''}</span></button><div class="pcb"><div class="pcap">${esc(p.cap)}</div>${p.on?`<div class="uf" id="pp${p.i}"><input class="num" inputmode="numeric" value="${p.p}" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,9);posts[${p.i}].p=+this.value||0;$('pp${p.i}').classList.remove('bad')" aria-label="Գինը դրամով"><span class="un">֏</span></div>`:'<div class="mu pm">Հպեք՝ ընտրելու համար</div>'}</div></div>`).join('')}</div>`}
+ return `<div class="sum"><span class="mu">Ընտրված է ${n}-ը ${posts.length}-ից</span><button class="lk" onclick="allIg(${n<posts.length})">${n<posts.length?'Ընտրել բոլորը':'Հանել բոլորը'}</button></div><div class="pg">${posts.map(p=>`<div class="pc ${p.on?'pon':''}"><button class="im pb" onclick="tog(${p.i})" aria-pressed="${p.on}" aria-label="${esc(p.cap)}">${art(p.c||'Photo')}<span class="bx">${p.on?ic('check'):''}</span></button><div class="pcb"><div class="pcap"${p.on?'':` onclick="tog(${p.i})" style="cursor:pointer"`}>${esc(p.cap)}</div>${p.on?`<div class="uf" id="pp${p.i}"><input class="num" inputmode="numeric" value="${p.p}" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,9);posts[${p.i}].p=+this.value||0;$('pp${p.i}').classList.remove('bad')" aria-label="Գինը դրամով"><span class="un">֏</span></div><button class="in dd" id="pc${p.i}" data-m onclick="igCat(this,${p.i})" aria-haspopup="menu" style="height:40px;gap:8px${p.c?'':';color:var(--mu)'}"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.c?CL[p.c]:'Կատեգորիա'}</span>${ic('chev')}</button>`:`<button class="mu pm" style="width:100%;text-align:left" onclick="tog(${p.i})">Հպեք՝ ընտրելու համար</button>`}</div></div>`).join('')}</div>`}
 function igFoot(){const n=posts.filter(p=>p.on).length;return `<p class="ae" id="sx"></p><p class="mu" style="font-size:12px;text-align:center">Ապրանքները կհայտնվեն ձեր խանութում և ընդհանուր շուկայում</p><button class="btn pri" style="height:44px" ${n?'':'disabled'} onclick="publishIg()">Հրապարակել ${n} ապրանք</button>`}
 function igRefresh(){$('ig').innerHTML=igHtml();const f=$('igf');if(f){f.innerHTML=igFoot();f.hidden=!posts.length}}
+function igCat(b,i){menu(b,CATS.slice(1).map(c=>`<button role="menuitemradio" aria-checked="${posts[i].c==c}" class="${posts[i].c==c?'s':''}" onclick="closeMenu();posts[${i}].c='${c}';igRefresh()"><span>${CL[c]}</span>${posts[i].c==c?ic('check'):''}</button>`).join(''))}
 function tog(i){posts[i].on=!posts[i].on;igRefresh()}
 function allIg(v){posts.forEach(p=>p.on=v);igRefresh()}
-function publishIg(){const sel=posts.filter(p=>p.on);if(!sel.length)return;const nz=sel.filter(p=>!p.p);if(nz.length){nz.forEach(p=>$('pp'+p.i).classList.add('bad'));$('pp'+nz[0].i).querySelector('input').focus();return}if(urlState(SF.url)[0]!='ok'){$('su').focus();return}
+function publishIg(){const sel=posts.filter(p=>p.on);if(!sel.length)return;const nc=sel.filter(p=>!p.c);if(nc.length){nc.forEach(p=>$('pc'+p.i).style.borderColor='var(--er,#B91C1C)');$('pc'+nc[0].i).focus();return}const nz=sel.filter(p=>!p.p);if(nz.length){nz.forEach(p=>$('pp'+p.i).classList.add('bad'));$('pp'+nz[0].i).querySelector('input').focus();return}if(urlState(SF.url)[0]!='ok'){$('su').focus();return}
  const ph=normPh(SF.ph);if(!ph){const e=$('sph');e.style.borderColor='var(--er,#B91C1C)';e.focus();return}
  if(full(ph))return;const h=SF.ig.replace(/^@/,''),id=addStore(h,SF.url,SF.marz,ph,SF.addr.trim(),SF.lat,SF.lng);
  sel.forEach((p,k)=>{const o={id:Date.now()+k,n:p.cap,s:id,c:p.c,p:p.p,pk:1,dl:['std'],d:'',sp:'',src:h};P.push(o);custom.p.push(o)});sv('imk_custom',custom);posts=[];closeAll();setStore(id)}
@@ -440,17 +465,70 @@ function delProd(id){const p=prod(id);if(!p||!isOwn(p)||!mine(p.s))return;
 function delStore(id){if(!mine(id))return;if(S.del!=id){S.del=id;draw();return}
  P=P.filter(p=>p.s!=id);stores=stores.filter(s=>s.id!=id);custom.s=custom.s.filter(s=>s.id!=id);custom.p=custom.p.filter(p=>p.s!=id);sv('imk_custom',custom);
  Object.keys(S.cart).forEach(i=>{if(!prod(i))delete S.cart[i]});sv('imk_cart',S.cart);S.rec=S.rec.filter(i=>prod(i));sv('imk_rec',S.rec);S.del=null;reset()}
+/* footer info pages. Legal pages are a starting draft: have them reviewed by a lawyer before launch */
+const CONTACT={email:'',phone:''};
+const BTN='<button class="btn pri" style="height:44px;margin-top:8px" onclick="openStore()">Բացել խանութ</button>',
+ DRAFT='<p class="mu" style="font-size:12px;margin-top:16px">Նախնական տարբերակ։</p>';
+const INFO={
+about:['Մեր մասին',`<p>imShuka-ն Հայաստանի առցանց շուկա է փոքր խանութների և անհատ վաճառողների համար։ Վաճառողը կարող է րոպեների ընթացքում բացել սեփական խանութ՝ իր հասցեով, իսկ գնորդը՝ մեկ տեղում գտնել տարբեր մարզերի խանութների ապրանքները։</p>
+<h3>Վաճառողների համար</h3><ul><li>Խանութ բացելը՝ 0% տեղադրման վճարով։</li><li>Ապրանքներ ավելացնել ձեռքով կամ ներմուծել Instagram-ի գրառումներից։</li><li>Ընտրել վճարման և առաքման եղանակները։</li><li>Խանութի հղումը դնել Instagram-ի էջում։</li></ul>
+<h3>Գնորդների համար</h3><ul><li>Որոնել և զտել ըստ մարզի, գնի և տեղում ստանալու հնարավորության։</li><li>Պատվիրել առանց գրանցման։</li></ul>
+<p>imShuka-ն ամբողջությամբ հայերեն է և ստեղծված է նախ և առաջ հեռախոսից օգտվելու համար։</p>${BTN}`],
+contact:['Կապ մեզ հետ',()=>`<p>Հարցերի, առաջարկների կամ բողոքների դեպքում գրեք մեզ։</p>
+${CONTACT.email?`<p><b>Էլ. փոստ՝</b> <a class="lk" href="mailto:${esc(CONTACT.email)}">${esc(CONTACT.email)}</a></p>`:''}${CONTACT.phone?`<p><b>Հեռախոս՝</b> <span class="num">${esc(CONTACT.phone)}</span></p>`:''}
+<p><b>Instagram՝</b> <a class="lk" href="https://instagram.com/imshuka" target="_blank" rel="noopener">@imshuka</a></p><p><b>Facebook՝</b> <a class="lk" href="https://facebook.com/imshuka" target="_blank" rel="noopener">imshuka</a></p>
+<p class="mu">Պատվերին վերաբերող հարցերով նախ դիմեք համապատասխան վաճառողին։</p>`],
+sell:['Վաճառողի ուղեցույց',`<ol><li><b>Բացեք խանութը։</b> Նշեք անվանումը, լատինատառ հասցեն, հեռախոսահամարը և մարզը։ Հեռախոսահամարը գնորդներին չի ցուցադրվում, այն օգտագործվում է մուտքի համար։ Մեկ համարով կարելի է ունենալ առավելագույնը 3 խանութ։</li>
+<li><b>Ավելացրեք ապրանքներ։</b> Ձեռքով՝ նկարով, անվանումով, գնով, կատեգորիայով և նկարագրությամբ, կամ ներմուծեք Instagram-ի վերջին գրառումները և ընտրեք յուրաքանչյուրի գինն ու կատեգորիան։</li>
+<li><b>Կարգավորեք խանութը։</b> «Կարգավորումներ»-ում ընտրեք վճարման և առաքման եղանակները, նշեք խանութի հասցեն և տեղը քարտեզի վրա, եթե ունեք։</li>
+<li><b>Տարածեք հղումը։</b> Խանութի էջում սեղմեք «Պատճենել հղումը» և դրեք այն Instagram-ի bio-ում։</li>
+<li><b>Հաստատեք պատվերները։</b> Երբ գնորդը պատվեր է տալիս, զանգահարեք նրա նշած համարով՝ պատվերը հաստատելու և վճարման ու ստացման մանրամասները պայմանավորվելու համար։</li></ol>
+<h3>Խորհուրդներ</h3><ul><li>Օգտագործեք պարզ, լավ լուսավորված նկարներ։</li><li>Նշեք ճիշտ գինը և նկարագրեք ապրանքի չափսը կամ քաշը։</li><li>Արագ արձագանքեք գնորդների զանգերին։</li></ul>${BTN}`],
+ship:['Առաքման ուղեցույց',`<p>Յուրաքանչյուր ապրանքի համար կարող եք միացնել մեկ կամ մի քանի ստացման եղանակ՝</p>
+<ul><li><b>Վերցնել տեղում։</b> Գնորդը գալիս է ձեր հասցեով։ Նշեք խանութի հասցեն և տեղը քարտեզի վրա։</li><li><b>Սովորական առաքում։</b> Առաքումը պայմանավորվում եք անմիջապես գնորդի հետ։</li><li><b>Առաքում ՀայՓոստով։</b> Ապրանքն ուղարկվում է փոստով։</li></ul>
+<p>Լռելյայն եղանակները սահմանվում են «Կարգավորումներ»-ում, իսկ յուրաքանչյուր ապրանքի համար կարելի է փոխել։ «Կիրառել առկա ապրանքների վրա» ընտրանքը թարմացնում է արդեն ավելացված ապրանքները։</p>
+<p>Ապրանքը պետք է ունենա առնվազն մեկ ստացման եղանակ։ Գնորդը պատվերի ժամանակ տեսնում է միայն այն եղանակները, որոնք համապատասխանում են զամբյուղի բոլոր ապրանքներին։ Առաքման գինը և ժամկետը դուք եք համաձայնեցնում գնորդի հետ։</p>`],
+faq:['Հաճախ տրվող հարցեր',`<details><summary>Պե՞տք է գրանցվել պատվիրելու համար</summary><p>Ոչ։ Բավական է նշել անունը, հեռախոսահամարը և, առաքման դեպքում, հասցեն։</p></details>
+<details><summary>Ինչպե՞ս է կատարվում վճարումը</summary><p>Վճարման եղանակները սահմանում է յուրաքանչյուր վաճառող՝ Idram, Telcell, բանկային քարտ կամ կանխիկ։ Դուք ընտրում եք եղանակը պատվերի ժամանակ, իսկ մանրամասները համաձայնեցնում եք վաճառողի հետ։</p></details>
+<details><summary>Կարո՞ղ եմ մի քանի խանութից միասին պատվիրել</summary><p>Այո, եթե այդ խանութներն ունեն առնվազն մեկ ընդհանուր վճարման և ստացման եղանակ։ Հակառակ դեպքում պատվիրեք առանձին։</p></details>
+<details><summary>Ինչպե՞ս բացել խանութ</summary><p>Սեղմեք «Վաճառել» կամ «Բացել խանութ», լրացրեք տվյալները և հրապարակեք։ Մանրամասները՝ «Վաճառողի ուղեցույց»-ում։</p></details>
+<details><summary>Քանի՞ խանութ կարելի է ունենալ</summary><p>Մեկ հեռախոսահամարով՝ առավելագույնը 3։</p></details>
+<details><summary>Ինչպե՞ս մուտք գործել</summary><p>Սեղմեք «Մուտք», մուտքագրեք խանութ բացելիս նշած հեռախոսահամարը և հաստատման կոդը։</p></details>
+<details><summary>Վաճառողի հեռախոսահամարը երևու՞մ է գնորդներին</summary><p>Ոչ։ Այն օգտագործվում է միայն մուտքի համար։</p></details>
+<details><summary>Ինչպե՞ս հաղորդել խնդրի մասին</summary><p>Գրեք մեզ՝ <button class="lk" onclick="openInfo('contact')">Կապ մեզ հետ</button> բաժնում նշված եղանակներով։</p></details>`],
+orders:['Պատվերի և առաքման մասին',`<ol><li><b>Ավելացրեք ապրանքը զամբյուղին։</b></li><li><b>Ձևակերպեք պատվերը։</b> Նշեք անունը, հեռախոսահամարը, ստացման եղանակը (տեղում, սովորական առաքում կամ ՀայՓոստ) և վճարման եղանակը։ Գրանցում պետք չէ։</li><li><b>Վաճառողը կզանգահարի</b> ձեր նշած համարով՝ պատվերը հաստատելու համար։</li><li><b>Վճարեք և ստացեք</b> այնպես, ինչպես պայմանավորվեցիք վաճառողի հետ։</li></ol>
+<ul><li>Տեղում ստանալիս ապրանքի էջում կտեսնեք խանութի հասցեն, իսկ եթե վաճառողը նշել է, նաև քարտեզը։</li><li>Առաքման գինը և ժամկետը ճշտեք վաճառողից։</li><li>Պատվերի հետ կապված հարցերով դիմեք վաճառողին։</li></ul>`],
+returns:['Վերադարձ և փոխհատուցում',`<p>imShuka-ն հարթակ է, վաճառքը կատարում են վաճառողները։ Վերադարձի և փոխհատուցման պայմանները սահմանում է յուրաքանչյուր վաճառող՝ Հայաստանի օրենսդրությանը համապատասխան։</p>
+<h3>Գնորդին</h3><ul><li>Պատվերը հաստատելիս հարցրեք վաճառողից վերադարձի պայմանները։</li><li>Ստուգեք ապրանքը ստանալիս։ Թերության դեպքում անմիջապես կապվեք վաճառողի հետ։</li><li>Պահպանեք վճարման ապացույցը և նամակագրությունը։</li></ul>
+<h3>Վաճառողին</h3><ul><li>Նկարագրության մեջ նշեք վերադարձի պայմանները։</li><li>Ժամանակին արձագանքեք գնորդի դիմումին։</li><li>Թերի ապրանքը փոխեք կամ վերադարձրեք գումարը։</li></ul>
+<p>Եթե վաճառողի հետ խնդիրը չի լուծվում, գրեք մեզ՝ կփորձենք օգնել։</p>${DRAFT}`],
+terms:['Օգտագործման պայմաններ',`<h3>1. Ընդհանուր դրույթներ</h3><p>imShuka-ն օգտագործելով՝ դուք համաձայնում եք այս պայմաններին։ Եթե համաձայն չեք, մի օգտվեք հարթակից։</p>
+<h3>2. Հարթակի դերը</h3><p>imShuka-ն տրամադրում է վայր, որտեղ վաճառողները ներկայացնում են ապրանքներ, իսկ գնորդները կապվում են նրանց հետ։ Առքուվաճառքը կատարվում է գնորդի և վաճառողի միջև։ imShuka-ն ապրանքի վաճառող չէ։</p>
+<h3>3. Վաճառողի պարտականությունները</h3><ul><li>Տրամադրել ճշգրիտ տվյալներ խանութի և ապրանքների մասին։</li><li>Վաճառել միայն օրինական ապրանքներ և ունենալ դրա իրավունքը։</li><li>Կատարել հաստատված պատվերները և պահպանել հայտարարված պայմանները։</li><li>Օգտագործել միայն իր հեռախոսահամարը, առավելագույնը 3 խանութ մեկ համարով։</li></ul>
+<h3>4. Գնորդի պարտականությունները</h3><p>Նշել ճիշտ կոնտակտային տվյալներ և պատվերները կատարել բարեխղճորեն։</p>
+<h3>5. Արգելված բովանդակություն</h3><p>Արգելվում է օրենքով արգելված ապրանքների վաճառքը, խաբեությունը, ուրիշի նկարների կամ նշանների անօրինական օգտագործումը։ Այդպիսի խանութները կամ ապրանքները կարող են հեռացվել։</p>
+<h3>6. Պատասխանատվության սահմանափակում</h3><p>imShuka-ն չի պատասխանում վաճառողների տրամադրած տվյալների ճշգրտության, ապրանքների որակի և գնորդի ու վաճառողի միջև համաձայնության կատարման համար։</p>
+<h3>7. Փոփոխություններ</h3><p>Պայմանները կարող են թարմացվել։ Հարթակից շարունակելը նշանակում է համաձայնություն նոր տարբերակին։</p>${DRAFT}`],
+privacy:['Գաղտնիության քաղաքականություն',`<h3>Ինչ տվյալներ ենք հավաքում</h3><ul><li><b>Վաճառողներից՝</b> հեռախոսահամար (միայն մուտքի համար, գնորդներին չի ցուցադրվում), խանութի անվանում, մարզ, հասցե և տեղը քարտեզի վրա (եթե նշել եք), ապրանքների նկարներ և նկարագրություններ։</li><li><b>Գնորդներից՝</b> պատվերի ժամանակ նշված անուն, հեռախոսահամար և առաքման հասցե։</li></ul>
+<h3>Ինչի համար ենք օգտագործում</h3><p>Տվյալներն օգտագործվում են միայն հարթակի աշխատանքի համար՝ մուտք, խանութի ցուցադրում և պատվերի կատարում։ Պատվերի տվյալները նախատեսված են համապատասխան վաճառողի համար։ Տվյալները չենք վաճառում։</p>
+<h3>Որտեղ են պահվում</h3><p>Ընթացիկ տարբերակում տվյալները պահվում են ձեր սարքի բրաուզերի հիշողության մեջ (localStorage)՝ զամբյուղ, վերջերս դիտածներ, խանութներ, ապրանքներ և մուտքի վիճակ։ Բրաուզերի տվյալները մաքրելով դրանք կջնջվեն։</p>
+<h3>Երրորդ կողմեր</h3><p>Քարտեզը և հասցեի որոնումը օգտագործում են OpenStreetMap-ը և Nominatim-ը, տառատեսակները՝ Google Fonts-ը։ Այդ ծառայությունները կարող են ստանալ ձեր IP հասցեն։ Վճարման եղանակների (Idram, Telcell, բանկ) հետ պատվերի ժամանակ կապ չի հաստատվում, վճարումը համաձայնեցվում է վաճառողի հետ։</p>
+<h3>Ձեր իրավունքները</h3><p>Դուք կարող եք ցանկացած ժամանակ խմբագրել կամ ջնջել ձեր խանութը և ապրանքները, իսկ տվյալների հետ կապված հարցերով գրել մեզ՝ «Կապ մեզ հետ» բաժնով։</p>${DRAFT}`]};
+function openInfo(k){const x=INFO[k];if(!x)return;sheet('dr',head(x[0])+`<div class="db"><div class="info">${typeof x[1]=='function'?x[1]():x[1]}</div></div>`)}
 /* install banner (PWA). Needs manifest.webmanifest, sw.js and icons next to this file, served over HTTPS */
 let DP=null;
 const ib=$('ib'),sa=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true,ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform=='MacIntel'&&navigator.maxTouchPoints>1);
-const ibShow=()=>{if(!sa&&Date.now()-ld('imk_ib',0)>6048e5)ib.hidden=false};
+let IB=ld('imk_ib',{});if(!IB||typeof IB!='object')IB={};
+try{if(!sessionStorage.getItem('imk_v')){sessionStorage.setItem('imk_v','1');IB.v=(IB.v||0)+1;sv('imk_ib',IB)}}catch(e){}
+const ibShow=()=>{if(sa||IB.done||(IB.n||0)>=3||(IB.v||0)<2||Date.now()-(IB.t||0)<[0,3,14][IB.n||0]*864e5)return;ib.hidden=false};
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 addEventListener('beforeinstallprompt',e=>{e.preventDefault();DP=e;ibShow()});
-addEventListener('appinstalled',()=>{DP=null;ib.hidden=true});
+addEventListener('appinstalled',()=>{DP=null;ib.hidden=true;IB.done=1;sv('imk_ib',IB)});
 if(ios)ibShow();
-function ibX(){ib.hidden=true;sv('imk_ib',Date.now())}
-function ibGo(){if(DP){DP.prompt();DP.userChoice.then(c=>{DP=null;if(c.outcome=='accepted')ib.hidden=true})}else if(ios)openIos()}
+function ibX(){ib.hidden=true;IB.n=(IB.n||0)+1;IB.t=Date.now();sv('imk_ib',IB)}
+function ibGo(){if(DP){DP.prompt();DP.userChoice.then(c=>{DP=null;if(c.outcome=='accepted'){ib.hidden=true;IB.done=1;sv('imk_ib',IB)}else ibX()})}else if(ios)openIos()}
 function openIos(){sheet('dr',head('Տեղադրել imShuka')+`<div class="db"><p class="mu">Safari-ում հավելվածը հիմնական էկրանին ավելացնելու համար՝</p><div class="cd" style="padding:16px"><b class="num">1.</b> Հպեք Safari-ի ներքևի «Կիսվել» կոճակին։</div><div class="cd" style="padding:16px"><b class="num">2.</b> Ընտրեք «Ավելացնել հիմնական էկրանին»։</div><div class="cd" style="padding:16px"><b class="num">3.</b> Հպեք «Ավելացնել»։ imShuka-ի պատկերակը կհայտնվի ձեր հեռախոսում։</div><p class="mu" style="font-size:12px">Եթե Safari-ում չեք, նախ բացեք այս էջը Safari-ով։</p></div>`)}
+$('fy').textContent=new Date().getFullYear();
 draw();
 </script>
 </body>
