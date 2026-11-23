@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>imShuka</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0F294A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFAFA;--sf:#fff;--ln:#E5E7EB;--ink:#111827;--mu:#6B7280;--br:#0F294A;--em:#059669;--ph:#F3F4F6;--pt:env(safe-area-inset-top,0px);--pb:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0B0F17;--sf:#121826;--ln:#243049;--ink:#F3F4F6;--mu:#9CA3AF;--br:#3B6BA8;--ph:#1A2233;--em:#34D399}}
+*{box-sizing:border-box;margin:0}
+html{padding-top:var(--pt)}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.5 Inter,'Noto Sans Armenian',system-ui,sans-serif;padding-bottom:calc(72px + var(--pb))}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+h1,h2,h3,.dsp{font-family:'Plus Jakarta Sans','Noto Sans Armenian',Inter,sans-serif;font-weight:700}
+.num{font-variant-numeric:tabular-nums}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.w{max-width:80rem;margin:0 auto;padding:0 16px}
+.hd{position:sticky;top:var(--pt);z-index:20;background:var(--sf);border-bottom:1px solid var(--ln);height:64px}
+.hd .w{height:64px;display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;gap:8px;min-height:44px}.logo b{font:700 18px 'Plus Jakarta Sans'}
+.sr{flex:1;display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--ln);border-radius:999px;padding:0 16px;height:40px;color:var(--mu);max-width:560px;margin:0 auto}
+.sr input{flex:1;min-width:0;border:0;background:none;outline:0}
+.btn,.pill,.sel{border:1px solid var(--ln);background:var(--sf);border-radius:999px;height:40px;padding:0 16px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:all .15s}
+.btn:hover,.pill:hover,.sel:hover{border-color:var(--mu)}
+.pri{background:var(--br);border-color:var(--br);color:#fff;font-weight:600;justify-content:center}.pri:hover{opacity:.92;border-color:var(--br)}
+.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.gst{color:var(--mu);font-size:12px}
+.cnt{background:var(--ink);color:var(--bg);border-radius:999px;font-size:11px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px}
+.hide-m{display:none}
+.row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:16px 0 8px}.row::-webkit-scrollbar{display:none}
+.tb{display:flex;gap:8px;align-items:center;overflow-x:auto;scrollbar-width:none;padding:8px 0 16px}.tb::-webkit-scrollbar{display:none}
+.sel{appearance:none;padding-right:12px;height:36px;font-size:13px}.tb .pill{height:36px;font-size:13px}
+.rc{color:var(--mu);font-size:13px;margin-right:auto;white-space:nowrap}
+.pop{position:relative}.pp{position:absolute;top:44px;left:0;z-index:15;background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:16px;display:none;gap:8px;width:260px}.pp.o{display:flex}
+.in{width:100%;height:44px;border:1px solid var(--ln);border-radius:8px;padding:0 12px;background:var(--sf);outline:0}.in:focus,.sr:focus-within{border-color:var(--br)}
+.ban{border:1px solid var(--ln);background:var(--sf);border-radius:12px;padding:16px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.ban h2{font-size:20px;display:flex;align-items:center;gap:8px}.mu{color:var(--mu)}
+.vf{color:var(--em)}
+.g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.cd{background:var(--sf);border:1px solid var(--ln);border-radius:12px;overflow:hidden;text-align:left;transition:border-color .15s;display:block;width:100%}.cd:hover{border-color:var(--mu)}
+.im{aspect-ratio:1;background:var(--ph);display:grid;place-items:center;overflow:hidden}.im img{width:100%;height:100%;object-fit:cover;display:block}.ae{font-size:12px;color:var(--er,#B91C1C)}.ae:empty{display:none}.im svg{width:58%;height:58%;fill:var(--sf);stroke:var(--mu);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.cb{padding:12px}.cb .n{font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sk{background:linear-gradient(90deg,var(--ph),var(--ln),var(--ph));background-size:200% 100%;animation:s 1s infinite linear;border-radius:8px}
+@keyframes s{to{background-position:-200% 0}}
+.lk{color:var(--mu);font-size:12px;text-decoration:underline;text-underline-offset:2px;display:inline-block;min-height:24px}.lk:hover{color:var(--ink)}
+.em{text-align:center;padding:64px 16px;border:1px dashed var(--ln);border-radius:12px;grid-column:1/-1}
+.rv{display:flex;gap:16px;overflow-x:auto;padding:8px 0 24px}.rv button{flex:none;width:96px;text-align:left}.rv .im{border-radius:8px;border:1px solid var(--ln)}
+.uf{display:flex;align-items:center;border:1px solid var(--ln);border-radius:8px;height:44px;background:var(--sf);padding-left:12px;color:var(--mu);transition:border-color .15s}.uf:focus-within{border-color:var(--br)}
+.uf input{flex:1;min-width:0;height:100%;border:0;background:none;outline:0;padding:0 12px 0 0;color:var(--ink)}
+.um{font-size:12px;margin-top:4px;color:var(--mu);display:flex;gap:4px;align-items:center;min-height:18px}.um svg{width:14px;height:14px}.um.ok{color:var(--em)}.um.bad{color:var(--er,#B91C1C)}
+.uf.ok{border-color:var(--em)}.uf.bad{border-color:var(--er,#B91C1C)}
+.us{display:flex;align-items:center;gap:4px;padding-right:12px;font-size:12px;white-space:nowrap}.us.ok{color:var(--em)}.us.bad{color:var(--er,#B91C1C)}.us svg{width:14px;height:14px}
+.db>*{flex-shrink:0}
+.ig .t{display:flex;flex-direction:column}.ig .f:nth-child(2){align-items:flex-start;min-height:60px}.ig .f:nth-child(3){margin-top:auto}
+.ig .f input[type=checkbox]{flex:none;margin:1px 0 0}.ig .f span{line-height:1.35}
+.dd{display:flex;align-items:center;justify-content:space-between;text-align:left}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--er:#F87171}}
+.mn{position:fixed;z-index:60;background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:4px;min-width:200px;max-width:calc(100vw - 16px);display:none}.mn.o{display:block}
+.mn>button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:0 12px;border-radius:8px;text-align:left;transition:background .15s}.mn>button:hover{background:var(--ph)}.mn .s{font-weight:600}
+.sl{appearance:none;-webkit-appearance:none;padding-right:40px;background:var(--sf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center}
+.ov{position:fixed;inset:0;background:rgba(17,24,39,.4);z-index:40;opacity:0;pointer-events:none;transition:opacity .15s}.ov.o{opacity:1;pointer-events:auto}
+.dr{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--sf);border-left:1px solid var(--ln);z-index:50;transform:translateX(100%);transition:transform .15s;display:flex;flex-direction:column;padding-top:var(--pt)}.dr.o{transform:none}
+.md{position:fixed;left:50%;top:50%;width:min(760px,calc(100% - 32px));max-height:90vh;overflow:auto;background:var(--sf);border:1px solid var(--ln);border-radius:16px;z-index:50;transform:translate(-50%,-48%);opacity:0;pointer-events:none;transition:all .15s}.md.o{opacity:1;transform:translate(-50%,-50%);pointer-events:auto}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--ln)}.dh h3{font-size:16px}
+.db{padding:16px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:16px}.df{padding:16px;border-top:1px solid var(--ln);padding-bottom:calc(16px + var(--pb));display:flex;flex-direction:column;gap:8px}
+.ic{width:44px;height:44px;display:grid;place-items:center;border-radius:999px}.ic:hover{background:var(--ph)}
+.st{display:inline-flex;align-items:center;border:1px solid var(--ln);border-radius:999px}.st button{width:44px;height:40px;display:grid;place-items:center}.st span{min-width:24px;text-align:center}
+.tabs{display:flex;border-bottom:1px solid var(--ln)}.tabs button{flex:1;height:44px;color:var(--mu);border-bottom:2px solid transparent}.tabs .a{color:var(--ink);border-color:var(--ink);font-weight:600}
+.mt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--ln);border-radius:12px}.mt div{padding:12px;font-size:12px;color:var(--mu)}.mt div+div{border-left:1px solid var(--ln)}.mt b{display:block;color:var(--ink);font-size:13px}
+.lb{display:block;font-size:12px;color:var(--mu);margin-bottom:4px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.ig{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ig .t{border:1px solid var(--ln);border-radius:8px;overflow:hidden}.ig .t.off{opacity:.45}.ig .im svg{width:50%;height:50%}
+.ig .f{display:flex;gap:8px;align-items:center;padding:8px}.ig input[type=checkbox]{width:20px;height:20px;accent-color:var(--br)}.ig .in{height:36px;padding:0 8px}
+.tab{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--sf);border-top:1px solid var(--ln);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-bottom:var(--pb)}
+.tab button{height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;color:var(--mu)}.tab .a{color:var(--ink)}
+.okc{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--em);color:var(--em);display:grid;place-items:center;margin:0 auto}
+:focus-visible{outline:2px solid var(--br);outline-offset:2px}
+@media(min-width:640px){.hide-m{display:inline-flex}}
+@media(min-width:1024px){.g{grid-template-columns:repeat(4,minmax(0,1fr))}.tab{display:none}body{padding-bottom:32px}.w{padding:0 32px}}
+/* responsive */
+.ban h2{overflow-wrap:anywhere}.st button{height:44px}
+.md .dh{position:sticky;top:0;background:var(--sf);z-index:2}.md .db{padding-bottom:calc(16px + var(--pb));overflow:visible;min-width:0}
+.md .db>div:last-child{flex-wrap:wrap}.md .db>div:last-child .pri{flex:1 1 180px!important;min-width:0;padding:0 16px;white-space:normal;text-align:center;line-height:1.25}
+.mt div{overflow-wrap:anywhere}
+@media(min-width:640px) and (max-width:1023px){.g{grid-template-columns:repeat(3,minmax(0,1fr))}.w{padding:0 24px}}
+@media(max-width:639px){
+ .md{left:0;top:auto;bottom:0;width:100%;max-height:92vh;max-height:92dvh;border-radius:16px 16px 0 0;border-width:1px 0 0;transform:translateY(24px)}.md.o{transform:none}
+ .md .im{aspect-ratio:16/9}
+ .mt div{padding:10px 8px;font-size:11px}.mt b{font-size:12px}
+ .ban{padding:16px 12px}.ban>div:last-child{width:100%}.ban>div:last-child .btn{flex:1;justify-content:center}
+}
+@media(pointer:coarse){.tb .pill,.row .pill{height:44px}.cd .lk{min-height:44px;display:inline-flex;align-items:center}.cd .cb:last-child{padding-bottom:0}.sel{height:44px}}
+@media(max-width:359px){.hd .w{gap:8px;padding:0 12px}.g{gap:12px}}
+/* overflow safeguards */
+html,body{max-width:100%;overflow-x:clip}
+.hd .w>*{min-width:0}.sr{min-width:0}.sr input{width:100%}.hd .btn,.logo{flex:none}
+.cb .n{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;min-height:2.8em}
+/* import list */
+.sum{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.sum .lk{font-size:13px;min-height:44px;display:inline-flex;align-items:center}
+.il{border:1px solid var(--ln);border-radius:12px;overflow:hidden}
+.ir{display:flex;align-items:center;gap:8px;padding:8px 12px 8px 4px;border-top:1px solid var(--ln)}.ir:first-child{border-top:0}
+.ck{width:44px;height:44px;display:grid;place-items:center;flex:none;cursor:pointer}.ck input{width:20px;height:20px;accent-color:var(--br)}
+.th{width:56px;height:56px;aspect-ratio:auto;border-radius:8px;border:1px solid var(--ln);flex:none}.th svg{width:60%;height:60%}
+.bd{flex:1;min-width:0}.cp{font-size:13px;line-height:1.35;margin-bottom:4px}.pf{display:flex;align-items:center;gap:8px}.pf .in{height:36px;max-width:140px}
+.ir.off .th{opacity:.5}.ir.off .cp{color:var(--mu)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+/* import tiles */
+.df[hidden],.btn[hidden]{display:none}
+.pg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.pc{border:1px solid var(--ln);border-radius:12px;overflow:hidden;background:var(--sf);display:flex;flex-direction:column;transition:border-color .15s}
+.pc.pon{border-color:var(--br);outline:1px solid var(--br);outline-offset:-1px}
+.pb{position:relative;width:100%;border-radius:0}.pb:focus-visible{outline-offset:-3px}
+.pc .pb>svg{width:50%;height:50%}.pc:not(.pon) .pb>svg{opacity:.55}
+.bx{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--mu);background:var(--sf);display:grid;place-items:center;color:#fff;transition:all .15s}
+.pc.pon .bx{background:var(--br);border-color:var(--br)}
+.pc .bx svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5}
+.pcb{padding:10px 12px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pcap{font-size:13px;line-height:1.35;min-height:2.7em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc .uf{height:40px}.un{padding-right:12px;font-size:13px}
+.pm{font-size:12px;height:40px;display:flex;align-items:center}
+
+body.lock{overflow:hidden}
+@media(pointer:coarse){.in,input,textarea{font-size:16px}button.pill,button.btn{min-height:44px}.lk{min-height:44px;display:inline-flex;align-items:center}}
+.mp{position:relative;height:220px;border:1px solid var(--ln);border-radius:12px;overflow:hidden;background:var(--ph);touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}.mp img{position:absolute;width:256px;height:256px;max-width:none;pointer-events:none}.mp .zc{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:4px}.mp .zc button{width:36px;height:36px;display:grid;place-items:center;background:var(--sf);border:1px solid var(--ln);border-radius:8px}.mp .at{position:absolute;left:4px;bottom:2px;font-size:10px;color:#333;background:rgba(255,255,255,.7);padding:0 4px;border-radius:4px}
+.ib{display:flex;align-items:center;gap:8px;padding:8px 12px 8px 4px;background:var(--sf);border-bottom:1px solid var(--ln)}.ib[hidden]{display:none}
+.ib .lg{width:40px;height:40px;border-radius:10px;background:var(--br);display:grid;place-items:center;flex:none}.ib .lg svg{width:26px;height:26px}
+.ib .tx{flex:1;min-width:0}.ib .tx b{display:block;font-weight:600}.ib .tx span{display:block;font-size:12px;color:var(--mu);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(min-width:640px){.ib{display:none!important}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="ib" id="ib" hidden><button class="ic" onclick="ibX()" aria-label="Փակել"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div class="lg"><svg viewBox="0 0 32 32" fill="none"><path d="M6 11h20l-1.6 15.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8z" fill="#fff"/><path d="M11.5 11V9a4.5 4.5 0 0 1 9 0v2" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="19" r="1.6" fill="#0F294A"/></svg></div><div class="tx"><b>imShuka</b><span>Տեղադրեք հավելվածը՝ ավելի արագ գնումների համար</span></div><button class="btn pri" style="height:36px" onclick="ibGo()">Տեղադրել</button></div>
+<header class="hd"><div class="w">
+ <button class="logo" onclick="reset()" aria-label="imShuka գլխավոր էջ">
+  <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M6 11h20l-1.6 15.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8z" fill="#0F294A"/><path d="M11.5 11V9a4.5 4.5 0 0 1 9 0v2" stroke="#0F294A" stroke-width="2" stroke-linecap="round"/><path d="M16 15.5c-2 0-3.3 1.5-3.3 3.2 0 2.2 3.3 5 3.3 5s3.3-2.8 3.3-5c0-1.7-1.300-3.200-3.300-3.200z" fill="#fff"/><circle cx="16" cy="18.6" r="1.1" fill="#0F294A"/></svg>
+  <b class="hide-m">imShuka</b></button>
+ <label class="sr"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" placeholder="Որոնեք ապրանք, բրենդ կամ մարզ" oninput="set('q',this.value)" aria-label="Որոնել"></label>
+ <button class="btn hide-m" onclick="openStore()">Բացել խանութ</button>
+ <button class="btn hide-m" id="acc" onclick="openAcc()">Մուտք</button>
+ <button class="btn" onclick="openCart()" aria-label="Զամբյուղ"><svg class="i" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg><span class="cnt num" id="cc">0</span></button>
+</div></header>
+<main class="w">
+ <div class="row" id="cats"></div>
+ <div class="tb" id="tb"></div>
+ <div id="ban"></div>
+ <div class="g" id="g"></div>
+ <h3 style="margin:32px 0 8px;font-size:15px">Վերջերս դիտածներ</h3>
+ <div class="rv" id="rv"></div>
+</main>
+<nav class="tab">
+ <button class="a" onclick="reset()"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Շուկա</button>
+ <button onclick="openStores()"><svg class="i" viewBox="0 0 24 24"><path d="m4 9 1-5h14l1 5M4 9a2.500 2.500 0 0 0 5 0 2.500 2.500 0 0 0 6 0 2.500 2.500 0 0 0 5 0M5 12v8h14v-8"/></svg>Խանութներ</button>
+ <button onclick="openStore()"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Վաճառել</button>
+ <button onclick="openAcc()"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span id="tl">Մուտք</span></button>
+ <button onclick="openCart()"><svg class="i" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Զամբյուղ</button>
+</nav>
+<div class="mn" id="mn" role="menu"></div>
+<div class="ov" id="ov" onclick="closeAll()"></div>
+<aside class="dr" id="dr" role="dialog" aria-modal="true"></aside>
+<div class="md" id="md" role="dialog" aria-modal="true"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}};
+const I={x:'<path d="M18 6 6 18M6 6l12 12"/>',pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',check:'<path d="M20 6 9 17l-5-5"/>',sl:'<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/>',pk:'<path d="M3 7l9-4 9 4-9 4zM3 7v10l9 4 9-4V7"/>',chev:'<path d="m6 9 6 6 6-6"/>',up:'<path d="M12 16V4M7 9l5-5 5 5M4 20h16"/>'};
+const ic=n=>`<svg class="i" viewBox="0 0 24 24">${I[n]}</svg>`;
+const vf='<svg class="i vf" viewBox="0 0 24 24" aria-label="Հաստատված խանութ"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>';
+const ART={Apparel:'<path d="M35 22 17 32l6 14 8-4v38h38V42l8 4 6-14-18-10c-2 6-8 9-15 9s-13-3-15-9z"/>',Home:'<path d="M42 16h16M44 16c0 12-14 18-14 38 0 14 8 26 20 26s20-12 20-26c0-20-14-26-14-38z"/><path d="M36 58h28"/>',Craft:'<path d="M16 42h68c0 22-14 38-34 38S16 64 16 42z"/><path d="M38 80h24M16 42h68"/>',Electronics:'<rect x="30" y="14" width="40" height="72" rx="6"/><circle cx="50" cy="60" r="13"/><circle cx="50" cy="32" r="4"/>',Pantry:'<rect x="34" y="12" width="32" height="10" rx="2"/><path d="M36 22v6c-8 4-8 10-8 14v36a6 6 0 0 0 6 6h32a6 6 0 0 0 6-6V42c0-4 0-10-8-14v-6"/><rect x="38" y="46" width="24" height="20" rx="2"/>'};
+ART.Photo='<rect x="16" y="22" width="68" height="56" rx="6"/><circle cx="36" cy="42" r="6"/><path d="m16 70 20-18 16 14 12-10 20 16"/>';
+const art=c=>`<svg viewBox="0 0 100 100" aria-hidden="true">${ART[c]||ART.Craft}</svg>`;
+const pic=(i,c)=>i?`<img src="${i}" alt="">`:art(c);
+const dlOf=p=>p.dl||['std'];
+const how=(p,s)=>{const a=[];if(p.pk)a.push(ic('pk')+'Վերցնել այսօր '+s.city+'ում');if(dlOf(p).includes('std'))a.push('Սովորական առաքում');if(dlOf(p).includes('hp'))a.push('Առաքում ՀայՓոստով');if(!a.length)a.push('Առաքում չկա');return a.map(t=>`<span class="pill" style="height:32px;font-size:12px">${t}</span>`).join('')};
+const fmt=n=>`<span class="num">${Math.round(n).toLocaleString('en-US').replace(/,/g,' ')} ֏</span>`;
+const CATS=['All','Apparel','Home','Craft','Electronics','Pantry'], MARZ=['Երևան','Տավուշ','Լոռի','Շիրակ'];
+const CL={All:'Բոլորը',Apparel:'Հագուստ',Home:'Տուն',Craft:'Ձեռագործ',Electronics:'Տեխնիկա',Pantry:'Մթերք'};
+let stores=[
+ {id:'tavush-craft',name:'Տավուշի արհեստ',city:'Իջևան',marz:'Տավուշ'},
+ {id:'yerevan-studio',name:'Երևան Ստուդիո',city:'Երևան',marz:'Երևան'},
+ {id:'ararat-roasters',name:'Արարատ Ռոուսթերս',city:'Գյումրի',marz:'Շիրակ'},
+ {id:'lori-tech',name:'Լոռի Թեք',city:'Վանաձոր',marz:'Լոռի'}];
+let P=[
+ [1,'Վուշե վերնաշապիկ','yerevan-studio','Apparel',24500,1,'Լվացված վուշ, ազատ կտրվածք։ Չափսերը՝ S-ից XL։','Նյութ՝ 100% վուշ'],
+ [2,'Բրդյա շարֆ','tavush-craft','Apparel',9800,1,'Ձեռքով հյուսված շարֆ՝ բնական մոխրագույն բրդից։','Երկարություն՝ 180 սմ'],
+ [3,'Կտորե պայուսակ','yerevan-studio','Apparel',4200,1,'Խիտ կտավից պայուսակ՝ ամրացված բռնակներով։','Ծավալ՝ 14 լ'],
+ [4,'Կերամիկական ծաղկաման','tavush-craft','Home',12000,0,'Բրուտի անիվի վրա պատրաստված՝ անփայլ ջնարակով։','Բարձրություն՝ 24 սմ'],
+ [5,'Ընկուզենու մատուցման տախտակ','tavush-craft','Home',15500,1,'Ընկուզենու մեկ կտորից, յուղով մշակված։','Չափ՝ 40 x 22 սմ'],
+ [6,'Վուշե սեղանի ճանապարհ','yerevan-studio','Home',8600,0,'Հյուսված վուշ՝ կարված եզրերով։','Երկարություն՝ 160 սմ'],
+ [7,'Ձեռագործ թաս','tavush-craft','Craft',6800,1,'Ջնարակած թաս. յուրաքանչյուրը յուրահատուկ է։','Տրամագիծ՝ 16 սմ'],
+ [8,'Փորագրված գդալների հավաքածու','tavush-craft','Craft',5400,1,'Երեք գդալ՝ փորագրված տանձենու փայտից։','3 հատ'],
+ [9,'Թաղիքե տակդիրներ','yerevan-studio','Craft',3900,0,'Չորս հատ՝ բնական ներկերով։','4 հատ'],
+ [10,'Bluetooth բարձրախոս','lori-tech','Electronics',32000,1,'Կոմպակտ բարձրախոս, աշխատում է մինչև 12 ժամ։','Մարտկոց՝ 12 ժ'],
+ [11,'Անլար լիցքավորիչ','lori-tech','Electronics',11500,1,'15 Վտ հզորությամբ Qi լիցքավորիչ՝ գործվածքե մակերեսով։','Հզորություն՝ 15 Վտ'],
+ [12,'Մեխանիկական ստեղնաշար','lori-tech','Electronics',46000,0,'75% դասավորություն, փոխարինվող անջատիչներով։','Դասավորություն՝ 75%'],
+ [13,'Մեկ ծագման սուրճ, 250 գ','ararat-roasters','Pantry',4800,1,'Միջին բովում, հատիկներով։ Բովվում է ամեն շաբաթ։','Քաշ՝ 250 գ'],
+ [14,'Լեռնային մեղր','ararat-roasters','Pantry',3600,1,'Հում մեղր Շիրակի բարձրադիր մարգագետիններից։','Քաշ՝ 400 գ'],
+ [15,'Չիր ծիրան, 300 գ','ararat-roasters','Pantry',2900,0,'Արևի տակ չորացրած հայկական ծիրան՝ առանց շաքարի։','Քաշ՝ 300 գ']
+].map(a=>({id:a[0],n:a[1],s:a[2],c:a[3],p:a[4],pk:a[5],d:a[6],sp:a[7]}));
+let S={cat:'All',store:'all',marz:'all',pk:false,min:'',max:'',sort:'f',q:'',busy:false,cart:ld('imk_cart',{}),rec:ld('imk_rec',[]),me:ld('imk_me','')};
+const store=id=>stores.find(s=>s.id==id)||{name:'Խանութ',city:'',marz:''};
+const prod=id=>P.find(p=>p.id==id);
+function list(){
+ const q=S.q.trim().toLowerCase();
+ let r=P.filter(p=>{const s=store(p.s);return (S.cat=='All'||p.c==S.cat)&&(S.store=='all'||p.s==S.store)&&(S.marz=='all'||s.marz==S.marz)&&(!S.pk||p.pk)&&(S.min===''||p.p>=+S.min)&&(S.max===''||p.p<=+S.max)&&(!q||(p.n+s.name+s.marz+s.city+p.c).toLowerCase().includes(q))});
+ if(S.sort=='a')r.sort((a,b)=>a.p-b.p);if(S.sort=='d')r.sort((a,b)=>b.p-a.p);return r}
+let T;
+function set(k,v){S[k]=v;S.delp=null;S.busy=true;draw();clearTimeout(T);T=setTimeout(()=>{S.busy=false;draw()},300)}
+function reset(){S.cat='All';S.store='all';S.marz='all';S.pk=false;S.min=S.max='';S.sort='f';S.q='';$('q').value='';closeAll();set('cat','All');scrollTo({top:0})}
+function card(p){const s=store(p.s);return `<div class="cd"><button style="display:block;width:100%;text-align:left" onclick="openProd(${p.id})"><div class="im">${pic(p.img,p.c)}</div><div class="cb"><span class="n">${p.n}</span><div>${fmt(p.p)}</div></div></button><div class="cb" style="padding-top:0;display:flex;gap:16px;flex-wrap:wrap;align-items:center"><button class="lk" onclick="setStore('${s.id}')">${s.name}</button>${S.store==p.s&&mine(p.s)&&isOwn(p)?`<button class="lk" onclick="openEdit(${p.id})">Խմբագրել</button><button class="lk ${S.delp==p.id?'bad':''}" style="${S.delp==p.id?'color:var(--er,#B91C1C)':''}" onclick="delProd(${p.id})">${S.delp==p.id?'Հաստատել ջնջումը':'Ջնջել'}</button>`:''}</div></div>`}
+const isOwn=p=>custom.p.some(x=>x.id==p.id);
+const unesc=s=>String(s).replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&amp;/g,'&');
+function draw(){
+ $('cats').innerHTML=CATS.map(c=>`<button class="pill ${S.cat==c?'on':''}" onclick="set('cat','${c}')">${CL[c]}</button>`).join('');
+ const r=list(),pr=S.min!==''||S.max!=='';
+ $('tb').innerHTML=`<span class="rc num">${S.busy?'Որոնվում է':'Գտնվել է '+r.length+' ապրանք'}</span>
+ <button class="pill ${S.store!='all'?'on':''}" data-m onclick="dd(this,'store')" aria-haspopup="menu">${S.store=='all'?'Բոլոր խանութները':store(S.store).name}${ic('chev')}</button>
+ <button class="pill ${S.marz!='all'?'on':''}" data-m onclick="dd(this,'marz')" aria-haspopup="menu">${S.marz=='all'?'Ամբողջ Հայաստանը':S.marz}${ic('chev')}</button>
+ <button class="pill ${S.pk?'on':''}" aria-pressed="${S.pk}" onclick="set('pk',!S.pk)">Վերցնել այսօր</button>
+ <button class="pill ${pr?'on':''}" data-m onclick="priceMenu(this)" aria-haspopup="menu">Գին${ic('chev')}</button>
+ <button class="pill" data-m onclick="dd(this,'sort')" aria-haspopup="menu">${OPTS.sort().find(o=>o[0]==S.sort)[1]}${ic('chev')}</button>`;
+ const bs=S.store!='all'?store(S.store):null,own=!!bs&&mine(bs.id),empty=own&&!P.some(p=>p.s==bs.id);
+ $('ban').innerHTML=bs?`<div class="ban"><div><h2>${bs.name}${vf}</h2><div class="mu num" style="margin-top:4px">imshuka.am/${bs.id}</div><div class="mu" style="margin-top:4px;display:flex;gap:4px 16px;flex-wrap:wrap"><span>${bs.city}, ${bs.marz}</span>${bs.addr?`<span>${esc(bs.addr)}</span>`:''}<span class="num">${P.filter(p=>p.s==bs.id).length} ապրանք</span></div></div><div style="display:flex;gap:8px;flex-wrap:wrap">${own?`<button class="btn pri" onclick="openAdd('${bs.id}')">Ավելացնել ապրանք</button><button class="btn" onclick="copyLink('${bs.id}',this)">Պատճենել հղումը</button><button class="btn" onclick="openSet('${bs.id}')">Կարգավորումներ</button><button class="btn" onclick="delStore('${bs.id}')">${S.del==bs.id?'Հաստատել ջնջումը':'Ջնջել խանութը'}</button>`:''}<button class="btn" onclick="reset()">Վերադառնալ ընդհանուր շուկա</button></div>${bs.lat!=null?'<div class="mp" id="bm" style="flex:1 1 100%"></div>':''}</div>`:'';
+ if(bs&&bs.lat!=null)mapView($('bm'),{lat:bs.lat,lng:bs.lng,z:15});
+ $('g').innerHTML=S.busy?Array(8).fill('<div class="cd"><div class="sk" style="aspect-ratio:1;border-radius:0"></div><div class="cb"><div class="sk" style="height:14px;margin-bottom:8px"></div><div class="sk" style="height:14px;width:50%"></div></div></div>').join(''):r.length?r.map(card).join(''):`<div class="em"><h3>${empty?'Խանութում դեռ ապրանք չկա':'Ոչինչ չգտնվեց'}</h3><p class="mu" style="margin:8px 0 16px">${empty?'Ավելացրեք առաջին ապրանքը, որ այն երևա շուկայում։':'Փորձեք փոխել որոնումը կամ հանել զտիչները։'}</p>${empty?`<button class="btn pri" onclick="openAdd('${bs.id}')">Ավելացնել ապրանք</button>`:`<button class="btn pri" onclick="reset()">Մաքրել զտիչները</button>`}</div>`;
+ const rv=S.rec.map(prod).filter(Boolean);
+ $('rv').innerHTML=rv.length?rv.map(p=>`<button onclick="openProd(${p.id})"><div class="im">${pic(p.img,p.c)}</div><div style="font-size:12px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.n}</div></button>`).join(''):'<span class="mu">Դիտած ապրանքները կերևան այստեղ։</span>';
+ const n=Object.values(S.cart).reduce((a,b)=>a+b,0);$('cc').textContent=n;const al=S.me?'Իմ էջը':'Մուտք';$('acc').textContent=al;$('tl').textContent=al}
+function setStore(id){S.del=null;closeAll();S.store=id;set('store',id);scrollTo({top:0})}
+function copyLink(id,b){if(!mine(id))return;const u='https://imshuka.am/'+id,done=()=>{const t=b.textContent;b.textContent='Հղումը պատճենվեց';setTimeout(()=>{b.textContent=t},2000)};
+ const fb=()=>{const a=document.createElement('textarea');a.value=u;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();done()};
+ navigator.clipboard&&window.isSecureContext?navigator.clipboard.writeText(u).then(done,fb):fb()}
+/* minimal OpenStreetMap slippy map (no libraries) */
+let MO,MP;
+function mapView(el,o){if(!el)return;let z=o.z||(o.lat!=null?15:7),la=o.lat!=null?o.lat:40.18,ln=o.lng!=null?o.lng:44.51,mk=o.lat!=null?[o.lat,o.lng]:null,d=null;
+ const TS=256,px=(a,b,q)=>{const n=TS*2**q,t=Math.sin(a*Math.PI/180);return[(b+180)/360*n,(.5-Math.log((1+t)/(1-t))/(4*Math.PI))*n]},ll=(x,y,q)=>{const n=TS*2**q;return[Math.atan(Math.sinh(Math.PI*(1-2*y/n)))*180/Math.PI,x/n*360-180]};
+ el.innerHTML='<div class="ml" style="position:absolute;inset:0"></div><div class="zc"><button data-z="1" aria-label="Մեծացնել">'+ic('plus')+'</button><button data-z="-1" aria-label="Փոքրացնել">'+ic('minus')+'</button></div><span class="at">© OpenStreetMap</span>';
+ const L=el.querySelector('.ml');
+ function paint(){const w=el.clientWidth,h=el.clientHeight,n=2**z,[cx,cy]=px(la,ln,z),x0=cx-w/2,y0=cy-h/2;let t='';
+  for(let ty=Math.floor(y0/TS);ty<=Math.floor((y0+h)/TS);ty++)for(let tx=Math.floor(x0/TS);tx<=Math.floor((x0+w)/TS);tx++){if(ty<0||ty>=n)continue;t+=`<img alt="" draggable="false" src="https://tile.openstreetmap.org/${z}/${((tx%n)+n)%n}/${ty}.png" style="left:${Math.round(tx*TS-x0)}px;top:${Math.round(ty*TS-y0)}px">`}
+  if(mk){const[mx,my]=px(mk[0],mk[1],z);t+=`<svg class="i" viewBox="0 0 24 24" style="position:absolute;width:32px;height:32px;left:${mx-x0-16}px;top:${my-y0-29}px;fill:#B91C1C;stroke:#fff;pointer-events:none">${I.pin}</svg>`}
+  L.innerHTML=t}
+ el.onpointerdown=e=>{if(e.target.closest('.zc'))return;d={x:e.clientX,y:e.clientY,m:0};el.setPointerCapture(e.pointerId)};
+ el.onpointermove=e=>{if(!d)return;const dx=e.clientX-d.x,dy=e.clientY-d.y,[cx,cy]=px(la,ln,z);d.m+=Math.abs(dx)+Math.abs(dy);d.x=e.clientX;d.y=e.clientY;[la,ln]=ll(cx-dx,cy-dy,z);la=Math.max(-80,Math.min(80,la));paint()};
+ el.onpointerup=e=>{if(d&&d.m<6&&o.pick){const r=el.getBoundingClientRect(),[cx,cy]=px(la,ln,z);mk=ll(cx-el.clientWidth/2+e.clientX-r.left,cy-el.clientHeight/2+e.clientY-r.top,z);o.pick(mk[0],mk[1]);paint()}d=null};
+ el.querySelector('.zc').onclick=e=>{const b=e.target.closest('button');if(!b)return;z=Math.max(5,Math.min(18,z+ +b.dataset.z));paint()};
+ paint();
+ return{set(a,b,q){if(a==null)mk=null;else{la=a;ln=b;mk=[a,b];if(q)z=q}paint()}}}
+function initMapEd(){const el=$('mp');if(!el)return;MP=mapView(el,{lat:MO.lat,lng:MO.lng,pick:(a,b)=>{MO.lat=a;MO.lng=b;$('mpn').textContent='Տեղը նշված է։'}})}
+async function findAddr(){const q=(MO.addr||'').trim(),m=$('mpn');if(!q){m.textContent='Նախ գրեք հասցեն։';return}m.textContent='Փնտրվում է…';
+ try{const x=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=am&q='+encodeURIComponent(q+', '+(MO.marz||'')+', Armenia')),j=await x.json();
+  if(j[0]){MO.lat=+j[0].lat;MO.lng=+j[0].lon;MP.set(MO.lat,MO.lng,16);m.textContent='Գտնվեց։ Անհրաժեշտության դեպքում ուղղեք՝ հպելով քարտեզին։'}else m.textContent='Հասցեն չգտնվեց։ Հպեք քարտեզին՝ տեղը ինքներդ նշելու համար։'}
+ catch(e){m.textContent='Որոնումը չհաջողվեց։ Հպեք քարտեզին՝ տեղը նշելու համար։'}}
+/* sheets */
+let MN=null;
+const OPTS={store:()=>[['all','Բոլոր խանութները'],...stores.map(s=>[s.id,s.name])],marz:()=>[['all','Ամբողջ Հայաստանը'],...MARZ.map(m=>[m,m])],sort:()=>[['f','Առաջարկվող'],['a','Գինը՝ ցածրից բարձր'],['d','Գինը՝ բարձրից ցածր']]};
+function menu(b,h){if(MN===b){closeMenu();return}const m=$('mn');MN=b;m.innerHTML=h;m.style.minWidth=Math.max(200,b.offsetWidth)+'px';m.classList.add('o');const r=b.getBoundingClientRect();m.style.left=Math.max(8,Math.min(r.left,innerWidth-m.offsetWidth-8))+'px';m.style.top=(r.bottom+8+m.offsetHeight>innerHeight-8?Math.max(8,r.top-8-m.offsetHeight):r.bottom+8)+'px'}
+function closeMenu(){MN=null;$('mn').classList.remove('o')}
+function dd(b,k){menu(b,OPTS[k]().map(o=>`<button role="menuitemradio" aria-checked="${S[k]==o[0]}" class="${S[k]==o[0]?'s':''}" onclick="closeMenu();set('${k}','${o[0]}')"><span>${o[1]}</span>${S[k]==o[0]?ic('check'):''}</button>`).join(''))}
+function priceMenu(b){menu(b,`<div style="padding:12px;display:flex;flex-direction:column;gap:8px;width:248px"><div style="display:flex;gap:8px"><input class="in num" inputmode="numeric" placeholder="Սկսած ֏" value="${S.min}" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onchange="set('min',this.value)" aria-label="Նվազագույն գին"><input class="in num" inputmode="numeric" placeholder="Մինչև ֏" value="${S.max}" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onchange="set('max',this.value)" aria-label="Առավելագույն գին"></div><button class="btn" style="height:44px;justify-content:center" onclick="closeMenu();S.max='';set('min','')">Մաքրել գինը</button></div>`)}
+function closeAll(){document.body.classList.remove('lock');closeMenu();['dr','md','ov'].forEach(i=>$(i).classList.remove('o'))}
+function sheet(id,h){document.body.classList.add('lock');$(id).innerHTML=h;$(id).classList.add('o');$('ov').classList.add('o')}
+const head=(t)=>`<div class="dh"><h3>${t}</h3><button class="ic" onclick="closeAll()" aria-label="Փակել">${ic('x')}</button></div>`;
+function openStores(){sheet('dr',head('Խանութներ')+`<div class="db">${stores.map(s=>`<button class="cd" style="padding:16px" onclick="setStore('${s.id}')"><b class="dsp" style="display:flex;gap:8px;align-items:center">${s.name}${vf}</b><span class="mu">${s.city}, ${s.marz}</span></button>`).join('')}</div>`)}
+/* product */
+let qty=1;
+function openProd(id){const p=prod(id),s=store(p.s);qty=1;
+ S.rec=[id,...S.rec.filter(x=>x!=id)].slice(0,8);sv('imk_rec',S.rec);draw();
+ sheet('md',head(p.n)+`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))"><div class="im">${pic(p.img,p.c)}</div><div class="db"><div class="dsp" style="font-size:22px">${fmt(p.p)}</div>${p.d&&p.d!='Նկարագրություն չկա։'?`<p>${p.d}</p>`:''}<div class="mu">${p.sp?p.sp+'<br>':''}Կատեգորիա՝ ${CL[p.c]}</div>${p.src&&mine(p.s)?`<div class="mu" style="font-size:12px">Ներմուծված է Instagram-ից՝ @${esc(p.src)}</div>`:''}<button class="lk" style="text-align:left" onclick="setStore('${s.id}')">${s.name} · ${s.city}, ${s.marz}</button><div class="seg">${how(p,s)}</div>${p.pk&&s.addr?`<div class="mu" style="font-size:12px">Հասցե՝ ${esc(s.addr)}</div>`:''}${p.pk&&s.lat!=null?`<a class="lk" style="align-self:flex-start" href="https://www.google.com/maps?q=${s.lat},${s.lng}" target="_blank" rel="noopener">Բացել քարտեզում</a>`:''}<div class="mu" style="font-size:12px">Վճարում՝ ${payOf(s).map(k=>PL[k]).join(', ')}</div><div style="display:flex;gap:16px;align-items:center;margin-top:auto"><div class="st"><button onclick="q2(-1)" aria-label="Պակասեցնել">${ic('minus')}</button><span class="num" id="qv">1</span><button onclick="q2(1)" aria-label="Ավելացնել">${ic('plus')}</button></div><button class="btn pri" style="flex:1;height:44px" onclick="add(${id})">Ավելացնել զամբյուղին</button></div></div></div>`)}
+function q2(d){qty=Math.max(1,qty+d);$('qv').textContent=qty}
+function add(id){S.cart[id]=(S.cart[id]||0)+qty;sv('imk_cart',S.cart);draw();closeAll();openCart()}
+const IMG_MAX=14e4,QERR='Հիշողությունը լցված է։ Հեռացրեք մի քանի ապրանք կամ ընտրեք ավելի փոքր նկար։';
+function shrink(im){let m=800,q=.78,u;for(let i=0;i<5;i++){const k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);u=c.toDataURL('image/jpeg',q);if(u.length<=IMG_MAX)break;m=Math.round(m*.8);q=Math.max(.5,q-.06)}return u}
+const DM=[['pk','Վերցնել տեղում'],['std','Սովորական առաքում'],['hp','Առաքում ՀայՓոստով']],DL=Object.fromEntries(DM);
+let CK={dm:''};
+const cartP=()=>Object.keys(S.cart).map(prod).filter(Boolean);
+const dmCommon=()=>{const ps=cartP();return DM.map(x=>x[0]).filter(k=>ps.every(p=>k=='pk'?p.pk:dlOf(p).includes(k)))};
+const pkWhere=()=>[...new Set(cartP().map(p=>{const t=store(p.s);return t.addr?t.city+', '+t.addr:t.city}))].join('; ');
+function ckDm(k){CK.dm=k;[...$('dm').children].forEach(b=>{const on=b.dataset.k==k;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});$('caw').hidden=k=='pk';$('dn').textContent=k=='pk'?'Վերցնելու վայր՝ '+pkWhere():''}
+/* cart */
+const tot=()=>Object.entries(S.cart).reduce((a,[i,q])=>a+prod(i).p*q,0);
+function bump(id,d){S.cart[id]=(S.cart[id]||0)+d;if(S.cart[id]<=0)delete S.cart[id];sv('imk_cart',S.cart);draw();openCart(true)}
+function openCart(keep){
+ const ids=Object.keys(S.cart);
+ if(!ids.length){sheet('dr',head('Զամբյուղ')+`<div class="db" style="text-align:center;padding-top:64px"><h3>Զամբյուղը դատարկ է</h3><p class="mu">Դեռ ոչինչ չեք ավելացրել։</p><button class="btn" style="align-self:center" onclick="closeAll()">Շարունակել գնումները</button></div>`);return}
+ const by={};ids.forEach(i=>(by[prod(i).s]??=[]).push(prod(i)));
+ sheet('dr',head('Զամբյուղ')+`<div class="db">${Object.entries(by).map(([sid,ps])=>`<div><div class="mu" style="margin-bottom:8px">${store(sid).name}</div>${ps.map(p=>`<div style="display:flex;gap:16px;align-items:center;padding:8px 0;border-top:1px solid var(--ln)"><div class="im" style="width:56px;border-radius:8px;flex:none">${pic(p.img,p.c)}</div><div style="flex:1;min-width:0"><div>${p.n}</div>${fmt(p.p)}</div><div class="st"><button onclick="bump(${p.id},-1)" aria-label="Պակասեցնել">${ic('minus')}</button><span class="num">${S.cart[p.id]}</span><button onclick="bump(${p.id},1)" aria-label="Ավելացնել">${ic('plus')}</button></div></div>`).join('')}</div>`).join('')}</div><div class="df"><div style="display:flex;justify-content:space-between" class="dsp"><span>Ընդամենը</span>${fmt(tot())}</div><button class="btn pri" style="height:44px" onclick="checkout()">Պատվիրել առանց գրանցման</button></div>`)}
+function checkout(){const dm=dmCommon();if(!dm.includes(CK.dm))CK.dm=dm[0]||'';sheet('dr',head('Պատվերի ձևակերպում')+`<div class="db"><div><label class="lb" for="cn">Անուն Ազգանուն</label><input class="in" id="cn" autocomplete="name"></div><div><label class="lb" for="cp">Հեռախոս</label><div style="display:flex;gap:8px"><span class="in num" style="width:72px;display:grid;place-items:center">+374</span><input class="in num" id="cp" inputmode="tel" placeholder="77 123 456"></div></div><div><span class="lb">Ստացման եղանակ</span><div class="seg" id="dm">${dm.map(k=>`<button class="pill ${CK.dm==k?'on':''}" data-k="${k}" aria-pressed="${CK.dm==k}" onclick="ckDm('${k}')">${DL[k]}</button>`).join('')||'<p class="ae">Զամբյուղի ապրանքներն ընդհանուր ստացման եղանակ չունեն։ Պատվիրեք դրանցից առանձին։</p>'}</div><div class="um" id="dn">${CK.dm=='pk'?'Վերցնելու վայր՝ '+esc(pkWhere()):''}</div></div><div id="caw"${CK.dm=='pk'?' hidden':''}><label class="lb" for="ca">Առաքման հասցե</label><input class="in" id="ca" autocomplete="street-address"></div><div><span class="lb">Վճարման եղանակ</span><div class="seg" id="pm">${payCommon().map((m,i)=>`<button class="pill ${i?'':'on'}" onclick="[...$('pm').children].forEach(b=>b.classList.remove('on'));this.classList.add('on')">${m}</button>`).join('')||'<p class="ae">Զամբյուղի խանութները ընդհանուր վճարման եղանակ չունեն։ Պատվիրեք դրանցից առանձին։</p>'}</div></div></div><div class="df"><div style="display:flex;justify-content:space-between" class="dsp"><span>Ընդամենը</span>${fmt(tot())}</div><button class="btn pri" style="height:44px" ${payCommon().length&&dm.length?'':'disabled'} onclick="place()">Հաստատել պատվերը</button><button class="btn" style="height:44px;justify-content:center" onclick="openCart()">Վերադառնալ զամբյուղին</button></div>`)}
+function place(){const n=$('cn').value.trim(),p=$('cp').value.trim(),a=$('ca').value.trim(),pm=($('pm').querySelector('.on')||{}).textContent||'';
+ if(!CK.dm)return;if(!n||p.length<8||(CK.dm!='pk'&&!a)){[['cn',n],['cp',p.length>=8],['ca',CK.dm=='pk'||a]].forEach(([i,v])=>$(i).style.borderColor=v?'':'#B91C1C');return}
+ const dlt=DL[CK.dm]+(CK.dm=='pk'?' ('+pkWhere()+')':''),no='IM-'+Math.floor(10000+Math.random()*89999);S.cart={};sv('imk_cart',S.cart);draw();
+ sheet('dr',head('Պատվերն ընդունված է')+`<div class="db" style="text-align:center;padding-top:48px"><div class="okc">${ic('check')}</div><h3>Շնորհակալություն, ${n.split(' ')[0]}</h3><p class="mu">Պատվեր <span class="num">${no}</span>-ն ընդունվեց։ Վաճառողը կզանգահարի <span class="num">+374 ${p}</span> համարով՝ պատվերը հաստատելու համար։${' Ստացում՝ '+esc(dlt)+'։'}${pm?' Վճարում՝ '+pm+'։':''}</p><button class="btn pri" style="align-self:center" onclick="closeAll()">Շարունակել գնումները</button></div>`)}
+/* open a store */
+let tab='c',lim=6,posts=[],fetching=false,loaded=null,SF;
+const RES=['admin','api','app','shop','store','stores','cart','checkout','imshuka','www','help','support'];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const AH='ա,բ,գ,դ,ե,զ,է,ը,թ,ժ,ի,լ,խ,ծ,կ,հ,ձ,ղ,ճ,մ,յ,ն,շ,ո,չ,պ,ջ,ռ,ս,վ,տ,ր,ց,փ,ք,օ,ֆ,և'.split(','),AL='a,b,g,d,e,z,e,y,t,zh,i,l,kh,ts,k,h,dz,gh,ch,m,y,n,sh,o,ch,p,j,r,s,v,t,r,ts,p,q,o,f,ev'.split(',');
+const slug=s=>s.toLowerCase().replace(/ու/g,'u').replace(/[ա-և]/g,c=>AL[AH.indexOf(c)]||'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30);
+function openStore(){tab='c';posts=[];fetching=false;loaded=null;SF={name:'',ig:'',url:'',touched:false,marz:MARZ[0],addr:'',lat:null,lng:null,ph:S.me?fmtPh(S.me):''};renderStore()}
+function urlState(u){if(!u)return['','Լատինատառ, թվեր և գծիկ'];if(u.length<3)return['bad','Առնվազն 3 նիշ'];if(u.endsWith('-'))return['bad','Հասցեն չի կարող ավարտվել գծիկով'];if(RES.includes(u)||stores.some(s=>s.id==u))return['bad','Այս հասցեն արդեն զբաղված է'];return['ok','Հասանելի է']}
+function sug(u){let i=2,c;do{c=(u+'-'+i++).slice(0,30)}while(RES.includes(c)||stores.some(s=>s.id==c));return c}
+function urlUI(){const[s,m]=urlState(SF.url),taken=s=='bad'&&m.includes('զբաղված');return{s,st:s=='ok'?ic('check')+'<span>Հասանելի է</span>':taken?ic('x')+'<span>Զբաղված է</span>':'',hint:s==''?m:s=='ok'?'':taken?`Փորձեք՝ <button class="lk" onclick="setUrl('${sug(SF.url)}')">imshuka.am/${sug(SF.url)}</button>`:m}}
+function uMsg(){const u=urlUI(),f=$('uf');if(!f)return;f.className='uf '+u.s;$('us').className='us '+u.s;$('us').innerHTML=u.st;$('um').className='um '+u.s;$('um').innerHTML=u.hint}
+function urlField(){const u=urlUI();return `<div><label class="lb" for="su">Խանութի հասցե</label><div class="uf ${u.s}" id="uf"><span class="num">imshuka.am/</span><input id="su" class="num" value="${SF.url}" oninput="setUrl(this.value)" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="dilijan-ceramics"><span class="us ${u.s}" id="us">${u.st}</span></div><div class="um ${u.s}" id="um">${u.hint}</div></div>`}
+function setUrl(v){SF.url=v.toLowerCase().replace(/[^a-z0-9-]/g,'').replace(/^-+/,'').slice(0,30);SF.touched=SF.url!=='';$('su').value=SF.url;uMsg();pv()}
+function pv(){const n=$('pn');if(n)n.textContent=SF.name||'Ձեր խանութի անունը';const h=$('ph');if(h)h.textContent='imshuka.am/'+(SF.url||'…')}
+function nameIn(v){SF.name=v;if(!SF.touched){SF.url=slug(v);$('su').value=SF.url;uMsg()}pv()}
+const igShow=()=>!loaded||loaded.lim!=lim||loaded.h!=SF.ig.replace(/^@/,'');
+function igBtn(){const b=$('igb');if(b)b.hidden=!igShow()}
+function igIn(v){SF.ig=v.replace(/[^A-Za-z0-9._@]/g,'');if(SF.ig!=v)$('ih').value=SF.ig;if(!SF.touched){SF.url=slug(SF.ig.replace(/^@/,''));$('su').value=SF.url;uMsg()}igBtn()}
+function marzField(){return `<div><span class="lb">Մարզ</span><button class="in dd" data-m onclick="mz(this)" aria-haspopup="menu"><span>${SF.marz}</span>${ic('chev')}</button></div>`}
+function mz(b){menu(b,MARZ.map(m=>`<button role="menuitemradio" aria-checked="${SF.marz==m}" class="${SF.marz==m?'s':''}" onclick="pickMarz('${m}')"><span>${m}</span>${SF.marz==m?ic('check'):''}</button>`).join(''))}
+const addrField=()=>`<div><label class="lb" for="sa">Խանութի հասցե (եթե կա)</label><input class="in" id="sa" maxlength="80" value="${esc(MO.addr||'')}" placeholder="Օրինակ՝ Շահումյան 12" oninput="MO.addr=this.value"><div class="um">Ցուցադրվում է գնորդներին՝ տեղում ստանալու համար։ Թողեք դատարկ, եթե խանութ չունեք։</div><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:8px 0"><button class="btn" onclick="findAddr()">Գտնել քարտեզում</button><button class="lk" onclick="MO.lat=null;MO.lng=null;MP.set(null);$('mpn').textContent='Հպեք քարտեզին՝ խանութի տեղը նշելու համար։'">Հանել նշումը</button></div><div class="mp" id="mp"></div><div class="um" id="mpn">${MO.lat!=null?'Տեղը նշված է։':'Հպեք քարտեզին՝ խանութի տեղը նշելու համար։'}</div></div>`;
+function pickMarz(m){SF.marz=m;closeMenu();renderStore()}
+function renderStore(){MO=SF;
+ const t=`<div class="tabs"><button class="${tab=='c'?'a':''}" onclick="tab='c';renderStore()">Նոր խանութ</button><button class="${tab=='i'?'a':''}" onclick="tab='i';renderStore()">Instagram-ից</button></div>`;
+ const mt=`<div class="mt"><div><b>Սեփական հասցե</b>Ձեր խանութի հղումը</div><div><b>Ընդհանուր շուկա</b>Տեսանելի է բոլոր գնորդներին</div><div><b>0% տեղադրման վճար</b>Ամբողջ հասույթը ձերն է</div></div>`;
+ let body;
+ if(tab=='c')body=`<div class="db"><div><label class="lb" for="sn">Խանութի անվանումը</label><input class="in" id="sn" value="${esc(SF.name)}" placeholder="Օրինակ՝ Դիլիջանի կերամիկա" oninput="nameIn(this.value)"></div>${urlField()}${phField()}${marzField()}${addrField()}<div class="ban" style="margin:0"><div><h2 id="pn">${esc(SF.name)||'Ձեր խանութի անունը'}</h2><div class="mu num" id="ph">imshuka.am/${SF.url||'…'}</div><div class="mu" style="margin-top:4px">${SF.marz}</div></div></div>${mt}</div><div class="df"><p class="ae" id="sx"></p><button class="btn pri" style="height:44px" onclick="publish()">Հրապարակել խանութը</button></div>`;
+ else body=`<div class="db"><div><label class="lb" for="ih">Instagram-ի էջ</label><input class="in" id="ih" value="${esc(SF.ig)}" placeholder="@yourshop" oninput="igIn(this.value)"></div>${urlField()}${phField()}${marzField()}${addrField()}<div><span class="lb">Քանի գրառում բեռնել</span><div class="seg">${[4,6,8,12].map(n=>`<button class="pill ${lim==n?'on':''}" onclick="lim=${n};renderStore()">${n==12?'Առավելագույնը՝ 12':n}</button>`).join('')}</div></div><button class="btn pri" id="igb" style="height:44px"${igShow()?'':' hidden'} onclick="fetchIg()">Ստանալ գրառումները</button><div id="ig">${fetching?'<div class="pg">'+Array(lim).fill('<div class="pc"><div class="sk" style="aspect-ratio:1;border-radius:0"></div><div class="pcb"><div class="sk" style="height:14px"></div><div class="sk" style="height:40px"></div></div></div>').join('')+'</div>':igHtml()}</div></div><div class="df" id="igf"${posts.length&&!fetching?'':' hidden'}>${igFoot()}</div>`;
+ sheet('dr',head('Բացել խանութ')+t+body);initMapEd()}
+function addStore(name,id,marz,ph,addr,lat,lng){const st={id,name:esc(name),city:marz,marz,phone:ph};if(addr)st.addr=addr;if(lat!=null){st.lat=lat;st.lng=lng}stores.push(st);custom.s.push(st);sv('imk_custom',custom);S.me=ph;sv('imk_me',ph);sv('imk_exp',Date.now()+AUTH.sess);return id}
+function publish(){if(!SF.name.trim()){$('sn').style.borderColor='var(--er,#B91C1C)';$('sn').focus();return}
+ if(urlState(SF.url)[0]!='ok'){$('su').focus();return}
+ const ph=normPh(SF.ph);if(!ph){const e=$('sph');e.style.borderColor='var(--er,#B91C1C)';e.focus();return}
+ if(full(ph))return;const id=addStore(SF.name.trim(),SF.url,SF.marz,ph,SF.addr.trim(),SF.lat,SF.lng);closeAll();setStore(id)}
+/* add product */
+let AP;
+function openAdd(sid){if(!mine(sid))return;AP={sid,cat:'Craft',pk:true,n:'',p:'',d:'',img:'',dl:dlDef(store(sid)).slice()};renderAdd()}
+function openEdit(id){const p=prod(id);if(!p||!isOwn(p)||!mine(p.s))return;S.delp=null;AP={id:p.id,sid:p.s,cat:p.c,pk:!!p.pk,n:unesc(p.n),p:String(p.p),d:p.d=='Նկարագրություն չկա։'?'':unesc(p.d),img:p.img||'',dl:dlOf(p).slice()};renderAdd()}
+function renderAdd(k){const o=$('dr').querySelector('.db'),sc=k&&o?o.scrollTop:0;
+sheet('dr',head(AP.id?'Խմբագրել ապրանքը':'Նոր ապրանք')+`<div class="db"><div style="display:flex;gap:16px;align-items:center"><div class="im" style="border:1px solid var(--ln);border-radius:12px;width:140px;flex:none">${pic(AP.img,AP.cat)}</div><div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start"><button class="btn" onclick="$('af').click()">${ic('up')}${AP.img?'Փոխել նկարը':'Բեռնել նկար'}</button>${AP.img?`<button class="lk" onclick="AP.img='';renderAdd(1)">Հեռացնել նկարը</button>`:''}</div><input type="file" id="af" accept="image/*" hidden onchange="pickImg(this)"></div>
+<div><label class="lb" for="an">Անվանումը</label><input class="in" id="an" value="${esc(AP.n)}" placeholder="Օրինակ՝ Բրդյա շարֆ" oninput="AP.n=this.value"></div>
+<div><span class="lb">Կատեգորիա</span><button class="in dd" data-m onclick="apCat(this)" aria-haspopup="menu"><span>${CL[AP.cat]}</span>${ic('chev')}</button></div>
+<div><label class="lb" for="apr">Գինը՝ ֏</label><input class="in num" id="apr" inputmode="numeric" value="${AP.p}" placeholder="5000" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,9);AP.p=this.value"></div>
+<div><label class="lb" for="ad">Նկարագրություն</label><textarea class="in" id="ad" rows="3" style="height:auto;min-height:88px;padding:12px;resize:vertical;font:inherit" oninput="AP.d=this.value">${esc(AP.d)}</textarea></div>
+<div><span class="lb">Տեղում ստացում</span><div class="seg"><button class="pill ${AP.pk?'on':''}" aria-pressed="${AP.pk}" onclick="AP.pk=!AP.pk;renderAdd(1)">Վերցնել այսօր</button></div></div>
+<div><span class="lb">Առաքում</span><div class="seg"><button class="pill ${AP.dl.length?'':'on'}" aria-pressed="${!AP.dl.length}" onclick="dlOn(0)">Առաքում չկա</button><button class="pill ${AP.dl.length?'on':''}" aria-pressed="${!!AP.dl.length}" onclick="dlOn(1)">Առաքում կա</button></div>${AP.dl.length?`<div class="seg" style="margin-top:8px">${[['std','Սովորական առաքում'],['hp','Առաքում ՀայՓոստով']].map(([k,l])=>`<button class="pill ${AP.dl.includes(k)?'on':''}" aria-pressed="${AP.dl.includes(k)}" onclick="dlSet('${k}')">${l}</button>`).join('')}</div>`:''}</div></div>
+<div class="df"><p class="ae" id="ae"></p><button class="btn pri" style="height:44px" onclick="saveProd()">${AP.id?'Պահպանել փոփոխությունները':'Ավելացնել ապրանք'}</button>${AP.id?`<button class="btn" style="height:44px;justify-content:center;${S.delp==AP.id?'color:var(--er,#B91C1C);border-color:var(--er,#B91C1C)':''}" onclick="delProd(${AP.id})">${S.delp==AP.id?'Հաստատել ջնջումը':'Ջնջել ապրանքը'}</button>`:''}</div>`);
+const nb=$('dr').querySelector('.db');if(nb)nb.scrollTop=sc}
+function dlOn(v){AP.dl=v?['std']:[];renderAdd(1)}
+function dlSet(k){const i=AP.dl.indexOf(k);if(i<0)AP.dl.push(k);else if(AP.dl.length>1)AP.dl.splice(i,1);renderAdd(1)}
+function pickImg(inp){const f=inp.files&&inp.files[0];inp.value='';if(!f||!/^image\//.test(f.type))return;
+ const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{AP.img=shrink(im);renderAdd(1)};im.onerror=()=>{$('ae').textContent='Այս նկարը չհաջողվեց բացել։ Փորձեք JPG կամ PNG։'};im.src=r.result};r.readAsDataURL(f)}
+function apCat(b){menu(b,CATS.slice(1).map(c=>`<button role="menuitemradio" aria-checked="${AP.cat==c}" class="${AP.cat==c?'s':''}" onclick="AP.cat='${c}';closeMenu();renderAdd(1)"><span>${CL[c]}</span>${AP.cat==c?ic('check'):''}</button>`).join(''))}
+function saveProd(){const bad=id=>{$(id).style.borderColor='var(--er,#B91C1C)';$(id).focus()},err=t=>{$('ae').textContent=t};
+ if(!AP.n.trim())return bad('an');if(!+AP.p)return bad('apr');
+ if(!AP.pk&&!AP.dl.length)return err('Ընտրեք ստացման առնվազն մեկ եղանակ՝ տեղում կամ առաքում։');
+ if(AP.id){const e=prod(AP.id);if(e){const old={...e};e.n=esc(AP.n.trim());e.c=AP.cat;e.p=+AP.p;e.pk=AP.pk?1:0;e.dl=AP.dl.slice();if(AP.img)e.img=AP.img;else delete e.img;e.d=esc(AP.d.trim());if(!sv('imk_custom',custom)){for(const k in e)delete e[k];Object.assign(e,old);return err(QERR)}}closeAll();draw();return}
+ const o={id:Date.now(),n:esc(AP.n.trim()),s:AP.sid,c:AP.cat,p:+AP.p,pk:AP.pk?1:0,dl:AP.dl.slice(),d:esc(AP.d.trim()),sp:''};if(AP.img)o.img=AP.img;
+ P.push(o);custom.p.push(o);if(!sv('imk_custom',custom)){P.pop();custom.p.pop();return err(QERR)}closeAll();setStore(AP.sid)}
+const CAP=[['Վուշե վերնաշապիկ՝ ձիթապտղագույն','Apparel',18500],['Մայրամուտ Դիլիջանում',0,0],['Կավե գավաթ՝ կապույտ փայլեցումով','Craft',4800],['Թիմային ճաշ արհեստանոցում',0,0],['Հյուսած պատի զարդ','Home',22000],['Մեղրի բանկաներ՝ նոր խմբաքանակ','Pantry',3600],['Ստուդիայի բացման օրը',0,0],['Կաշվե քարտապանակ','Craft',6500],['Բամբակյա պայուսակ՝ բնական','Apparel',4200],['Ընկուզենու կտրատելու տախտակ','Home',15500],['Կուլիսներում',0,0],['Չրերի տուփ','Pantry',2900]];
+function fetchIg(){const h=SF.ig.replace(/^@/,'');if(!h){$('ih').style.borderColor='var(--er,#B91C1C)';$('ih').focus();return}
+ loaded={lim,h};fetching=true;posts=[];renderStore();
+ setTimeout(()=>{posts=CAP.slice(0,lim).map((c,i)=>({i,cap:c[0],c:c[1]||'Craft',nc:!c[1],p:c[2]||5000,on:!!c[1]}));fetching=false;renderStore()},700)}
+function igHtml(){if(!posts.length)return '<p class="mu">Մուտքագրեք էջի անունը և ընտրեք, թե վերջին քանի գրառումը բեռնել։</p>';
+ const n=posts.filter(p=>p.on).length;
+ return `<div class="sum"><span class="mu">Ընտրված է ${n}-ը ${posts.length}-ից</span><button class="lk" onclick="allIg(${n<posts.length})">${n<posts.length?'Ընտրել բոլորը':'Հանել բոլորը'}</button></div><div class="pg">${posts.map(p=>`<div class="pc ${p.on?'pon':''}"><button class="im pb" onclick="tog(${p.i})" aria-pressed="${p.on}" aria-label="${esc(p.cap)}">${art(p.nc?'Photo':p.c)}<span class="bx">${p.on?ic('check'):''}</span></button><div class="pcb"><div class="pcap">${esc(p.cap)}</div>${p.on?`<div class="uf" id="pp${p.i}"><input class="num" inputmode="numeric" value="${p.p}" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,9);posts[${p.i}].p=+this.value||0;$('pp${p.i}').classList.remove('bad')" aria-label="Գինը դրամով"><span class="un">֏</span></div>`:'<div class="mu pm">Հպեք՝ ընտրելու համար</div>'}</div></div>`).join('')}</div>`}
+function igFoot(){const n=posts.filter(p=>p.on).length;return `<p class="ae" id="sx"></p><p class="mu" style="font-size:12px;text-align:center">Ապրանքները կհայտնվեն ձեր խանութում և ընդհանուր շուկայում</p><button class="btn pri" style="height:44px" ${n?'':'disabled'} onclick="publishIg()">Հրապարակել ${n} ապրանք</button>`}
+function igRefresh(){$('ig').innerHTML=igHtml();const f=$('igf');if(f){f.innerHTML=igFoot();f.hidden=!posts.length}}
+function tog(i){posts[i].on=!posts[i].on;igRefresh()}
+function allIg(v){posts.forEach(p=>p.on=v);igRefresh()}
+function publishIg(){const sel=posts.filter(p=>p.on);if(!sel.length)return;const nz=sel.filter(p=>!p.p);if(nz.length){nz.forEach(p=>$('pp'+p.i).classList.add('bad'));$('pp'+nz[0].i).querySelector('input').focus();return}if(urlState(SF.url)[0]!='ok'){$('su').focus();return}
+ const ph=normPh(SF.ph);if(!ph){const e=$('sph');e.style.borderColor='var(--er,#B91C1C)';e.focus();return}
+ if(full(ph))return;const h=SF.ig.replace(/^@/,''),id=addStore(h,SF.url,SF.marz,ph,SF.addr.trim(),SF.lat,SF.lng);
+ sel.forEach((p,k)=>{const o={id:Date.now()+k,n:p.cap,s:id,c:p.c,p:p.p,pk:1,dl:['std'],d:'',sp:'',src:h};P.push(o);custom.p.push(o)});sv('imk_custom',custom);posts=[];closeAll();setStore(id)}
+/* seller login (prototype: no server, code is shown on screen) */
+let LG,LOCK=0;
+/* auth adapter. Demo mode (api=''): code shown on screen. Real use: set api to a backend with POST /auth/send {phone} and POST /auth/verify {phone,code} -> {token} */
+const AUTH={api:'',codeTtl:3e5,maxTry:5,lock:6e4,sess:2592e6,
+ async send(ph){if(this.api){const x=await fetch(this.api+'/auth/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:'+374'+ph})});if(!x.ok)throw 0;return{}}return{demo:String(1000+Math.floor(Math.random()*9000))}},
+ async verify(ph,code,real){if(this.api){const x=await fetch(this.api+'/auth/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:'+374'+ph,code})});return x.ok}return code===real}};
+const normPh=v=>{let d=String(v).replace(/\D/g,'');if(d.startsWith('374')&&d.length==11)d=d.slice(3);else if(d.startsWith('0')&&d.length==9)d=d.slice(1);return d.length==8?d:''};
+const MAXS=3,full=ph=>{if(stores.filter(s=>s.phone===ph).length<MAXS)return false;const x=$('sx');if(x)x.textContent='Մեկ համարով կարելի է բացել առավելագույնը '+MAXS+' խանութ։';return true};
+const fmtPh=p=>p.slice(0,2)+' '+p.slice(2,5)+' '+p.slice(5);
+const mine=id=>!!S.me&&store(id).phone===S.me;
+function phField(){return `<div><label class="lb" for="sph">Հեռախոսահամար (մուտքի համար)</label><div style="display:flex;gap:8px"><span class="in num" style="width:72px;display:grid;place-items:center;flex:none">+374</span><input class="in num" id="sph" inputmode="tel" autocomplete="tel-national" placeholder="77 123 456" value="${esc(SF.ph)}" oninput="SF.ph=this.value.replace(/[^0-9 ]/g,'');this.value=SF.ph;this.style.borderColor=''"></div><div class="um">Գնորդներին չի ցուցադրվում։ Օգտագործվում է ձեր էջ մուտք գործելու համար։</div></div>`}
+function openAcc(){S.me?openMine():openLogin()}
+function openLogin(){LG={step:1,ph:'',code:'',real:'',err:''};renderLogin()}
+function renderLogin(){const s1=LG.step==1;
+ sheet('dr',head('Մուտք վաճառողի էջ')+`<div class="db">${s1?`<p class="mu">Մուտքագրեք այն հեռախոսահամարը, որով բացել եք խանութը։</p><div><label class="lb" for="lph">Հեռախոսահամար</label><div style="display:flex;gap:8px"><span class="in num" style="width:72px;display:grid;place-items:center;flex:none">+374</span><input class="in num" id="lph" inputmode="tel" autocomplete="tel-national" placeholder="77 123 456" value="${esc(LG.ph)}" oninput="LG.ph=this.value.replace(/[^0-9 ]/g,'');this.value=LG.ph;$('lerr').textContent=''" onkeydown="if(event.key=='Enter')sendCode()"></div></div>`:`<p class="mu">Կոդն ուղարկվել է <span class="num">+374 ${fmtPh(LG.ph)}</span> համարին։</p>${LG.real?`<div class="ban" style="margin:0;padding:12px"><span class="mu" style="font-size:12px">Դեմո ռեժիմ՝ իրական SMS չի ուղարկվում։ Ձեր կոդը՝ <b class="num" style="color:var(--ink)">${LG.real}</b></span></div>`:''}<div><label class="lb" for="lcd">Հաստատման կոդ</label><input class="in num" id="lcd" inputmode="numeric" maxlength="4" autocomplete="one-time-code" placeholder="0000" value="${esc(LG.code)}" oninput="this.value=this.value.replace(/[^0-9]/g,'');LG.code=this.value;$('lerr').textContent=''" onkeydown="if(event.key=='Enter')verifyCode()"></div><button class="lk" style="align-self:flex-start" onclick="LG.step=1;LG.err='';renderLogin()">Փոխել համարը</button>`}<p class="ae" id="lerr">${esc(LG.err)}</p></div><div class="df"><button class="btn pri" style="height:44px" onclick="${s1?'sendCode()':'verifyCode()'}">${s1?'Ստանալ կոդ':'Մուտք'}</button>${s1?`<button class="btn" style="height:44px;justify-content:center" onclick="openStore()">Բացել նոր խանութ</button>`:''}</div>`);
+ const f=$(s1?'lph':'lcd');if(f)f.focus()}
+async function sendCode(){const ph=normPh(LG.ph),e=t=>{LG.err=t;$('lerr').textContent=t};
+ if(!ph)return e('Մուտքագրեք 8 թվանշանանոց համար, օրինակ՝ 77 123 456։');
+ if(!custom.s.some(s=>s.phone===ph||!s.phone))return e('Այս համարով խանութ չի գտնվել։ Բացեք նոր խանութ։');
+ if(Date.now()<LOCK)return e('Շատ փորձեր։ Փորձեք '+Math.ceil((LOCK-Date.now())/1e3)+' վրկ հետո։');
+ try{const x=await AUTH.send(ph);LG.real=x.demo||'';LG.exp=Date.now()+AUTH.codeTtl}catch(z){return e('Կոդն ուղարկել չհաջողվեց։ Փորձեք կրկին։')}
+ LG.ph=ph;LG.step=2;LG.code='';LG.err='';LG.tries=0;renderLogin()}
+async function verifyCode(){const e=t=>{LG.err=t;$('lerr').textContent=t};
+ if(Date.now()<LOCK)return e('Շատ փորձեր։ Փորձեք '+Math.ceil((LOCK-Date.now())/1e3)+' վրկ հետո։');
+ if(LG.exp&&Date.now()>LG.exp)return e('Կոդի ժամկետը լրացել է։ Ստացեք նոր կոդ։');
+ if(!await AUTH.verify(LG.ph,LG.code,LG.real)){if(++LG.tries>=AUTH.maxTry){LOCK=Date.now()+AUTH.lock;LG.step=1;renderLogin();return e('Շատ սխալ փորձ։ Ստացեք նոր կոդ մեկ րոպեից։')}return e('Կոդը սխալ է։')}
+ const ph=LG.ph;custom.s.forEach(s=>{if(!s.phone)s.phone=ph});sv('imk_custom',custom);S.me=ph;sv('imk_me',ph);sv('imk_exp',Date.now()+AUTH.sess);draw();openMine()}
+function openMine(){const my=stores.filter(s=>s.phone===S.me);
+ sheet('dr',head('Իմ էջը')+`<div class="db"><div class="mu num">+374 ${fmtPh(S.me)}</div>${my.length?my.map(s=>`<button class="cd" style="padding:16px" onclick="setStore('${s.id}')"><b class="dsp" style="display:flex;gap:8px;align-items:center">${s.name}${vf}</b><span class="mu num">imshuka.am/${s.id} · ${P.filter(p=>p.s==s.id).length} ապրանք</span></button>`).join(''):'<p class="mu">Այս համարով խանութ դեռ չկա։</p>'}${my.length>=MAXS?`<p class="mu" style="font-size:12px">Մեկ համարով կարելի է ունենալ առավելագույնը ${MAXS} խանութ։</p>`:''}</div><div class="df"><button class="btn pri" style="height:44px" ${my.length>=MAXS?'disabled':''} onclick="openStore()">Բացել նոր խանութ</button><button class="btn" style="height:44px;justify-content:center" onclick="logout()">Դուրս գալ</button></div>`)}
+function logout(){S.me='';sv('imk_me','');S.delp=null;S.del=null;closeAll();draw()}
+/* store settings: payment + default delivery */
+const PAY=[['idram','Idram'],['telcell','Telcell'],['card','Բանկային քարտ'],['cash','Կանխիկ']],PL=Object.fromEntries(PAY);
+const payOf=s=>s.pay||PAY.map(x=>x[0]);
+const dlDef=s=>s.dl||['std'];
+const payCommon=()=>{const ids=[...new Set(Object.keys(S.cart).map(i=>prod(i)).filter(Boolean).map(p=>p.s))];return PAY.filter(([k])=>ids.every(id=>payOf(store(id)).includes(k))).map(x=>x[1])};
+let ST;
+function openSet(id){if(!mine(id))return;const s=store(id);ST={id,pay:payOf(s).slice(),dl:dlDef(s).slice(),apply:false,addr:s.addr||'',marz:s.marz,lat:s.lat,lng:s.lng};renderSet()}
+function renderSet(keep){MO=ST;const o=$('dr').querySelector('.db'),sc=keep&&o?o.scrollTop:0;
+ sheet('dr',head('Խանութի կարգավորումներ')+`<div class="db"><div><span class="lb">Վճարման եղանակներ</span><div class="seg">${PAY.map(([k,l])=>`<button class="pill ${ST.pay.includes(k)?'on':''}" aria-pressed="${ST.pay.includes(k)}" onclick="setPay('${k}')">${l}</button>`).join('')}</div><div class="um">Գնորդը զամբյուղում կտեսնի միայն ընտրված եղանակները։</div></div>
+<div><span class="lb">Առաքում</span><div class="seg"><button class="pill ${ST.dl.length?'':'on'}" aria-pressed="${!ST.dl.length}" onclick="setDlOn(0)">Առաքում չկա</button><button class="pill ${ST.dl.length?'on':''}" aria-pressed="${!!ST.dl.length}" onclick="setDlOn(1)">Առաքում կա</button></div>${ST.dl.length?`<div class="seg" style="margin-top:8px">${[['std','Սովորական առաքում'],['hp','Առաքում ՀայՓոստով']].map(([k,l])=>`<button class="pill ${ST.dl.includes(k)?'on':''}" aria-pressed="${ST.dl.includes(k)}" onclick="setDlK('${k}')">${l}</button>`).join('')}</div>`:''}<div class="um">Սա լռելյայն արժեքն է նոր ապրանքների համար։ Յուրաքանչյուր ապրանքի համար կարելի է փոխել։</div></div>
+${addrField()}
+<div><button class="pill ${ST.apply?'on':''}" aria-pressed="${ST.apply}" onclick="ST.apply=!ST.apply;renderSet(1)">Կիրառել առկա ապրանքների վրա</button></div></div>
+<div class="df"><p class="ae" id="se"></p><button class="btn pri" style="height:44px" onclick="saveSet()">Պահպանել</button></div>`);initMapEd();
+ const nb=$('dr').querySelector('.db');if(nb)nb.scrollTop=sc}
+function setPay(k){const i=ST.pay.indexOf(k);if(i<0)ST.pay.push(k);else if(ST.pay.length>1)ST.pay.splice(i,1);renderSet(1)}
+function setDlOn(v){ST.dl=v?['std']:[];renderSet(1)}
+function setDlK(k){const i=ST.dl.indexOf(k);if(i<0)ST.dl.push(k);else if(ST.dl.length>1)ST.dl.splice(i,1);renderSet(1)}
+function saveSet(){const s=store(ST.id);if(!mine(ST.id))return;
+ if(ST.apply&&!ST.dl.length&&P.some(p=>p.s==ST.id&&!p.pk)){$('se').textContent='Որոշ ապրանքներ տեղում ստացում չունեն։ Թողեք առաքումը կամ խմբագրեք այդ ապրանքները։';return}
+ const ad=ST.addr.trim();if(ad)s.addr=ad;else delete s.addr;if(ST.lat!=null){s.lat=ST.lat;s.lng=ST.lng}else{delete s.lat;delete s.lng}s.pay=ST.pay.slice();s.dl=ST.dl.slice();if(ST.apply)P.forEach(p=>{if(p.s==ST.id)p.dl=ST.dl.slice()});
+ sv('imk_custom',custom);closeAll();draw()}
+document.addEventListener('click',e=>{if(!e.target.closest('#mn')&&!e.target.closest('[data-m]'))closeMenu()});
+addEventListener('scroll',closeMenu,true);addEventListener('resize',closeMenu);
+document.addEventListener('keydown',e=>{if(e.key=='Escape')closeAll()});
+if(S.me&&Date.now()>ld('imk_exp',0)){S.me='';sv('imk_me','')}
+let custom=ld('imk_custom',{s:[],p:[]});
+custom.p.forEach(p=>{if(p.d=='Ներմուծված է Instagram-ից։')p.d='';const t='Աղբյուր՝ @';if(typeof p.sp=='string'&&p.sp.startsWith(t)){p.src=p.sp.slice(t.length);p.sp=''}if(p.p>999999999)p.p=999999999});sv('imk_custom',custom);
+custom.s.forEach(s=>stores.push(s));custom.p.forEach(p=>P.push(p));
+Object.keys(S.cart).forEach(i=>{if(!prod(i))delete S.cart[i]});
+function delProd(id){const p=prod(id);if(!p||!isOwn(p)||!mine(p.s))return;
+ if(S.delp!=id){S.delp=id;draw();if(AP&&AP.id==id&&$('dr').classList.contains('o'))renderAdd();return}
+ P=P.filter(x=>x.id!=id);custom.p=custom.p.filter(x=>x.id!=id);sv('imk_custom',custom);
+ delete S.cart[id];sv('imk_cart',S.cart);S.rec=S.rec.filter(i=>i!=id);sv('imk_rec',S.rec);S.delp=null;closeAll();draw()}
+function delStore(id){if(!mine(id))return;if(S.del!=id){S.del=id;draw();return}
+ P=P.filter(p=>p.s!=id);stores=stores.filter(s=>s.id!=id);custom.s=custom.s.filter(s=>s.id!=id);custom.p=custom.p.filter(p=>p.s!=id);sv('imk_custom',custom);
+ Object.keys(S.cart).forEach(i=>{if(!prod(i))delete S.cart[i]});sv('imk_cart',S.cart);S.rec=S.rec.filter(i=>prod(i));sv('imk_rec',S.rec);S.del=null;reset()}
+/* install banner (PWA). Needs manifest.webmanifest, sw.js and icons next to this file, served over HTTPS */
+let DP=null;
+const ib=$('ib'),sa=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true,ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform=='MacIntel'&&navigator.maxTouchPoints>1);
+const ibShow=()=>{if(!sa&&Date.now()-ld('imk_ib',0)>6048e5)ib.hidden=false};
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();DP=e;ibShow()});
+addEventListener('appinstalled',()=>{DP=null;ib.hidden=true});
+if(ios)ibShow();
+function ibX(){ib.hidden=true;sv('imk_ib',Date.now())}
+function ibGo(){if(DP){DP.prompt();DP.userChoice.then(c=>{DP=null;if(c.outcome=='accepted')ib.hidden=true})}else if(ios)openIos()}
+function openIos(){sheet('dr',head('Տեղադրել imShuka')+`<div class="db"><p class="mu">Safari-ում հավելվածը հիմնական էկրանին ավելացնելու համար՝</p><div class="cd" style="padding:16px"><b class="num">1.</b> Հպեք Safari-ի ներքևի «Կիսվել» կոճակին։</div><div class="cd" style="padding:16px"><b class="num">2.</b> Ընտրեք «Ավելացնել հիմնական էկրանին»։</div><div class="cd" style="padding:16px"><b class="num">3.</b> Հպեք «Ավելացնել»։ imShuka-ի պատկերակը կհայտնվի ձեր հեռախոսում։</div><p class="mu" style="font-size:12px">Եթե Safari-ում չեք, նախ բացեք այս էջը Safari-ով։</p></div>`)}
+draw();
+</script>
+</body>
+</html>
